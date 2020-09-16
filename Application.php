@@ -1,9 +1,12 @@
 <?php
+ 
+// INCLUDE THE FILES NEEDED...
 
-//INCLUDE THE FILES NEEDED...
-require_once('view/LoginView.php');
-require_once('view/DateTimeView.php');
-require_once('view/LayoutView.php');
+use Controller\Controller;
+
+require_once('View/LoginView.php');
+require_once('View/DateTimeView.php');
+require_once('View/LayoutView.php');
 
 //MAKE SURE ERRORS ARE SHOWN... MIGHT WANT TO TURN THIS OFF ON A PUBLIC SERVER
 // error_reporting(E_ALL);
@@ -13,6 +16,7 @@ class Application {
 	private $view;
 	private $dateTimeView;
 	private $layoutView;
+	private $contoller;
 
 	
 	//CREATE OBJECTS OF THE VIEWS
@@ -20,6 +24,7 @@ class Application {
 		$this->view = new LoginView();
 		$this->dateTimeView = new DateTimeView();
 		$this->layoutView = new LayoutView();
+		// $this->contoller = new \Controller\logInOrOut($this->user, $this->view);
 		
 		$this->layoutView->render(false, $this->view, $this->dateTimeView);
 

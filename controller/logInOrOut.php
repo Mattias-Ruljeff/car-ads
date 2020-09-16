@@ -2,7 +2,7 @@
 
 namespace Controller;
 
-class Controller {
+class logInOrOut {
 
     private $user;
     private $view;
