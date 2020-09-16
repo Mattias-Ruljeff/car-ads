@@ -5,7 +5,7 @@ class DateTimeView {
 
 	public function show() {
 
-		$timeString = 'TODO, Write servertime here...';
+		$timeString = date("y/m/d");
 
 		return '<p>' . $timeString . '</p>';
 	}
