@@ -6,14 +6,23 @@ require_once('view/DateTimeView.php');
 require_once('view/LayoutView.php');
 
 //MAKE SURE ERRORS ARE SHOWN... MIGHT WANT TO TURN THIS OFF ON A PUBLIC SERVER
-error_reporting(E_ALL);
-ini_set('display_errors', 'On');
+// error_reporting(E_ALL);
+// ini_set('display_errors', 'On');
 
-//CREATE OBJECTS OF THE VIEWS
-$v = new LoginView();
-$dtv = new DateTimeView();
-$lv = new LayoutView();
+class Application {
+	private $view;
+	private $dateTimeView;
+	private $layoutView;
 
+	
+	//CREATE OBJECTS OF THE VIEWS
+	public function run() {
+		$this->view = new LoginView();
+		$this->dateTimeView = new DateTimeView();
+		$this->layoutView = new LayoutView();
+		
+		$this->layoutView->render(false, $this->view, $this->dateTimeView);
 
-$lv->render(false, $v, $dtv);
+	}
+}
 
