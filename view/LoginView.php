@@ -10,7 +10,6 @@ class LoginView {
 	private static $keep = 'LoginView::KeepMeLoggedIn';
 	private static $messageId = 'LoginView::Message';
 
-	
 
 	/**
 	 * Create HTTP response
@@ -23,7 +22,7 @@ class LoginView {
 		$message = "hej";
 		
 		$response = $this->generateLoginFormHTML($message);
-		$response .= $this->generateLogoutButtonHTML($message);
+		// $response .= $this->generateLogoutButtonHTML($message);
 		return $response;
 	}
 

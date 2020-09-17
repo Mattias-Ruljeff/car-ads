@@ -2,11 +2,11 @@
  
 // INCLUDE THE FILES NEEDED...
 
-use Controller\Controller;
 
 require_once('View/LoginView.php');
 require_once('View/DateTimeView.php');
 require_once('View/LayoutView.php');
+require_once("Controller/logInOrOut.php");
 
 //MAKE SURE ERRORS ARE SHOWN... MIGHT WANT TO TURN THIS OFF ON A PUBLIC SERVER
 // error_reporting(E_ALL);
