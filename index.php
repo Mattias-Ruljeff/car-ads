@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 
 
 require_once("Application.php");
-
+require_once("View/LoginView.php");
 
 $app = new Application();
 $app->run();
