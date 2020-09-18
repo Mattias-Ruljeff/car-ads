@@ -36,7 +36,7 @@ class Application {
 	}
 
 	private function generateOutput() {
-			echo $this->view->generateLoginFormHTML("Hello");
+			echo $this->dateTimeView->show();
 		// $body = $this->view->getBody();
 		// $title = $this->view->getTitle();
 		// $this->layoutView = new LayoutView($this->user);
