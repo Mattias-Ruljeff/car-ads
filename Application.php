@@ -16,17 +16,17 @@ class Application {
 	private $dbConnection;
 
 	public function __construct(){
-		$this->storage = new \model\UserStorage();
-		$this->user = $this->storage->loadUser();
+		// $this->storage = new \model\UserStorage();
+		// $this->user = $this->storage->loadUser();
 		$this->dateTimeView = new DateTimeView();
-		$this->registerView = new RegisterView($this->user);
+		// $this->registerView = new RegisterView($this->user);
 		$this->view = new LoginView();
-		$this->controller = new logInOrOut($this->user, $this->view);
-		$this->dbConnection = new DatabaseConnection();
+		// $this->controller = new logInOrOut($this->user, $this->view);
+		// $this->dbConnection = new DatabaseConnection();
 	}
 
 	public function run() {
-		$this->changeState();
+		// $this->changeState();
 		$this->generateOutput();
 	}
 
@@ -36,11 +36,11 @@ class Application {
 	}
 
 	private function generateOutput() {
-		
+			echo $this->view->generateLoginFormHTML("Hello");
 		// $body = $this->view->getBody();
 		// $title = $this->view->getTitle();
-		$this->layoutView = new LayoutView($this->user);
-		$this->layoutView->render(false, $this->view, $this->dateTimeView, $this->registerView);
+		// $this->layoutView = new LayoutView($this->user);
+		// $this->layoutView->render(false, $this->view, $this->dateTimeView, $this->registerView);
 	}
 
 }
