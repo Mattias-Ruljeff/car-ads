@@ -8,8 +8,8 @@ error_reporting(E_ALL);
 require_once("Application.php");
 
 require_once('view/DateTimeView.php');
-require_once('view/LoginView1.php');
-require_once('view/LayoutView.php');
+require_once('view/LoginView.php');
+require_once('view/LayoutView1.php');
 // require_once("view/RegisterView.php");
 // require_once("controller/logInOrOut.php");
 // require_once("model/UserStorage.php");
