@@ -5,11 +5,11 @@
 require_once('view/LoginView.php');
 require_once('view/DateTimeView.php');
 // require_once('view/LayoutView.php');
-// require_once("view/RegisterView.php");
-// require_once("controller/logInOrOut.php");
-// require_once("model/UserStorage.php");
-// require_once("model/UserName.php");
-// require_once("model/DatabaseConnection.php");
+require_once("view/RegisterView.php");
+require_once("controller/logInOrOut.php");
+require_once("model/UserStorage.php");
+require_once("model/UserName.php");
+require_once("model/DatabaseConnection.php");
 
 
 //MAKE SURE ERRORS ARE SHOWN... MIGHT WANT TO TURN THIS OFF ON A PUBLIC SERVER
@@ -45,11 +45,11 @@ class Application {
 	}
 
 	private function generateOutput() {
-		
+		$this->view->generateLoginFormHTML("");
 		// $body = $this->view->getBody();
 		// $title = $this->view->getTitle();
-		$this->layoutView = new LayoutView($this->user);
-		$this->layoutView->render(false, $this->view, $this->dateTimeView, $this->registerView);
+		// $this->layoutView = new LayoutView($this->user);
+		// $this->layoutView->render(false, $this->view, $this->dateTimeView, $this->registerView);
 	}
 
 }

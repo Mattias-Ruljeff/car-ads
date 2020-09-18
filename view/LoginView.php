@@ -68,7 +68,7 @@ class LoginView {
 	* @param $message, String output message
 	* @return  void, BUT writes to standard output!
 	*/
-	private function generateLoginFormHTML($message) {
+	public function generateLoginFormHTML($message) {
 		return '
 			<form method="post" > 
 				<fieldset>
