@@ -23,8 +23,8 @@ class Application {
 	private $dbConnection;
 
 	public function __construct(){
-		// $this->storage = new \model\UserStorage();
-		// $this->user = $this->storage->loadUser();
+		$this->storage = new \model\UserStorage();
+		$this->user = $this->storage->loadUser();
 		$this->dateTimeView = new DateTimeView();
 		$this->registerView = new RegisterView($this->user);
 		$this->view = new LoginView();
@@ -39,7 +39,7 @@ class Application {
 
 	private function changeState() {
 		$this->controller->doChangeUserName();
-		$this->storage->saveUser($this->user);
+		// $this->storage->saveUser($this->user);
 	}
 
 	private function generateOutput() {
