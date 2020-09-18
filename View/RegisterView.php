@@ -1,6 +1,6 @@
 <?php
 
-class LoginView {
+class RegisterView {
 	private static $login = 'LoginView::Login';
 	private static $logout = 'LoginView::Logout';
 	private static $name = 'LoginView::UserName';
@@ -9,7 +9,6 @@ class LoginView {
 	private static $cookiePassword = 'LoginView::CookiePassword';
 	private static $keep = 'LoginView::KeepMeLoggedIn';
 	private static $messageId = 'LoginView::Message';
-	private static $test;
 
 
 	/**
@@ -20,23 +19,10 @@ class LoginView {
 	 * @return  void BUT writes to standard output and cookies!
 	 */
 	public function response() {
-
-		$message = "";
-		if($_POST[self::$name] == "" or $_POST[self::$password] == "") {
-			self::$test = $_POST[self::$name];
-			$message = "Enter name and password";
-		} else {
-			self::$test = $_POST[self::$name];
-			$username = $_POST[self::$name];
-			$password = $_POST[self::$password];
-			$_SESSION["user"] = "Username: " . $username . " Password: " .  $password;		
-		}
-		if ($_POST) {
-			$response = $this->generateLoginFormHTML($message);
-		} else {
-			$response = $this->generateLoginFormHTML("");
-		}
-		// $response .= $this->generateLogoutButtonHTML($message);
+		$message = "hej";
+		
+		$response = $this->generateLoginFormHTML($message);
+		$response .= $this->generateLogoutButtonHTML($message);
 		return $response;
 	}
 
@@ -67,7 +53,7 @@ class LoginView {
 					<p id="' . self::$messageId . '">' . $message . '</p>
 					
 					<label for="' . self::$name . '">Username :</label>
-					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="' . self::$test .'" />
+					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="" />
 
 					<label for="' . self::$password . '">Password :</label>
 					<input type="password" id="' . self::$password . '" name="' . self::$password . '" />
@@ -88,5 +74,3 @@ class LoginView {
 	}
 	
 }
-
-// $this->test == "" ? self::$name : $this->test

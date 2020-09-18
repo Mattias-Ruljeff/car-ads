@@ -3,7 +3,12 @@
 
 class LayoutView {
   
-  public function render($isLoggedIn, LoginView $v, DateTimeView $dtv) {
+  public function render($isLoggedIn, LoginView $v, DateTimeView $dtv, RegisterView $regView) {
+    if (session_status() == 1) {
+      echo "session started";
+      session_start();
+    }
+
     echo '<!DOCTYPE html>
       <html>
         <head>
