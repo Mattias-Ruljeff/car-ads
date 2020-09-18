@@ -97,5 +97,3 @@ class LoginView {
 	// }
 	
 }
-
-// $this->test == "" ? self::$name : $this->test
