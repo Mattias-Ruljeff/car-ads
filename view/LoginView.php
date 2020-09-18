@@ -12,6 +12,15 @@ class LoginView {
 	private static $test;
 
 
+	public function userWantsToChangeName() : bool {
+		return isset($_GET[self::$name]) and isset($_GET[self::$password]) ;
+	}
+
+	public function getUserName() {
+		echo " getUserName() ";
+		return $this->dbConnection->checkUsernameAndPassword($_GET[self::$name], $_GET[self::$password]);
+	}
+
 	/**
 	 * Create HTTP response
 	 *

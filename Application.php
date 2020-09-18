@@ -9,6 +9,7 @@ require_once("view/RegisterView.php");
 require_once("Controller/logInOrOut.php");
 require_once("model/UserStorage.php");
 require_once("model/UserName.php");
+require_once("model/DatabaseConnection.php");
 
 
 //MAKE SURE ERRORS ARE SHOWN... MIGHT WANT TO TURN THIS OFF ON A PUBLIC SERVER
@@ -21,23 +22,35 @@ class Application {
 	private $registerView;
 	private $controller;
 	private $view;
+	private $dbConnection;
 
 	public function __construct(){
 		$this->storage = new \model\UserStorage();
 		$this->user = $this->storage->loadUser();
 		$this->dateTimeView = new DateTimeView();
-		$this->layoutView = new LayoutView($this->user);
 		$this->registerView = new RegisterView($this->user);
 		$this->view = new LoginView();
-		$this->controller = new logInOrOut($this->user, $this->layoutView);
+		$this->controller = new logInOrOut($this->user, $this->view);
+		$this->dbConnection = new DatabaseConnection();
 	}
 
-	
-	//CREATE OBJECTS OF THE VIEWS
 	public function run() {
-
-		$this->layoutView->render(false, $this->view, $this->dateTimeView, $this->registerView);
-
+		$this->changeState();
+		$this->generateOutput();
 	}
+
+	private function changeState() {
+		$this->controller->doChangeUserName();
+		// $this->storage->saveUser($this->user);
+	}
+
+	private function generateOutput() {
+		
+		// $body = $this->view->getBody();
+		// $title = $this->view->getTitle();
+		$this->layoutView = new LayoutView($this->user);
+		$this->layoutView->render(false, $this->view, $this->dateTimeView, $this->registerView);
+	}
+
 }
 
