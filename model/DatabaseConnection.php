@@ -10,10 +10,10 @@ class DatabaseConnection {
     // private $password = "root";
 
     // Heroku
+    // private $dbparts = $_SERVER["SERVER_NAME"] == "localhost" ? "localhost:8889" : parse_url($url);
     private $url = getenv('JAWSDB_URL');
     private $dbparts = parse_url($url);
-    // private $dbparts = $_SERVER["SERVER_NAME"] == "localhost" ? "localhost:8889" : parse_url($url);
-
+    
     private $hostname = $dbparts['host'];
     private $username = $dbparts['user'];
     private $password = $dbparts['pass'];
