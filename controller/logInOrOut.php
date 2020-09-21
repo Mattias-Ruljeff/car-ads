@@ -12,14 +12,11 @@ class logInOrOut {
     }
 
     public function doChangeUserName($dbConnection)  {
-        // echo "loginorout 1 ";
 		if ($this->view->userWantsToChangeName()) {
             try {
-                // echo "loginorout 2 ";
 				$name = $dbConnection->checkUsernameAndPassword("John", "Doe");
 				// echo $name;
 			} catch (\Exception $e) {
-                // echo "loginorout 3 ";
                 // $this->view->getMessages();
                 echo $e;
 			}
