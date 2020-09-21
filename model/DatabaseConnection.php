@@ -18,6 +18,7 @@ class DatabaseConnection {
     private $username;
     private $password;
     private $database;
+    private $tableName = "prutt";
     
     public function __construct(){   
         $this->url = getenv('JAWSDB_URL');
