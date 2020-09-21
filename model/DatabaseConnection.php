@@ -3,21 +3,24 @@
 
 class DatabaseConnection {
     private $dbConnection;
-    private $servername = "localhost:8889";
+    private $servername =  "localhost:8889";
 
     // Local host
     // private $username = "root";
     // private $password = "root";
 
     // Heroku
-    private $username = getenv('USERNAME');
-    private $password = getenv('PASSWORD');
-    private $dbname = "users";
-    private $tableName = "prutt";
+    private $url = getenv('JAWSDB_URL');
+    private $dbparts = $_SERVER["SERVER_NAME"] == "localhost" ? "localhost:8889" : parse_url($url);
+
+    private $hostname = $dbparts['host'];
+    private $username = $dbparts['user'];
+    private $password = $dbparts['pass'];
+    private $database = ltrim($dbparts['path'],'/');
 
     public function __construct(){     
         // Create connection
-        $this->dbConnection = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
+        $this->dbConnection = new mysqli($this->dbparts, $this->username, $this->password, $this->hostname);
     }
 
     private function createDatabase () {
