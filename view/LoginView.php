@@ -33,7 +33,7 @@ class LoginView {
 	 */
 	public function response() {
 
-		$message = "asd";
+		$message = "";
 		// if($_POST[self::$name] == "" and $_POST[self::$password] == "") {
 		// 	self::$savedName = $_POST[self::$name];
 		// 	$message = "Enter name and password";
