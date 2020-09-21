@@ -28,8 +28,6 @@ class DatabaseConnection {
         $this->password = $this->dbparts['pass'];
         $this->database = ltrim($this->dbparts['path'],'/');
 
-        echo $this->dbparts;
-        echo $this->database;
         $this->createDatabase();
 
         // Create connection
