@@ -4,11 +4,9 @@ class LayoutView {
 
   public function render($isLoggedIn, $v, DateTimeView $dtv) {
     if (session_status() == 1) {
-      echo "session started";
       session_start();
     }
 
-    // if ($_POST) {
       echo '<!DOCTYPE html>
         <html>
           <head>

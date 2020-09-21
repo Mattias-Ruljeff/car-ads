@@ -34,9 +34,9 @@ class DatabaseConnection {
     }
 
     private function createDatabase () {
-        echo $this->database;
+        // echo $this->database;
         if($this->dbConnection->query("CREATE DATABASE $this->database") === TRUE){
-            echo "Database created successfully";
+            // echo "Database created successfully";
         } else {
           echo "Error creating database: " . $this->dbConnection->error;
         }
@@ -51,7 +51,7 @@ class DatabaseConnection {
             )";
             
             if ($this->dbConnection->query($sql) === TRUE) {
-                echo "Table $this->tableName created successfully";
+                // echo "Table $this->tableName created successfully";
             } else {
                 echo "Error creating table: " . $this->dbConnection->error . ".";
             }
@@ -59,7 +59,7 @@ class DatabaseConnection {
             if ($this->dbConnection->connect_error) {
                 die("Connection failed: " . $this->dbConnection->connect_error);
             }
-            echo " Connected successfully!";
+            // echo " Connected successfully!";
         }
         
 
