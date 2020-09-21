@@ -12,16 +12,16 @@ class DatabaseConnection {
     // Heroku
     // private $dbparts = $_SERVER["SERVER_NAME"] == "localhost" ? "localhost:8889" : parse_url($url);
     
-    private $hostname = $dbparts['host'];
-    private $username = $dbparts['user'];
-    private $password = $dbparts['pass'];
-    private $database = ltrim($dbparts['path'],'/');
     
     public function __construct(){     
         $url = getenv('JAWSDB_URL');
         $dbparts = parse_url($url);
+        $hostname = $dbparts['host'];
+        $username = $dbparts['user'];
+        $password = $dbparts['pass'];
+        $database = ltrim($dbparts['path'],'/');
         // Create connection
-        $this->dbConnection = new mysqli($dbparts, $this->username, $this->password, $this->hostname);
+        $this->dbConnection = new mysqli($dbparts, $username, $password, $database);
     }
 
     private function createDatabase () {
