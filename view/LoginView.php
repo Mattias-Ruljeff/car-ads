@@ -37,7 +37,7 @@ class LoginView {
 
 		if($_POST[self::$name] == "" and $_POST[self::$password] == "") {
 			self::$savedName = $_POST[self::$name];
-			$message = "Username is missing";
+			$message = "Username is missing herlkjasfdlkn";
 		} else if($_POST[self::$name] == "") {
 			$message = "Username is missing";
 		} else if($_POST[self::$password] == "") {
@@ -45,9 +45,9 @@ class LoginView {
 			$message = "Password is missing";
 		} else {
 			self::$savedName = $_POST[self::$name];
-			$username = $_POST[self::$name];
-			$password = $_POST[self::$password];
-			$_SESSION["user"] = "Username: " . $username . " Password: " .  $password;		
+			// $username = $_POST[self::$name];
+			// $password = $_POST[self::$password];
+			// $_SESSION["user"] = "Username: " . $username . " Password: " .  $password;		
 		}
 		
 			$response = $this->generateLoginFormHTML($message);
