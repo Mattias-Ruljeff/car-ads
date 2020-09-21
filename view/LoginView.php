@@ -37,7 +37,7 @@ class LoginView {
 
 			if($_POST[self::$name] == "" and $_POST[self::$password] == "") {
 				self::$savedName = $_POST[self::$name];
-				$message = "Username is missing herlkjasfdlkn";
+				$message = "Username is missing";
 			} else if($_POST[self::$name] == "") {
 				$message = "Username is missing";
 			} else if($_POST[self::$password] == "") {
