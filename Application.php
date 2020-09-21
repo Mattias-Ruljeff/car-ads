@@ -42,12 +42,12 @@ class Application {
 		$this->controller->doChangeUserName($this->dbConnection);
 
 
-		echo "<br> GET ";
-		var_dump($_GET);
-		echo "<br> POST ";
-		var_dump($_POST);
-		echo "<br> COOKIE ";
-		var_dump($_COOKIE);
+		// echo "<br> GET ";
+		// var_dump($_GET);
+		// echo "<br> POST ";
+		// var_dump($_POST);
+		// echo "<br> COOKIE ";
+		// var_dump($_COOKIE);
 		// $this->storage->saveUser($this->user);
 	}
 

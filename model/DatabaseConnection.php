@@ -18,15 +18,16 @@ class DatabaseConnection {
     private $username;
     private $password;
     private $database;
-    private $tableName = "test";
+    private $tableName;
     
     public function __construct(){   
-        $this->url = getenv('JAWSDB_URL');
-        $this->dbparts = parse_url($this->url);
-        $this->hostname = $this->dbparts['host'];
-        $this->username = $this->dbparts['user'];
-        $this->password = $this->dbparts['pass'];
-        $this->database = ltrim($this->dbparts['path'],'/');
+        $this->url = $_SERVER["SERVER_NAME"] == "localhost" ?  : getenv('JAWSDB_URL');
+        $this->dbparts = $_SERVER["SERVER_NAME"] == "localhost" ? "" : parse_url($this->url);
+        $this->hostname = $_SERVER["SERVER_NAME"] == "localhost" ? "localhost:8889" : $this->dbparts['host'];
+        $this->username = $_SERVER["SERVER_NAME"] == "localhost" ? "root" : $this->dbparts['user'];
+        $this->password = $_SERVER["SERVER_NAME"] == "localhost" ? "root" : $this->dbparts['pass'];
+        $this->database = $_SERVER["SERVER_NAME"] == "localhost" ? "users" : ltrim($this->dbparts['path'],'/');
+        $this->tableName = $_SERVER["SERVER_NAME"] == "localhost" ? "prutt" : "test";
 
         // Create connection
         $this->dbConnection = new mysqli($this->hostname, $this->username, $this->password, $this->database);
@@ -66,7 +67,7 @@ class DatabaseConnection {
         try {
             $this->dbConnection->query("INSERT INTO $this->tableName (username, passwrd)
             VALUES ('John', 'Doe')");
-            echo "";
+            // echo "";
 
         }catch(\Exception $error) {
             echo "fel vid skapande av table data " . $error;
@@ -75,9 +76,9 @@ class DatabaseConnection {
 
     // Fixa denna, går fortfarande att "hitta användare"
     public function checkUsernameAndPassword($username, $password) {
-        echo " checked username and passwrd 1 <br>";
+        // echo " checked username and passwrd 1 <br>";
         try {
-            echo " checked username and passwrd 2 <br>";
+            // echo " checked username and passwrd 2 <br>";
             $sql = "SELECT * FROM $this->tableName WHERE username = '$username' and passwrd = '$password' ";
             $query = $this->dbConnection->query($sql);
             if (!$query)

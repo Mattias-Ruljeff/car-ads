@@ -18,8 +18,8 @@ class LoginView {
 	}
 
 	public function getUserName() {
-		echo " getUserName() ";
-		echo "funka??";
+		// echo " getUserName() ";
+		// echo "funka??";
 		// return $this->dbConnection->checkUsernameAndPassword($_GET[self::$name], $_GET[self::$password]);
 		return $this->dbConnection->checkUsernameAndPassword("John", "Doe");
 	}
@@ -34,20 +34,20 @@ class LoginView {
 	public function response() {
 
 		$message = "asd";
-		if($_POST[self::$name] == "" and $_POST[self::$password] == "") {
-			self::$savedName = $_POST[self::$name];
-			$message = "Enter name and password";
-		} else if($_POST[self::$name] == "") {
-			$message = "Enter name";
-		} else if($_POST[self::$password] == "") {
-			self::$savedName = $_POST[self::$name];
-			$message = "Enter password";
-		} else {
-			self::$savedName = $_POST[self::$name];
-			$username = $_POST[self::$name];
-			$password = $_POST[self::$password];
-			$_SESSION["user"] = "Username: " . $username . " Password: " .  $password;		
-		}
+		// if($_POST[self::$name] == "" and $_POST[self::$password] == "") {
+		// 	self::$savedName = $_POST[self::$name];
+		// 	$message = "Enter name and password";
+		// } else if($_POST[self::$name] == "") {
+		// 	$message = "Enter name";
+		// } else if($_POST[self::$password] == "") {
+		// 	self::$savedName = $_POST[self::$name];
+		// 	$message = "Enter password";
+		// } else {
+		// 	self::$savedName = $_POST[self::$name];
+		// 	$username = $_POST[self::$name];
+		// 	$password = $_POST[self::$password];
+		// 	$_SESSION["user"] = "Username: " . $username . " Password: " .  $password;		
+		// }
 
 		
 		// if ($_POST) {
