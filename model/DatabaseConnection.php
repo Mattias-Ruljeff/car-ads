@@ -21,7 +21,7 @@ class DatabaseConnection {
         $password = $dbparts['pass'];
         $database = ltrim($dbparts['path'],'/');
         // Create connection
-        $this->dbConnection = new mysqli($dbparts, $username, $password, $database);
+        $this->dbConnection = new mysqli($hostname, $username, $password, $database);
     }
 
     private function createDatabase () {
