@@ -10,8 +10,8 @@ class DatabaseConnection {
     // private $password = "root";
 
     // Heroku
-    private $username = getenv("USERNAME");
-    private $password = getenv("PASSWORD");
+    private $username = getenv('USERNAME');
+    private $password = getenv('PASSWORD');
     private $dbname = "users";
     private $tableName = "prutt";
 
