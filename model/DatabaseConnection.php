@@ -27,12 +27,17 @@ class DatabaseConnection {
         $this->username = $this->dbparts['user'];
         $this->password = $this->dbparts['pass'];
         $this->database = ltrim($this->dbparts['path'],'/');
+
+        echo $this->dbparts;
+        echo $this->database;
+        $this->createDatabase();
+
         // Create connection
         $this->dbConnection = new mysqli($this->hostname, $this->username, $this->password, $this->database);
     }
 
     private function createDatabase () {
-        if($this->dbConnection->query("CREATE DATABASE $this->dbname") === TRUE){
+        if($this->dbConnection->query("CREATE DATABASE $this->database") === TRUE){
             echo "Database created successfully";
         } else {
           echo "Error creating database: " . $this->dbConnection->error;
