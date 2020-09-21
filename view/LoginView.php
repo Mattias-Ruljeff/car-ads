@@ -13,8 +13,7 @@ class LoginView {
 
 
 	public function userWantsToChangeName() : bool {
-		// return isset($_GET[self::$name]) and isset($_GET[self::$password]) ;
-		return true;
+		return isset($_GET[self::$name]) and isset($_GET[self::$password]) ;
 	}
 
 	public function getUserName() {
@@ -34,6 +33,8 @@ class LoginView {
 	public function response() {
 
 		$message = "";
+		if ($_POST) {
+
 		if($_POST[self::$name] == "" and $_POST[self::$password] == "") {
 			self::$savedName = $_POST[self::$name];
 			$message = "Enter name and password";
@@ -48,13 +49,11 @@ class LoginView {
 			$password = $_POST[self::$password];
 			$_SESSION["user"] = "Username: " . $username . " Password: " .  $password;		
 		}
-
 		
-		// if ($_POST) {
 			$response = $this->generateLoginFormHTML($message);
-		// } else {
-			// $response = $this->generateLoginFormHTML("");
-		// }
+		} else {
+			$response = $this->generateLoginFormHTML("");
+		}
 		// $response .= $this->generateLogoutButtonHTML($message);
 		return $response;
 	}
