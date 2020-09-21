@@ -44,7 +44,7 @@ class DatabaseConnection {
     }
 
     public function createTableInDataBase () {
-        $sql = "CREATE TABLE $this->tableName (
+        $sql = "CREATE TABLE $this->database (
             id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             username VARCHAR(30) NOT NULL,
             passwrd VARCHAR(30) NOT NULL,s
@@ -66,7 +66,7 @@ class DatabaseConnection {
 
     public function createUsernameAndPassword($username, $password) {
         try {
-            $this->dbConnection->query("INSERT INTO $this->tableName (username, passwrd)
+            $this->dbConnection->query("INSERT INTO $this->database (username, passwrd)
             VALUES ('John', 'Doe')");
             echo "";
 
@@ -80,7 +80,7 @@ class DatabaseConnection {
         echo " checked username and passwrd 1 <br>";
         try {
             echo " checked username and passwrd 2 <br>";
-            $sql = "SELECT * FROM $this->tableName WHERE username = '$username' and passwrd = '$password' ";
+            $sql = "SELECT * FROM $this->database WHERE username = '$username' and passwrd = '$password' ";
             $query = $this->dbConnection->query($sql);
             if (!$query)
             {
