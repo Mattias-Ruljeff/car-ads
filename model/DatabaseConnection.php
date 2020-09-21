@@ -35,6 +35,8 @@ class DatabaseConnection {
     }
 
     private function createDatabase () {
+        $test = implode(",", $this->database);
+        echo $test;
         if($this->dbConnection->query("CREATE DATABASE $this->database") === TRUE){
             echo "Database created successfully";
         } else {
