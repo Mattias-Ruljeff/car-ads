@@ -18,7 +18,7 @@ class DatabaseConnection {
     private $username;
     private $password;
     private $database;
-    private $tableName = "prutt";
+    private $tableName = "test";
     
     public function __construct(){   
         $this->url = getenv('JAWSDB_URL');
@@ -42,7 +42,7 @@ class DatabaseConnection {
     }
 
     public function createTableInDataBase () {
-        $sql = "CREATE TABLE $this->database (
+        $sql = "CREATE TABLE $this->tableName (
             id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             username VARCHAR(30) NOT NULL,
             passwrd VARCHAR(30) NOT NULL,s
@@ -50,7 +50,7 @@ class DatabaseConnection {
             )";
             
             if ($this->dbConnection->query($sql) === TRUE) {
-                echo "Table $this->dbname created successfully";
+                echo "Table $this->tableName created successfully";
             } else {
                 echo "Error creating table: " . $this->dbConnection->error . ".";
             }
@@ -64,7 +64,7 @@ class DatabaseConnection {
 
     public function createUsernameAndPassword($username, $password) {
         try {
-            $this->dbConnection->query("INSERT INTO $this->database (username, passwrd)
+            $this->dbConnection->query("INSERT INTO $this->tableName (username, passwrd)
             VALUES ('John', 'Doe')");
             echo "";
 
@@ -78,7 +78,7 @@ class DatabaseConnection {
         echo " checked username and passwrd 1 <br>";
         try {
             echo " checked username and passwrd 2 <br>";
-            $sql = "SELECT * FROM $this->database WHERE username = '$username' and passwrd = '$password' ";
+            $sql = "SELECT * FROM $this->tableName WHERE username = '$username' and passwrd = '$password' ";
             $query = $this->dbConnection->query($sql);
             if (!$query)
             {
