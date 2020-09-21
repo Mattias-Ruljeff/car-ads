@@ -19,7 +19,13 @@ class DatabaseConnection {
     public $password = $dbparts['pass'];
     public $database = ltrim($dbparts['path'],'/');
     
-    public function __construct(){     
+    public function __construct(){   
+        $this->url = getenv('JAWSDB_URL');
+        $this->dbparts = parse_url($this->url);
+        $this->hostname = $this->dbparts['host'];
+        $this->username = $this->dbparts['user'];
+        $this->password = $this->dbparts['pass'];
+        $this->database = ltrim($this->dbparts['path'],'/');
         // Create connection
         $this->dbConnection = new mysqli($this->hostname, $this->username, $this->password, $this->database);
     }
