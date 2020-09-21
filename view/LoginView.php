@@ -1,7 +1,5 @@
 <?php
 
-echo "hello loginview";
-
 class LoginView {
 	private static $login = 'LoginView::Login';
 	private static $logout = 'LoginView::Logout';
@@ -15,12 +13,15 @@ class LoginView {
 
 
 	public function userWantsToChangeName() : bool {
-		return isset($_GET[self::$name]) and isset($_GET[self::$password]) ;
+		// return isset($_GET[self::$name]) and isset($_GET[self::$password]) ;
+		return true;
 	}
 
 	public function getUserName() {
 		echo " getUserName() ";
-		return $this->dbConnection->checkUsernameAndPassword($_GET[self::$name], $_GET[self::$password]);
+		echo "funka??";
+		// return $this->dbConnection->checkUsernameAndPassword($_GET[self::$name], $_GET[self::$password]);
+		return $this->dbConnection->checkUsernameAndPassword("John", "Doe");
 	}
 
 	/**

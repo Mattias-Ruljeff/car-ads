@@ -2,8 +2,6 @@
 
 namespace Model;
 
-session_start();
-
 class UserStorage {
 
 	private static $SESSION_KEY =  __CLASS__ .  "::UserName";

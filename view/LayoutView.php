@@ -8,6 +8,11 @@ class LayoutView {
       session_start();
     }
 
+    if ($_POST) {
+
+
+    }
+
     echo '<!DOCTYPE html>
       <html>
         <head>

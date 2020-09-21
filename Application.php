@@ -33,12 +33,13 @@ class Application {
 	}
 
 	public function run() {
+		// echo $_SERVER["SERVER_NAME"] . "<br>";
 		$this->changeState();
 		$this->generateOutput();
 	}
 
 	private function changeState() {
-		$this->controller->doChangeUserName();
+		$this->controller->doChangeUserName($this->dbConnection);
 		// $this->storage->saveUser($this->user);
 	}
 
