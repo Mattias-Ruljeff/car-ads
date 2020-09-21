@@ -39,7 +39,7 @@ class Application {
 	}
 
 	private function changeState() {
-		$this->controller->doChangeUserName($this->dbConnection);
+		$this->controller->logIn($this->dbConnection);
 
 
 		// echo "<br> GET ";

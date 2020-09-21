@@ -74,12 +74,9 @@ class DatabaseConnection {
         }
     }
 
-    // Fixa denna, går fortfarande att "hitta användare"
-    public function checkUsernameAndPassword($username, $password) {
-        // echo " checked username and passwrd 1 <br>";
+    public function checkUserCredentials($tableName, $enteredString) {
         try {
-            // echo " checked username and passwrd 2 <br>";
-            $sql = "SELECT * FROM $this->tableName WHERE username = '$username' and passwrd = '$password' ";
+            $sql = "SELECT * FROM $this->tableName WHERE $tableName = '$enteredString' ";
             $query = $this->dbConnection->query($sql);
             if (!$query)
             {
@@ -99,5 +96,6 @@ class DatabaseConnection {
             echo " Fel användare eller lösen " . $error;
         }
     }
+    
 
 }

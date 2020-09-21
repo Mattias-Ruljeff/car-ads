@@ -12,15 +12,16 @@ class LoginView {
 	private static $savedName;
 
 
-	public function userWantsToChangeName() : bool {
-		return isset($_GET[self::$name]) and isset($_GET[self::$password]) ;
+	public function userWantsToLogIn() : bool {
+		return isset($_POST[self::$login]);
 	}
 
 	public function getUserName() {
-		// echo " getUserName() ";
-		// echo "funka??";
-		// return $this->dbConnection->checkUsernameAndPassword($_GET[self::$name], $_GET[self::$password]);
-		return $this->dbConnection->checkUsernameAndPassword("John", "Doe");
+		return $_POST[self::$name];
+	}
+	
+	public function getPassword() {
+		return $_POST[self::$password];
 	}
 
 	/**
@@ -56,6 +57,10 @@ class LoginView {
 		}
 		// $response .= $this->generateLogoutButtonHTML($message);
 		return $response;
+	}
+
+	public function checkUsername () {
+
 	}
 
 	/**
