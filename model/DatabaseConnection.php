@@ -4,8 +4,14 @@
 class DatabaseConnection {
     private $dbConnection;
     private $servername = "localhost:8889";
-    private $username = "root";
-    private $password = "root";
+
+    // Local host
+    // private $username = "root";
+    // private $password = "root";
+
+    // Heroku
+    private $username = getenv("USERNAME");
+    private $password = getenv("PASSWORD");
     private $dbname = "users";
     private $tableName = "prutt";
 

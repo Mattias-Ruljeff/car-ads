@@ -1,45 +1,18 @@
 <?php
 
 class RegisterView {
-	private static $login = 'LoginView::Login';
-	private static $logout = 'LoginView::Logout';
-	private static $name = 'LoginView::UserName';
-	private static $password = 'LoginView::Password';
-	private static $cookieName = 'LoginView::CookieName';
-	private static $cookiePassword = 'LoginView::CookiePassword';
-	private static $keep = 'LoginView::KeepMeLoggedIn';
-	private static $messageId = 'LoginView::Message';
+	private static $login = 'RegisterView::Login';
+	private static $logout = 'RegisterView::Logout';
+	private static $name = 'RegisterView::UserName';
+	private static $password = 'RegisterView::Password';
+	private static $password2 = 'RegisterView::Password2';
+	private static $cookieName = 'RegisterView::CookieName';
+	private static $cookiePassword = 'RegisterView::CookiePassword';
+	private static $keep = 'RegisterView::KeepMeLoggedIn';
+	private static $messageId = 'RegisterView::Message';
+	private $savedName;
 
 
-
-	public function render($isLoggedIn, LoginView $v, DateTimeView $dtv) {
-		if (session_status() == 1) {
-		  echo "session started";
-		  session_start();
-		}
-	
-		if ($_POST) {
-		  echo '<!DOCTYPE html>
-			<html>
-			  <head>
-				<meta charset="utf-8">
-				<title>Login Example</title>
-			  </head>
-			  <body>
-				<h1>Assignment 2</h1>
-				' . $this->renderIsLoggedIn($isLoggedIn) . '
-				
-				<div class="container">
-					' . $v->response() . '
-					
-					' . $dtv->show() . '
-				</div>
-			   </body>
-			</html>
-		  ';
-
-		}
-	}
 	/**
 	 * Create HTTP response
 	 *
@@ -48,25 +21,25 @@ class RegisterView {
 	 * @return  void BUT writes to standard output and cookies!
 	 */
 	public function response() {
-		$message = "hej";
+		$message = "";
 		
-		$response = $this->generateLoginFormHTML($message);
-		$response .= $this->generateLogoutButtonHTML($message);
-		return $response;
-	}
+		// if($_POST[self::$name] == "" and $_POST[self::$password] == "") {
+		// 	self::$savedName = $_POST[self::$name];
+		// 	$message = "Enter name and password";
+		// } else if($_POST[self::$name] == "") {
+		// 	$message = "Enter name";
+		// } else if($_POST[self::$password] == "") {
+		// 	self::$savedName = $_POST[self::$name];
+		// 	$message = "Enter password";
+		// } else {
+		// 	self::$savedName = $_POST[self::$name];
+		// 	$username = $_POST[self::$name];
+		// 	$password = $_POST[self::$password];
+		// 	$_SESSION["user"] = "Username: " . $username . " Password: " .  $password;		
+		// }
 
-	/**
-	* Generate HTML code on the output buffer for the logout button
-	* @param $message, String output message
-	* @return  void, BUT writes to standard output!
-	*/
-	private function generateLogoutButtonHTML($message) {
-		return '
-			<form  method="post" >
-				<p id="' . self::$messageId . '">' . $message .'</p>
-				<input type="submit" name="' . self::$logout . '" value="logout"/>
-			</form>
-		';
+		$response = $this->generateLoginFormHTML($message);
+		return $response;
 	}
 	
 	/**
@@ -76,42 +49,30 @@ class RegisterView {
 	*/
 	private function generateLoginFormHTML($message) {
 		return '
+			<form action="/" method="post">
+				<input type="submit" name="login" value="Login Page"/>
+			</form>
 			<form method="post" > 
 				<fieldset>
-					<legend>Login - enter Username and password</legend>
+					<legend>Register - enter Username and password</legend>
 					<p id="' . self::$messageId . '">' . $message . '</p>
 					
 					<label for="' . self::$name . '">Username :</label>
 					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="" />
-
+					<br>
+					
 					<label for="' . self::$password . '">Password :</label>
 					<input type="password" id="' . self::$password . '" name="' . self::$password . '" />
-
-					<label for="' . self::$keep . '">Keep me logged in  :</label>
-					<input type="checkbox" id="' . self::$keep . '" name="' . self::$keep . '" />
+					<br>
 					
-					<input type="submit" name="' . self::$login . '" value="login" />
+					<label for="' . self::$password2 . '">Repeat password :</label>
+					<input type="password" id="' . self::$password2 . '" name="' . self::$password2 . '" />
+					<br>
+					
+					<input type="submit" name="' . self::$login . '" value="Register" />
 				</fieldset>
 			</form>
 		';
-	}
-	private function renderIsLoggedIn($isLoggedIn) {
-		if ($isLoggedIn) {
-		  return '<h2>Logged in</h2>';
-		}
-		else {
-		  return '
-		  <h2>Not logged in</h2>
-		  <form action="?register" method="post">
-		  <input type="submit" name="Register new user" value="registerNewUser"/>
-		  </form>
-		  ';
-		}
-	  }
-	//CREATE GET-FUNCTIONS TO FETCH REQUEST VARIABLES
-	private function getRequestUserName() {
-		//RETURN REQUEST VARIABLE: USERNAME
-		return "username";
 	}
 	
 }

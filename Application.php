@@ -52,11 +52,10 @@ class Application {
 	}
 
 	private function generateOutput() {
+		$this->layoutView = new LayoutView();
 		if(isset($_GET["register"])){
-			$this->registerView = new RegisterView($this->user);
-			$this->registerView->render(false, $this->view, $this->dateTimeView);
+			$this->layoutView->render(false, $this->registerView, $this->dateTimeView);
 		} else {
-			$this->layoutView = new LayoutView($this->user);
 			$this->layoutView->render(false, $this->view, $this->dateTimeView);
 		}
 	}

@@ -33,7 +33,7 @@ class LoginView {
 	 */
 	public function response() {
 
-		$message = "";
+		$message = "asd";
 		if($_POST[self::$name] == "" and $_POST[self::$password] == "") {
 			self::$savedName = $_POST[self::$name];
 			$message = "Enter name and password";
@@ -50,11 +50,11 @@ class LoginView {
 		}
 
 		
-		if ($_POST) {
+		// if ($_POST) {
 			$response = $this->generateLoginFormHTML($message);
-		} else {
-			$response = $this->generateLoginFormHTML("");
-		}
+		// } else {
+			// $response = $this->generateLoginFormHTML("");
+		// }
 		// $response .= $this->generateLogoutButtonHTML($message);
 		return $response;
 	}
@@ -80,6 +80,9 @@ class LoginView {
 	*/
 	public function generateLoginFormHTML($message) {
 		return '
+			<form action="?register" method="post">
+				<input type="submit" name="Register new user" value="Register New User"/>
+			</form>
 			<form method="post" > 
 				<fieldset>
 					<legend>Login - enter Username and password</legend>
@@ -96,6 +99,7 @@ class LoginView {
 					
 					<input type="submit" name="' . self::$login . '" value="login" />
 				</fieldset>
+				
 			</form>
 		';
 	}
