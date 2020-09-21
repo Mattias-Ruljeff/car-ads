@@ -40,12 +40,25 @@ class Application {
 
 	private function changeState() {
 		$this->controller->doChangeUserName($this->dbConnection);
+
+
+		echo "<br> GET ";
+		var_dump($_GET);
+		echo "<br> POST ";
+		var_dump($_POST);
+		echo "<br> COOKIE ";
+		var_dump($_COOKIE);
 		// $this->storage->saveUser($this->user);
 	}
 
 	private function generateOutput() {
-		$this->layoutView = new LayoutView($this->user);
-		$this->layoutView->render(false, $this->view, $this->dateTimeView, $this->registerView);
+		if(isset($_GET["register"])){
+			$this->registerView = new RegisterView($this->user);
+			$this->registerView->render(false, $this->view, $this->dateTimeView);
+		} else {
+			$this->layoutView = new LayoutView($this->user);
+			$this->layoutView->render(false, $this->view, $this->dateTimeView);
+		}
 	}
 
 }

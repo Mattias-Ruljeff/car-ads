@@ -9,7 +9,7 @@ class LoginView {
 	private static $cookiePassword = 'LoginView::CookiePassword';
 	private static $keep = 'LoginView::KeepMeLoggedIn';
 	private static $messageId = 'LoginView::Message';
-	private static $test;
+	private static $savedName;
 
 
 	public function userWantsToChangeName() : bool {
@@ -34,15 +34,22 @@ class LoginView {
 	public function response() {
 
 		$message = "";
-		if($_POST[self::$name] == "" or $_POST[self::$password] == "") {
-			self::$test = $_POST[self::$name];
+		if($_POST[self::$name] == "" and $_POST[self::$password] == "") {
+			self::$savedName = $_POST[self::$name];
 			$message = "Enter name and password";
+		} else if($_POST[self::$name] == "") {
+			$message = "Enter name";
+		} else if($_POST[self::$password] == "") {
+			self::$savedName = $_POST[self::$name];
+			$message = "Enter password";
 		} else {
-			self::$test = $_POST[self::$name];
+			self::$savedName = $_POST[self::$name];
 			$username = $_POST[self::$name];
 			$password = $_POST[self::$password];
 			$_SESSION["user"] = "Username: " . $username . " Password: " .  $password;		
 		}
+
+		
 		if ($_POST) {
 			$response = $this->generateLoginFormHTML($message);
 		} else {
@@ -79,7 +86,7 @@ class LoginView {
 					<p id="' . self::$messageId . '">' . $message . '</p>
 					
 					<label for="' . self::$name . '">Username :</label>
-					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="' . self::$test .'" />
+					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="' . self::$savedName .'" />
 
 					<label for="' . self::$password . '">Password :</label>
 					<input type="password" id="' . self::$password . '" name="' . self::$password . '" />
