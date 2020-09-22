@@ -38,7 +38,7 @@ class logInOrOut {
                         if(!$passwrd) {
                             return "Password is missing";
                         }
-                        $message = 'Username or password incorrect';
+                        $message = 'Wrong name or password';
                         // echo " password is not correct ";
                         return $message;
                     }
