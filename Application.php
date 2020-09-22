@@ -6,6 +6,7 @@ require_once('view/LoginView.php');
 require_once("view/LayoutView.php");
 require_once("view/RegisterView.php");
 require_once("controller/logInOrOut.php");
+require_once("controller/RegisterNewUser.php");
 require_once("model/UserStorage.php");
 require_once("model/UserName.php");
 require_once("model/DatabaseConnection.php");
@@ -23,38 +24,45 @@ class Application {
 	private $dbConnection;
 
 	public function __construct(){
-		$this->storage = new \model\UserStorage();
-		$this->user = $this->storage->loadUser();
 		$this->dateTimeView = new DateTimeView();
-		$this->registerView = new RegisterView($this->user);
+		$this->registerView = new RegisterView();
 		$this->view = new LoginView();
-		$this->controller = new logInOrOut($this->user, $this->view);
+		$this->controller = new logInOrOut($this->view);
 		$this->dbConnection = new DatabaseConnection();
 	}
 
 	public function run() {
 		$response = $this->changeState();
-		$this->generateOutput($response);
+		$checkIfLoggedIn = $this->checkIfLoggedIn();
+		$this->generateOutput($response, $checkIfLoggedIn);
 	}
 
 	private function changeState() {
+		// if(isset($_GET["register"])){
+		// 	$response = $this->controller->registerNewUser($this->dbConnection);
+		// }
 		$response = $this->controller->logIn($this->dbConnection);
-		return $response;
+
 		// echo "<br> GET ";
 		// var_dump($_GET);
 		// echo "<br> POST ";
 		// var_dump($_POST);
 		// echo "<br> COOKIE ";
 		// var_dump($_COOKIE);
-		// $this->storage->saveUser($this->user);
+		return $response;
 	}
 
-	private function generateOutput($message) {
+	private function checkIfLoggedIn() {
+		$response = $this->controller->checkIfLoggedIn();
+		return $response;
+	}
+
+	private function generateOutput($message, $checkIfLoggedIn) {
 		$this->layoutView = new LayoutView();
 		if(isset($_GET["register"])){
-			$this->layoutView->render(false, $this->registerView, $this->dateTimeView, $message);
+			$this->layoutView->render($checkIfLoggedIn, $this->registerView, $this->dateTimeView, $message);
 		} else {
-			$this->layoutView->render(false, $this->view, $this->dateTimeView, $message);
+			$this->layoutView->render($checkIfLoggedIn, $this->view, $this->dateTimeView, $message);
 		}
 	}
 

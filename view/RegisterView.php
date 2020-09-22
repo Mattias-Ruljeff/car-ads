@@ -1,7 +1,7 @@
 <?php
 
 class RegisterView {
-	private static $login = 'RegisterView::Login';
+	private static $register = 'RegisterView::Register';
 	private static $logout = 'RegisterView::Logout';
 	private static $name = 'RegisterView::UserName';
 	private static $password = 'RegisterView::Password';
@@ -12,7 +12,9 @@ class RegisterView {
 	private static $messageId = 'RegisterView::Message';
 	private $savedName;
 
-
+	public function userWantsToRegisterUser() : bool {
+		return isset($_POST[self::$register]);
+	}
 	/**
 	 * Create HTTP response
 	 *
@@ -67,7 +69,7 @@ class RegisterView {
 					<input type="password" id="' . self::$password2 . '" name="' . self::$password2 . '" />
 					<br>
 					
-					<input type="submit" name="' . self::$login . '" value="Register" />
+					<input type="submit" name="' . self::$register . '" value="Register" />
 				</fieldset>
 			</form>
 		';

@@ -3,13 +3,12 @@
 
 class logInOrOut {
 
-    private $user;
     private $view;
     private $columnOneName = "Username";
     private $columTwoName = "Passwrd";
+    private $isLoggedIn = false;
 
-    public function __construct(\model\UserName $user, \LoginView $view) {
-        $this->user = $user;
+    public function __construct(\LoginView $view) {
         $this->view = $view;
 
     }
@@ -28,6 +27,7 @@ class logInOrOut {
                     $message = "";
 
                     if($dbConnection->checkUserCredentials("passwrd", $passwrd)) {
+                        $this->isLoggedIn = true;;
                         $message = "Welcome";
                         return $message;
                     } else {
@@ -40,12 +40,16 @@ class logInOrOut {
                     $message = "Wrong name or password";
                     return $message;
                 } else {
+                    $this->isLoggedIn = false;
                     $message = "Wrong name or password";
                     return $message;
                 }
 			} catch (\Exception $e) {
                 echo $e;
 			}
-		}
-	}
+        }  
+    }
+    public function checkIfLoggedIn () {
+        return $this->isLoggedIn;
+    }
 }
