@@ -9,7 +9,7 @@ class LoginView {
 	private static $cookiePassword = 'LoginView::CookiePassword';
 	private static $keep = 'LoginView::KeepMeLoggedIn';
 	private static $messageId = 'LoginView::Message';
-	private static $savedName;
+	private static $savedName = "";
 
 
 	public function userWantsToLogIn() : bool {
@@ -32,6 +32,9 @@ class LoginView {
 	 * @return  void BUT writes to standard output and cookies!
 	 */
 	public function response($message) {
+		if($_POST[self::$name]) {
+			self::$savedName = $_POST[self::$name];
+		}
 		$response = $this->generateLoginFormHTML($message);
 		return $response;
 	}

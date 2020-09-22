@@ -5,6 +5,7 @@ class logInOrOut {
 
     private $user;
     private $view;
+    private $savedUsername;
     private $columnOneName = "Username";
     private $columTwoName = "Passwrd";
 
@@ -17,7 +18,6 @@ class logInOrOut {
     public function logIn($dbConnection)  {
 		if ($this->view->userWantsToLogIn()) {
             $message = "";
-            $loggedIn = false;
             try {
                 $username = $this->view->getUserName();
                 if(!$username) {
@@ -25,10 +25,9 @@ class logInOrOut {
                 }
                 $passwrd = $this->view->getPassword();
                 
-                $passwrd = $this->view->getPassword();
-
 				if($dbConnection->checkUserCredentials("username", $username)) {
                     $message = "";
+                    $this->savedUsername = $username;
 
                     if($dbConnection->checkUserCredentials("passwrd", $passwrd)) {
                         $message = "Username and password correct";
