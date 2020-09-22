@@ -42,10 +42,10 @@ class logInOrOut {
                         // echo " password is not correct ";
                         return $message;
                     }
-                    $message = "Username or password incorrect";
+                    $message = "Wrong name or password";
                     return $message;
                 } else {
-                    $message = "Username or password incorrect";
+                    $message = "Wrong name or password";
                     return $message;
                 }
                 // echo $name;
