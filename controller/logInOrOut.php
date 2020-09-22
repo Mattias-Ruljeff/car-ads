@@ -20,6 +20,11 @@ class logInOrOut {
             $loggedIn = false;
             try {
                 $username = $this->view->getUserName();
+                if(!$username) {
+                    return "Username is missing";
+                }
+                $passwrd = $this->view->getPassword();
+                
                 $passwrd = $this->view->getPassword();
 
 				if($dbConnection->checkUserCredentials("username", $username)) {
@@ -30,7 +35,10 @@ class logInOrOut {
                         $loggedIn = true;
                         return $message;
                     } else {
-                        $message = 'fail';
+                        if(!$passwrd) {
+                            return "Password is missing";
+                        }
+                        $message = 'Username or password incorrect';
                         // echo " password is not correct ";
                         return $message;
                     }
