@@ -36,48 +36,25 @@ class LoginView {
 		return $response;
 	}
 
-	public function checkUsernameAndPassword () {
-		if ($_POST) {
-
-			if($_POST[self::$name] == "" and $_POST[self::$password] == "") {
-				self::$savedName = $_POST[self::$name];
-				$message = "Username is missing";
-			} else if($_POST[self::$name] == "") {
-				$message = "Username is missing";
-			} else if($_POST[self::$password] == "") {
-				self::$savedName = $_POST[self::$name];
-				$message = "Password is missing";
-			} else {
-				self::$savedName = $_POST[self::$name];
-				$message = "";
-				// $username = $_POST[self::$name];
-				// $password = $_POST[self::$password];
-				// $_SESSION["user"] = "Username: " . $username . " Password: " .  $password;		
-			}
-			return $message;
-		}
-		
-	}
-
 	/**
-	* Generate HTML code on the output buffer for the logout button
-	* @param $message, String output message
-	* @return  void, BUT writes to standard output!
-	*/
+	 * Generate HTML code on the output buffer for the logout button
+	 * @param $message, String output message
+	 * @return  void, BUT writes to standard output!
+	 */
 	private function generateLogoutButtonHTML($message) {
 		return '
-			<form  method="post" >
-				<p id="' . self::$messageId . '">' . $message .'</p>
-				<input type="submit" name="' . self::$logout . '" value="logout"/>
-			</form>
+		<form  method="post" >
+		<p id="' . self::$messageId . '">' . $message .'</p>
+		<input type="submit" name="' . self::$logout . '" value="logout"/>
+		</form>
 		';
 	}
 	
 	/**
-	* Generate HTML code on the output buffer for the logout button
-	* @param $message, String output message
-	* @return  void, BUT writes to standard output!
-	*/
+	 * Generate HTML code on the output buffer for the logout button
+	 * @param $message, String output message
+	 * @return  void, BUT writes to standard output!
+	 */
 	public function generateLoginFormHTML($message) {
 		return '
 			<form action="?register" method="post">

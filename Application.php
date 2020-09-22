@@ -33,14 +33,13 @@ class Application {
 	}
 
 	public function run() {
-		// echo $_SERVER["SERVER_NAME"] . "<br>";
-		$test = $this->changeState();
-		$this->generateOutput($test);
+		$response = $this->changeState();
+		$this->generateOutput($response);
 	}
 
 	private function changeState() {
-		$test = $this->controller->logIn($this->dbConnection);
-		return $test;
+		$response = $this->controller->logIn($this->dbConnection);
+		return $response;
 		// echo "<br> GET ";
 		// var_dump($_GET);
 		// echo "<br> POST ";

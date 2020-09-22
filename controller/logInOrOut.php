@@ -48,9 +48,7 @@ class logInOrOut {
                     $message = "Wrong name or password";
                     return $message;
                 }
-                // echo $name;
 			} catch (\Exception $e) {
-                // $this->view->getMessages();
                 echo $e;
 			}
 		}
