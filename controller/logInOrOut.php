@@ -21,14 +21,14 @@ class logInOrOut {
                 $passwrd = $this->view->getPassword();
 
 				if($dbConnection->checkUserCredentials($this->columnOneName, "$username")) {
-                    echo " username exists ";
+                    // echo " username exists ";
                     if($dbConnection->checkUserCredentials($this->columTwoName, "$passwrd")) {
-                        echo " password is correct ";
+                        // echo " password is correct ";
                     } else {
-                        echo " password is not correct ";
+                        // echo " password is not correct ";
                     }
                 } else {
-                    echo " username do not exists ";
+                    // echo " username do not exists ";
 
                 }
 				// echo $name;

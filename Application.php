@@ -40,8 +40,6 @@ class Application {
 
 	private function changeState() {
 		$this->controller->logIn($this->dbConnection);
-
-
 		// echo "<br> GET ";
 		// var_dump($_GET);
 		// echo "<br> POST ";

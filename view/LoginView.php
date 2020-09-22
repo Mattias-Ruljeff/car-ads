@@ -19,7 +19,7 @@ class LoginView {
 	public function getUserName() {
 		return $_POST[self::$name];
 	}
-	
+
 	public function getPassword() {
 		return $_POST[self::$password];
 	}
@@ -32,8 +32,11 @@ class LoginView {
 	 * @return  void BUT writes to standard output and cookies!
 	 */
 	public function response() {
+		$response = $this->generateLoginFormHTML($this->checkUsernameAndPassword());
+		return $response;
+	}
 
-		$message = "";
+	public function checkUsernameAndPassword () {
 		if ($_POST) {
 
 			if($_POST[self::$name] == "" and $_POST[self::$password] == "") {
@@ -46,21 +49,14 @@ class LoginView {
 				$message = "Password is missing";
 			} else {
 				self::$savedName = $_POST[self::$name];
+				$message = "";
 				// $username = $_POST[self::$name];
 				// $password = $_POST[self::$password];
 				// $_SESSION["user"] = "Username: " . $username . " Password: " .  $password;		
 			}
-		
-			$response = $this->generateLoginFormHTML($message);
-		} else {
-			$response = $this->generateLoginFormHTML("");
+			return $message;
 		}
-		// $response .= $this->generateLogoutButtonHTML($message);
-		return $response;
-	}
-
-	public function checkUsername () {
-
+		
 	}
 
 	/**
