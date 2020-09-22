@@ -34,12 +34,13 @@ class Application {
 
 	public function run() {
 		// echo $_SERVER["SERVER_NAME"] . "<br>";
-		$this->changeState();
-		$this->generateOutput();
+		$test = $this->changeState();
+		$this->generateOutput($test);
 	}
 
 	private function changeState() {
-		$this->controller->logIn($this->dbConnection);
+		$test = $this->controller->logIn($this->dbConnection);
+		return $test;
 		// echo "<br> GET ";
 		// var_dump($_GET);
 		// echo "<br> POST ";
@@ -49,12 +50,12 @@ class Application {
 		// $this->storage->saveUser($this->user);
 	}
 
-	private function generateOutput() {
+	private function generateOutput($message) {
 		$this->layoutView = new LayoutView();
 		if(isset($_GET["register"])){
-			$this->layoutView->render(false, $this->registerView, $this->dateTimeView);
+			$this->layoutView->render(false, $this->registerView, $this->dateTimeView, $message);
 		} else {
-			$this->layoutView->render(false, $this->view, $this->dateTimeView);
+			$this->layoutView->render(false, $this->view, $this->dateTimeView, $message);
 		}
 	}
 

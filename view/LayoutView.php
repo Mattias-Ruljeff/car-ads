@@ -2,7 +2,7 @@
 
 class LayoutView {
 
-  public function render($isLoggedIn, $v, DateTimeView $dtv) {
+  public function render($isLoggedIn, $v, DateTimeView $dtv, $message) {
     if (session_status() == 1) {
       session_start();
     }
@@ -18,7 +18,7 @@ class LayoutView {
             ' . $this->renderIsLoggedIn($isLoggedIn) . '
 
             <div class="container">
-                ' . $v->response() . '
+                ' . $v->response($message) . '
                 
                 ' . $dtv->show() . '
             </div>

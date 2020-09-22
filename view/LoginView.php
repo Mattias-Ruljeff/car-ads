@@ -31,8 +31,8 @@ class LoginView {
 	 *
 	 * @return  void BUT writes to standard output and cookies!
 	 */
-	public function response() {
-		$response = $this->generateLoginFormHTML($this->checkUsernameAndPassword());
+	public function response($message) {
+		$response = $this->generateLoginFormHTML($message);
 		return $response;
 	}
 

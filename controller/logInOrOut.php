@@ -5,8 +5,8 @@ class logInOrOut {
 
     private $user;
     private $view;
-    private $columnOneName = "username";
-    private $columTwoName = "passwrd";
+    private $columnOneName = "Username";
+    private $columTwoName = "Passwrd";
 
     public function __construct(\model\UserName $user, \LoginView $view) {
         $this->user = $user;
@@ -16,22 +16,31 @@ class logInOrOut {
 
     public function logIn($dbConnection)  {
 		if ($this->view->userWantsToLogIn()) {
+            $message = "";
+            $loggedIn = false;
             try {
                 $username = $this->view->getUserName();
                 $passwrd = $this->view->getPassword();
 
-				if($dbConnection->checkUserCredentials($this->columnOneName, "$username")) {
-                    // echo " username exists ";
-                    if($dbConnection->checkUserCredentials($this->columTwoName, "$passwrd")) {
-                        // echo " password is correct ";
-                    } else {
-                        // echo " password is not correct ";
-                    }
-                } else {
-                    // echo " username do not exists ";
+				if($dbConnection->checkUserCredentials("username", $username)) {
+                    $message = "";
 
+                    if($dbConnection->checkUserCredentials("passwrd", $passwrd)) {
+                        $message = "Username and password correct";
+                        $loggedIn = true;
+                        return $message;
+                    } else {
+                        $message = 'fail';
+                        // echo " password is not correct ";
+                        return $message;
+                    }
+                    $message = "Username or password incorrect";
+                    return $message;
+                } else {
+                    $message = "Username or password incorrect";
+                    return $message;
                 }
-				// echo $name;
+                // echo $name;
 			} catch (\Exception $e) {
                 // $this->view->getMessages();
                 echo $e;
