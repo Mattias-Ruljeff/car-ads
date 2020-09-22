@@ -5,7 +5,6 @@ class logInOrOut {
 
     private $user;
     private $view;
-    private $savedUsername;
     private $columnOneName = "Username";
     private $columTwoName = "Passwrd";
 
@@ -27,18 +26,15 @@ class logInOrOut {
                 
 				if($dbConnection->checkUserCredentials("username", $username)) {
                     $message = "";
-                    $this->savedUsername = $username;
 
                     if($dbConnection->checkUserCredentials("passwrd", $passwrd)) {
-                        $message = "Username and password correct";
-                        $loggedIn = true;
+                        $message = "Welcome";
                         return $message;
                     } else {
                         if(!$passwrd) {
                             return "Password is missing";
                         }
                         $message = 'Wrong name or password';
-                        // echo " password is not correct ";
                         return $message;
                     }
                     $message = "Wrong name or password";
