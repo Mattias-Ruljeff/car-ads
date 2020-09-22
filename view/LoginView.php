@@ -56,10 +56,10 @@ class LoginView {
 	 * @return  void, BUT writes to standard output!
 	 */
 	public function generateLoginFormHTML($message) {
+
 		return '
-			<form action="?register" method="post">
-				<input type="submit" name="Register new user" value="Register New User"/>
-			</form>
+			<a href="?register">Register new user</a>
+
 			<form method="post" > 
 				<fieldset>
 					<legend>Login - enter Username and password</legend>

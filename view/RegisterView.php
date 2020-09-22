@@ -23,20 +23,20 @@ class RegisterView {
 	public function response() {
 		$message = "";
 		
-		if($_POST[self::$name] == "" and $_POST[self::$password] == "") {
-			self::$savedName = $_POST[self::$name];
-			$message = "Enter name and password";
-		} else if($_POST[self::$name] == "") {
-			$message = "Enter name";
-		} else if($_POST[self::$password] == "") {
-			self::$savedName = $_POST[self::$name];
-			$message = "Enter password";
-		} else {
-			self::$savedName = $_POST[self::$name];
-			$username = $_POST[self::$name];
-			$password = $_POST[self::$password];
-			$_SESSION["user"] = "Username: " . $username . " Password: " .  $password;		
-		}
+		// if($_POST[self::$name] == "" and $_POST[self::$password] == "") {
+		// 	self::$savedName = $_POST[self::$name];
+		// 	$message = "Enter name and password";
+		// } else if($_POST[self::$name] == "") {
+		// 	$message = "Enter name";
+		// } else if($_POST[self::$password] == "") {
+		// 	self::$savedName = $_POST[self::$name];
+		// 	$message = "Enter password";
+		// } else {
+		// 	self::$savedName = $_POST[self::$name];
+		// 	$username = $_POST[self::$name];
+		// 	$password = $_POST[self::$password];
+		// 	$_SESSION["user"] = "Username: " . $username . " Password: " .  $password;		
+		// }
 
 		$response = $this->generateLoginFormHTML($message);
 		return $response;
@@ -49,9 +49,7 @@ class RegisterView {
 	*/
 	private function generateLoginFormHTML($message) {
 		return '
-			<form action="/" method="post">
-				<input type="submit" name="login" value="Login Page"/>
-			</form>
+			<a href="/">Log in</a>
 			<form method="post" > 
 				<fieldset>
 					<legend>Register - enter Username and password</legend>
