@@ -60,7 +60,7 @@ class Application {
 		return $response;
 	}
 
-	private function generateOutput($message, $checkIfLoggedIn) {
+	private function generateOutput($message) {
 		$this->layoutView = new LayoutView();
 			// if($_POST[$this->view->userWantsToLogOut()]){
 			// 	session_unset();
