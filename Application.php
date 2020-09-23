@@ -32,6 +32,9 @@ class Application {
 	}
 
 	public function run() {
+		if (session_status() == 1) {
+			session_start();
+		  }
 		$response = $this->changeState();
 		$checkIfLoggedIn = $this->checkIfLoggedIn();
 		$this->generateOutput($response, $checkIfLoggedIn);
@@ -60,9 +63,9 @@ class Application {
 	private function generateOutput($message, $checkIfLoggedIn) {
 		$this->layoutView = new LayoutView();
 		if(isset($_GET["register"])){
-			$this->layoutView->render($checkIfLoggedIn, $this->registerView, $this->dateTimeView, $message);
+			$this->layoutView->render(isset($_SESSION["username"]), $this->registerView, $this->dateTimeView, $message);
 		} else {
-			$this->layoutView->render($checkIfLoggedIn, $this->view, $this->dateTimeView, $message);
+			$this->layoutView->render(isset($_SESSION["username"]), $this->view, $this->dateTimeView, $message);
 		}
 	}
 

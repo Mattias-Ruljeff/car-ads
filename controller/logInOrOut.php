@@ -27,7 +27,8 @@ class logInOrOut {
                     $message = "";
 
                     if($dbConnection->checkUserCredentials("passwrd", $passwrd)) {
-                        $this->isLoggedIn = true;;
+                        $_SESSION["username"] = $username;
+                        $this->isLoggedIn = true;
                         $message = "Welcome";
                         return $message;
                     } else {

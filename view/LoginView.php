@@ -35,7 +35,14 @@ class LoginView {
 		if($_POST[self::$name]) {
 			self::$savedName = $_POST[self::$name];
 		}
-		$response = $this->generateLoginFormHTML($message);
+		if($_POST[self::$logout]){
+			session_unset();
+		}
+		if(isset($_SESSION["username"])) {
+			$response = $this->generateLogoutButtonHTML($message);
+		} else {
+			$response = $this->generateLoginFormHTML($message);
+		}
 		return $response;
 	}
 
