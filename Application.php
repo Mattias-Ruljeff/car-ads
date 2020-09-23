@@ -62,8 +62,11 @@ class Application {
 
 	private function generateOutput($message, $checkIfLoggedIn) {
 		$this->layoutView = new LayoutView();
+			// if($_POST[$this->view->userWantsToLogOut()]){
+			// 	session_unset();
+			// };
 		if(isset($_GET["register"])){
-			$this->layoutView->render(isset($_SESSION["username"]), $this->registerView, $this->dateTimeView, $message);
+			$this->layoutView->render(false, $this->registerView, $this->dateTimeView, $message);
 		} else {
 			$this->layoutView->render(isset($_SESSION["username"]), $this->view, $this->dateTimeView, $message);
 		}

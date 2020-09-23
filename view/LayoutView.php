@@ -3,9 +3,6 @@
 class LayoutView {
 
   public function render($isLoggedIn, $v, DateTimeView $dtv, $message) {
-    if (session_status() == 1) {
-      session_start();
-    }
 
       echo '<!DOCTYPE html>
         <html>

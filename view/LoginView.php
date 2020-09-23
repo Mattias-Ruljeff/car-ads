@@ -16,6 +16,10 @@ class LoginView {
 		return isset($_POST[self::$login]);
 	}
 
+	public function userWantsToLogOut() : bool {
+		return isset($_POST[self::$logout]);
+	}
+
 	public function getUserName() {
 		return $_POST[self::$name];
 	}
