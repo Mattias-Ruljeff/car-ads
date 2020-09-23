@@ -51,7 +51,7 @@ class logInOrOut {
                 echo $e;
 			}
         } else if($this->view->userWantsToLogOut()  and isset($_SESSION["username"])) {
-         return "Bye Bye!";
+         return "Bye bye!";
         }
     }
     public function checkIfLoggedIn () {
