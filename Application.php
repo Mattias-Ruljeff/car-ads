@@ -32,7 +32,9 @@ class Application {
 	}
 
 	public function run() {
-
+		if (session_status() != 2) {
+			session_start();
+		}
 		$response = $this->changeState();
 		// $checkIfLoggedIn = $this->checkIfLoggedIn();
 		$this->generateOutput($response);

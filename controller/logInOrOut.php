@@ -1,20 +1,22 @@
 <?php
 
+use function PHPSTORM_META\type;
 
 class logInOrOut {
 
     private $view;
     private $columnOneName = "Username";
     private $columTwoName = "Passwrd";
-    private $isLoggedIn = false;
+    private $isLoggedIn;
 
     public function __construct(\LoginView $view) {
         $this->view = $view;
+        $this->isLoggedIn = false;
 
     }
 
     public function logIn($dbConnection)  {
-		if ($this->view->userWantsToLogIn() and !$this->isLoggedIn) {
+		if ($this->view->userWantsToLogIn() and !isset($_SESSION["username"])) {
             $message = "";
             try {
                 $username = $this->view->getUserName();
@@ -27,9 +29,6 @@ class logInOrOut {
                     $message = "";
 
                     if($dbConnection->checkUserCredentials("passwrd", $passwrd)) {
-                        if (session_status() != 2) {
-                            session_start();
-                        }
                         $_SESSION["username"] = $username;
                         $this->isLoggedIn = true;
                         $message = "Welcome";
