@@ -5,7 +5,7 @@ class RegisterView {
 	private static $logout = 'RegisterView::Logout';
 	private static $name = 'RegisterView::UserName';
 	private static $password = 'RegisterView::Password';
-	private static $password2 = 'RegisterView::Password2';
+	private static $passwordRepeat = 'RegisterView::Repeat';
 	private static $cookieName = 'RegisterView::CookieName';
 	private static $cookiePassword = 'RegisterView::CookiePassword';
 	private static $keep = 'RegisterView::KeepMeLoggedIn';
@@ -65,8 +65,8 @@ class RegisterView {
 					<input type="password" id="' . self::$password . '" name="' . self::$password . '" />
 					<br>
 					
-					<label for="' . self::$password2 . '">Repeat password :</label>
-					<input type="password" id="' . self::$password2 . '" name="' . self::$password2 . '" />
+					<label for="' . self::$passwordRepeat . '">Repeat password :</label>
+					<input type="password" id="' . self::$passwordRepeat . '" name="' . self::$passwordRepeat . '" />
 					<br>
 					
 					<input type="submit" name="' . self::$register . '" value="Register" />
