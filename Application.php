@@ -36,14 +36,11 @@ class Application {
 			session_start();
 		  }
 		$response = $this->changeState();
-		$checkIfLoggedIn = $this->checkIfLoggedIn();
-		$this->generateOutput($response, $checkIfLoggedIn);
+		// $checkIfLoggedIn = $this->checkIfLoggedIn();
+		$this->generateOutput($response);
 	}
 
 	private function changeState() {
-		// if(isset($_GET["register"])){
-		// 	$response = $this->controller->registerNewUser($this->dbConnection);
-		// }
 		$response = $this->controller->logIn($this->dbConnection);
 
 		// echo "<br> GET ";
@@ -55,10 +52,10 @@ class Application {
 		return $response;
 	}
 
-	private function checkIfLoggedIn() {
-		$response = $this->controller->checkIfLoggedIn();
-		return $response;
-	}
+	// private function checkIfLoggedIn() {
+	// 	$response = $this->controller->checkIfLoggedIn();
+	// 	return $response;
+	// }
 
 	private function generateOutput($message) {
 		$this->layoutView = new LayoutView();
@@ -68,7 +65,13 @@ class Application {
 		if(isset($_GET["register"])){
 			$this->layoutView->render(false, $this->registerView, $this->dateTimeView, $message);
 		} else {
-			$this->layoutView->render(isset($_SESSION["username"]), $this->view, $this->dateTimeView, $message);
+		if ($this->view->userWantsToLogOut()) {
+			$this->layoutView->render(false, $this->view, $this->dateTimeView, $message);
+			
+		} else {
+			$this->layoutView->render(true, $this->view, $this->dateTimeView, $message);
+
+		}
 		}
 	}
 
