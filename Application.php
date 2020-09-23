@@ -32,9 +32,7 @@ class Application {
 	}
 
 	public function run() {
-		if (session_status() == 1) {
-			session_start();
-		  }
+
 		$response = $this->changeState();
 		// $checkIfLoggedIn = $this->checkIfLoggedIn();
 		$this->generateOutput($response);
@@ -65,7 +63,8 @@ class Application {
 		if(isset($_GET["register"])){
 			$this->layoutView->render(false, $this->registerView, $this->dateTimeView, $message);
 		} else {
-		if ($this->view->userWantsToLogOut()) {
+
+		if ($this->view->userWantsToLogOut() or !$_SESSION["username"]) {
 			$this->layoutView->render(false, $this->view, $this->dateTimeView, $message);
 			
 		} else {

@@ -13,4 +13,4 @@ $app->run();
 if(isset($_SERVER['HTTP_CACHE_CONTROL'])){
     echo " refresh ";
 };
-// var_dump($_SESSION);
+var_dump($_SESSION);

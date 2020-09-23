@@ -14,7 +14,7 @@ class logInOrOut {
     }
 
     public function logIn($dbConnection)  {
-		if ($this->view->userWantsToLogIn() and !isset($_SESSION["username"])) {
+		if ($this->view->userWantsToLogIn() and !$this->isLoggedIn) {
             $message = "";
             try {
                 $username = $this->view->getUserName();
@@ -27,6 +27,9 @@ class logInOrOut {
                     $message = "";
 
                     if($dbConnection->checkUserCredentials("passwrd", $passwrd)) {
+                        if (session_status() != 2) {
+                            session_start();
+                        }
                         $_SESSION["username"] = $username;
                         $this->isLoggedIn = true;
                         $message = "Welcome";
