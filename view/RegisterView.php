@@ -5,7 +5,7 @@ class RegisterView {
 	private static $logout = 'RegisterView::Logout';
 	private static $name = 'RegisterView::UserName';
 	private static $password = 'RegisterView::Password';
-	private static $passwordRepeat = 'RegisterView::Repeat';
+	private static $passwordRepeat = 'RegisterView::PasswordRepeat';
 	private static $cookieName = 'RegisterView::CookieName';
 	private static $cookiePassword = 'RegisterView::CookiePassword';
 	private static $keep = 'RegisterView::KeepMeLoggedIn';
