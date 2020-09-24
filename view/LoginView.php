@@ -72,8 +72,6 @@ class LoginView {
 	public function generateLoginFormHTML($message) {
 
 		return '
-			<a href="?register">Register new user</a>
-
 			<form method="post" > 
 				<fieldset>
 					<legend>Login - enter Username and password</legend>
