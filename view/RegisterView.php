@@ -37,7 +37,7 @@ class RegisterView {
 		if($_POST[self::$name]) {
 			self::$savedName = trim($_POST[self::$name]);
 		}
-		$response = $this->generateLoginFormHTML($message);
+		$response = $this->generateRegisterFormHTML($message);
 		
 		// if($_POST[self::$name] == "" and $_POST[self::$password] == "") {
 		// 	self::$savedName = $_POST[self::$name];
@@ -61,12 +61,13 @@ class RegisterView {
 	* @param $message, String output message
 	* @return  void, BUT writes to standard output!
 	*/
-	private function generateLoginFormHTML($message) {
+	private function generateRegisterFormHTML($message) {
 		return '
-			<a href="/">Log in</a>
+			<a href="/">Back to log in</a>
+			<h2>Register new user</h2>
 			<form method="post" > 
 				<fieldset>
-					<legend>Register - enter Username and password</legend>
+					<legend>Register a new user - Write username and password</legend>
 					<p id="' . self::$messageId . '">' . $message . '</p>
 					
 					<label for="' . self::$name . '">Username :</label>
