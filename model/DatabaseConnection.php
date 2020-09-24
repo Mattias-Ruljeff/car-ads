@@ -56,7 +56,7 @@ class DatabaseConnection {
 
     public function createUsernameAndPassword($username, $password) {
         try {
-            $this->dbConnection->query("INSERT INTO {$this->tableName} (username, passwrd)
+            $this->dbConnection->query("INSERT INTO $this->tableName (username, passwrd)
             VALUES ('$username', '$password')");
 
         }catch(\Exception $error) {
