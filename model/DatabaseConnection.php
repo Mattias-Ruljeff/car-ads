@@ -66,7 +66,7 @@ class DatabaseConnection {
 
     public function checkUserCredentials($columnName, $enteredString) {
         try {
-            $sql = "SELECT * FROM test WHERE $columnName = '$enteredString'";
+            $sql = "SELECT * FROM $this->tableName WHERE $columnName = '$enteredString'";
             $query = $this->dbConnection->query($sql);
             if (!$query)
             {

@@ -16,10 +16,18 @@ class RegisterNewUser {
 		if ($this->view->userWantsToRegisterUser()) {
             try {
 
-                // Check username-----------------------------------------
                 $username = $this->view->getUserName();
+                $passwrd = $this->view->getPassword();
+                $repeatedPasswrd = $this->view->getRepeatedPassword();
+
+                if(!$username and !$passwrd){
+                    return "Username has too few characters, at least 3 characters.<br>Enter a username with 2 characters or more";
+
+                }
+
+                // Check username-----------------------------------------
                 if(!$username) {
-                    return "Username is missing";
+                    return "Username has too few characters, at least 3 characters.";
                 }
 
                 if (strlen($username) < 2) {
@@ -27,14 +35,12 @@ class RegisterNewUser {
                 }
 
                 // Check password------------------------------------------
-                $passwrd = $this->view->getPassword();
-                $repeatedPasswrd = $this->view->getRepeatedPassword();
                 if(!$passwrd) {
                     return "Enter a password";
                 }
 
                 if(strlen($passwrd) < 6){
-                    return "Enter a password  with 6 characters or more";
+                    return "Password has too few characters, at least 6 characters.";
                 }
                 
 				if($dbConnection->checkUserCredentials("username", $username)) {
