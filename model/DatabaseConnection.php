@@ -26,6 +26,7 @@ class DatabaseConnection {
         $this->tableName = $_SERVER["SERVER_NAME"] == "localhost" ? "Test" : "Test";
 
         // Create connection
+        echo $this->database;
         $this->dbConnection = new mysqli($this->hostname, $this->username, $this->password, $this->database);
     }
 
@@ -56,8 +57,8 @@ class DatabaseConnection {
 
     public function createUsernameAndPassword($username, $password) {
         try {
-            $this->dbConnection->query("INSERT INTO $this->tableName (username, passwrd)
-            VALUES ('$username', '$password')");
+            $sql = "INSERT INTO $this->tableName (username, passwrd) VALUES ('$username', '$password')";
+            $this->dbConnection->query($sql);
 
         }catch(\Exception $error) {
             echo "fel vid skapande av table data " . $error;
@@ -66,7 +67,7 @@ class DatabaseConnection {
 
     public function checkUserCredentials($columnName, $enteredString) {
         try {
-            $sql = "SELECT * FROM $this->tableName WHERE $columnName = '$enteredString'";
+            $sql = "SELECT * FROM Test WHERE $columnName = '$enteredString'";
             $query = $this->dbConnection->query($sql);
             if (!$query)
             {
