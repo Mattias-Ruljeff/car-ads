@@ -62,11 +62,12 @@ class Application {
 		if(isset($_GET["register"])){
 			$this->layoutView->render(false, $this->registerView, $this->dateTimeView, $message);
 		} else {
-		if ($this->view->userWantsToLogOut() or !$_SESSION["username"]) {
-			$this->layoutView->render(false, $this->view, $this->dateTimeView, $message);
-		} else {
-			$this->layoutView->render(true, $this->view, $this->dateTimeView, $message);
-		}
+			
+			if ($this->view->userWantsToLogOut() or !$_SESSION["username"]) {
+				$this->layoutView->render(false, $this->view, $this->dateTimeView, $message);
+			} else {
+				$this->layoutView->render(true, $this->view, $this->dateTimeView, $message);
+			}
 		}
 	}
 
