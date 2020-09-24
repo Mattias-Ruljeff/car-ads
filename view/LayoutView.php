@@ -18,7 +18,7 @@ class LayoutView {
           </head>
           <body>
             <h1>Assignment 2</h1>
-            <a href=" ' . $href . '">  ' . $textInATag . '</a>
+            <a href="' . $href . '">  '. $textInATag .'</a>
             ' . $this->renderIsLoggedIn($isLoggedIn) . '
             <div class="container">
             ' . $v->response($message) . '
