@@ -35,7 +35,11 @@ class RegisterView {
 	 */
 	public function response($message) {
 		if($_POST[self::$name]) {
-			self::$savedName = trim($_POST[self::$name]);
+			// if (preg_match_all('/[<>!_]/', self::$name, $result)) {
+			// 	self::$savedName = strip_tags(trim($_POST[self::$name]));
+			// } else {
+			// }
+			self::$savedName = strip_tags(trim($_POST[self::$name]));
 		}
 		$response = $this->generateRegisterFormHTML($message);
 		
