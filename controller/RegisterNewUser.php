@@ -35,7 +35,7 @@ class RegisterNewUser {
                 }
 
                 if (preg_match_all('/[<>!_]/', $username, $result)) {
-                    return "Username contains invalid characters."
+                    return "Username contains invalid characters.";
                 }
                 
                 if($dbConnection->checkUserCredentials("username", $username)) {
