@@ -66,6 +66,7 @@ class Application {
 			if ($this->view->userWantsToLogOut() or !$_SESSION["username"]) {
 				$this->layoutView->render(false, $this->view, $this->dateTimeView, $message);
 			} else {
+				session_regenerate_id();
 				$this->layoutView->render(true, $this->view, $this->dateTimeView, $message);
 			}
 		}
