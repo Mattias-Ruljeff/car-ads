@@ -56,9 +56,10 @@ class RegisterNewUser {
                 }
 
                 $dbConnection->createUsernameAndPassword($username, $passwrd);
+                header("Refresh:0; url=index.php");
                 return "User registered!";
                 // unset($_SESSION[""]);
-                header("Refresh:0; url=index.php");
+                // exit;
 
 			} catch (\Exception $e) {
                 echo $e;
