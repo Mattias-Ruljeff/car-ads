@@ -23,7 +23,7 @@ class DatabaseConnection {
         $this->username = $_SERVER["SERVER_NAME"] == "localhost" ? "root" : $this->dbparts['user'];
         $this->password = $_SERVER["SERVER_NAME"] == "localhost" ? "root" : $this->dbparts['pass'];
         $this->database = $_SERVER["SERVER_NAME"] == "localhost" ? "users" : ltrim($this->dbparts['path'],'/');
-        $this->tableName = $_SERVER["SERVER_NAME"] == "localhost" ? "test" : "test";
+        $this->tableName = $_SERVER["SERVER_NAME"] == "localhost" ? "Test" : "Test";
 
         // Create connection
         $this->dbConnection = new mysqli($this->hostname, $this->username, $this->password, $this->database);
@@ -56,8 +56,8 @@ class DatabaseConnection {
 
     public function createUsernameAndPassword($username, $password) {
         try {
-            $this->dbConnection->query("INSERT INTO {$this->tableName} ($this->dbColumnOneName, $this->dbColumnTwoName)
-            VALUES ($username, $password)");
+            $this->dbConnection->query("INSERT INTO {$this->tableName} (username, passwrd)
+            VALUES ('$username', '$password')");
 
         }catch(\Exception $error) {
             echo "fel vid skapande av table data " . $error;

@@ -10,10 +10,21 @@ class RegisterView {
 	private static $cookiePassword = 'RegisterView::CookiePassword';
 	private static $keep = 'RegisterView::KeepMeLoggedIn';
 	private static $messageId = 'RegisterView::Message';
-	private $savedName;
+	private static $savedName;
 
 	public function userWantsToRegisterUser() : bool {
 		return isset($_POST[self::$register]);
+	}
+
+	public function getUserName() {
+		return $_POST[self::$name];
+	}
+
+	public function getPassword() {
+		return $_POST[self::$password];
+	}
+	public function getRepeatedPassword() {
+		return $_POST[self::$passwordRepeat];
 	}
 	/**
 	 * Create HTTP response
@@ -22,8 +33,11 @@ class RegisterView {
 	 *
 	 * @return  void BUT writes to standard output and cookies!
 	 */
-	public function response() {
-		$message = "";
+	public function response($message) {
+		if($_POST[self::$name]) {
+			self::$savedName = trim($_POST[self::$name]);
+		}
+		$response = $this->generateLoginFormHTML($message);
 		
 		// if($_POST[self::$name] == "" and $_POST[self::$password] == "") {
 		// 	self::$savedName = $_POST[self::$name];
@@ -39,8 +53,6 @@ class RegisterView {
 		// 	$password = $_POST[self::$password];
 		// 	$_SESSION["user"] = "Username: " . $username . " Password: " .  $password;		
 		// }
-
-		$response = $this->generateLoginFormHTML($message);
 		return $response;
 	}
 	
@@ -58,7 +70,7 @@ class RegisterView {
 					<p id="' . self::$messageId . '">' . $message . '</p>
 					
 					<label for="' . self::$name . '">Username :</label>
-					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="" />
+					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="'. self::$savedName . '" />
 					<br>
 					
 					<label for="' . self::$password . '">Password :</label>

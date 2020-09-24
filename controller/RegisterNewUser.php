@@ -12,38 +12,45 @@ class RegisterNewUser {
 
     }
 
-    // public function registerNewUser($dbConnection)  {
-	// 	if ($this->view->userWantsToRegisterUser()) {
-    //         $message = "";
-    //         try {
-    //             $username = $this->view->getUserName();
-    //             if(!$username) {
-    //                 return "Username is missing";
-    //             }
-    //             $passwrd = $this->view->getPassword();
-                
-	// 			if($dbConnection->checkUserCredentials("username", $username)) {
-    //                 $message = "";
+    public function registerNewUser($dbConnection)  {
+		if ($this->view->userWantsToRegisterUser()) {
+            try {
 
-    //                 if($dbConnection->checkUserCredentials("passwrd", $passwrd)) {
-    //                     $message = "Welcome";
-    //                     return $message;
-    //                 } else {
-    //                     if(!$passwrd) {
-    //                         return "Password is missing";
-    //                     }
-    //                     $message = 'Wrong name or password';
-    //                     return $message;
-    //                 }
-    //                 $message = "Wrong name or password";
-    //                 return $message;
-    //             } else {
-    //                 $message = "Wrong name or password";
-    //                 return $message;
-    //             }
-	// 		} catch (\Exception $e) {
-    //             echo $e;
-	// 		}
-	// 	}
-	// }
+                // Check username-----------------------------------------
+                $username = $this->view->getUserName();
+                if(!$username) {
+                    return "Username is missing";
+                }
+
+                if (strlen($username) < 2) {
+                    return "Enter a username with 2 characters or more";
+                }
+
+                // Check password------------------------------------------
+                $passwrd = $this->view->getPassword();
+                $repeatedPasswrd = $this->view->getRepeatedPassword();
+                if(!$passwrd) {
+                    return "Enter a password";
+                }
+
+                if(strlen($passwrd) < 6){
+                    return "Enter a password  with 6 characters or more";
+                }
+                
+				if($dbConnection->checkUserCredentials("username", $username)) {
+                    return "Username taken";
+                } 
+
+                if($passwrd != $repeatedPasswrd) {
+                    return "Password not matching!";
+                }
+
+                $dbConnection->createUsernameAndPassword($username, $passwrd);
+                return "User registered!";
+
+			} catch (\Exception $e) {
+                echo $e;
+			}
+		}
+	}
 }

@@ -7,7 +7,7 @@ class logInOrOut {
     private $view;
     private $columnOneName = "Username";
     private $columTwoName = "Passwrd";
-    private $isLoggedIn;
+    // private $isLoggedIn;
 
     public function __construct(\LoginView $view) {
         $this->view = $view;
@@ -30,7 +30,7 @@ class logInOrOut {
 
                     if($dbConnection->checkUserCredentials("passwrd", $passwrd)) {
                         $_SESSION["username"] = $username;
-                        $this->isLoggedIn = true;
+                        // $this->isLoggedIn = true;
                         $message = "Welcome";
                         return $message;
                     } else {
