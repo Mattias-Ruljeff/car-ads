@@ -19,6 +19,7 @@ class RegisterNewUser {
                 $username = $this->view->getUserName();
                 $passwrd = $this->view->getPassword();
                 $repeatedPasswrd = $this->view->getRepeatedPassword();
+                
 
                 if(!$username and !$passwrd){
                     return "Username has too few characters, at least 3 characters.<br>Password has too few characters, at least 6 characters.";
@@ -31,6 +32,10 @@ class RegisterNewUser {
 
                 if (strlen($username) < 3) {
                     return "Username has too few characters, at least 3 characters.";
+                }
+
+                if (preg_match_all('/[<>!_]/', $username, $result)) {
+                    return "Username contains invalid characters."
                 }
                 
                 if($dbConnection->checkUserCredentials("username", $username)) {
@@ -52,6 +57,8 @@ class RegisterNewUser {
 
                 $dbConnection->createUsernameAndPassword($username, $passwrd);
                 return "User registered!";
+                // unset($_SESSION[""]);
+                header("Refresh:0; url=index.php");
 
 			} catch (\Exception $e) {
                 echo $e;
