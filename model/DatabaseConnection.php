@@ -26,7 +26,6 @@ class DatabaseConnection {
         $this->tableName = $_SERVER["SERVER_NAME"] == "localhost" ? "Test" : "test";
 
         // Create connection
-        echo $this->database . " ";
         $this->dbConnection = new mysqli($this->hostname, $this->username, $this->password, $this->database);
     }
 
