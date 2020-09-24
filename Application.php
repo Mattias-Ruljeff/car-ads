@@ -43,12 +43,13 @@ class Application {
 				'samesite' => true
 			]);
 			session_start();
+			setcookie("hej", "hopp", 5000 , "/", "https://infinite-tundra-79934.herokuapp.com/", true, true);
 		}
 		$response = $this->changeState();
 		$this->generateOutput($response);
-		
-		// var_dump($_COOKIE);
-		// print_r(session_get_cookie_params());
+
+		var_dump($_COOKIE);
+		print_r(session_get_cookie_params());
 	}
 
 	private function changeState() {
