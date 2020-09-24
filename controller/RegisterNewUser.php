@@ -29,10 +29,13 @@ class RegisterNewUser {
                     return "Username has too few characters, at least 3 characters.";
                 }
 
-                if (strlen($username) < 4) {
+                if (strlen($username) < 3) {
                     return "Username has too few characters, at least 3 characters.";
                 }
-
+                
+                if($dbConnection->checkUserCredentials("username", $username)) {
+                    return "User exists, pick another username.";
+                } 
                 // Check password------------------------------------------
                 if(!$passwrd) {
                     return "Password has too few characters, at least 6 characters.";
@@ -42,12 +45,9 @@ class RegisterNewUser {
                     return "Password has too few characters, at least 6 characters.";
                 }
                 
-				if($dbConnection->checkUserCredentials("username", $username)) {
-                    return "Username taken";
-                } 
 
                 if($passwrd != $repeatedPasswrd) {
-                    return "Passwords do not match";
+                    return "Passwords do not match.";
                 }
 
                 $dbConnection->createUsernameAndPassword($username, $passwrd);
