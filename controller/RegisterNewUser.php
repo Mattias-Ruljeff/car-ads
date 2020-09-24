@@ -21,7 +21,7 @@ class RegisterNewUser {
                 $repeatedPasswrd = $this->view->getRepeatedPassword();
 
                 if(!$username and !$passwrd){
-                    return "Username has too few characters, at least 3 characters.'\n'Password has too few characters, at least 6 characters.";
+                    return "Username has too few characters, at least 3 characters.<br>Password has too few characters, at least 6 characters.";
                 }
 
                 // Check username-----------------------------------------
