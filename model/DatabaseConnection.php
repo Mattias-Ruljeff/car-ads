@@ -23,10 +23,10 @@ class DatabaseConnection {
         $this->username = $_SERVER["SERVER_NAME"] == "localhost" ? "root" : $this->dbparts['user'];
         $this->password = $_SERVER["SERVER_NAME"] == "localhost" ? "root" : $this->dbparts['pass'];
         $this->database = $_SERVER["SERVER_NAME"] == "localhost" ? "users" : ltrim($this->dbparts['path'],'/');
-        $this->tableName = $_SERVER["SERVER_NAME"] == "localhost" ? "Test" : "Test";
+        $this->tableName = $_SERVER["SERVER_NAME"] == "localhost" ? "Test" : "test";
 
         // Create connection
-        echo $this->database;
+        echo $this->database . " ";
         $this->dbConnection = new mysqli($this->hostname, $this->username, $this->password, $this->database);
     }
 
