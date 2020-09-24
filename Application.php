@@ -34,10 +34,21 @@ class Application {
 
 	public function run() {
 		if (session_status() != 2) {
+			session_set_cookie_params([
+				'lifetime' => 600,
+				'path' => '/',
+				'domain' => $_SERVER['HTTP_HOST'],
+				'secure' => true,
+				'httponly' => true,
+				'samesite' => true
+			]);
 			session_start();
 		}
 		$response = $this->changeState();
 		$this->generateOutput($response);
+		
+		// var_dump($_COOKIE);
+		// print_r(session_get_cookie_params());
 	}
 
 	private function changeState() {
