@@ -20,6 +20,7 @@ class Application {
 	private $layoutView;
 	private $registerView;
 	private $controller;
+	private $registerController;
 	private $view;
 	private $dbConnection;
 
