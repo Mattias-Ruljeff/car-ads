@@ -15,51 +15,11 @@ class RegisterNewUser {
     public function registerNewUser($dbConnection)  {
 		if ($this->view->userWantsToRegisterUser()) {
             try {
-
                 $username = $this->view->getUserName();
                 $passwrd = $this->view->getPassword();
                 $repeatedPasswrd = $this->view->getRepeatedPassword();
-                
 
-                if(!$username and !$passwrd){
-                    return "Username has too few characters, at least 3 characters.<br>Password has too few characters, at least 6 characters.";
-                }
-
-                // Check username-----------------------------------------
-                if(!$username) {
-                    return "Username has too few characters, at least 3 characters.";
-                }
-
-                if (strlen($username) < 3) {
-                    return "Username has too few characters, at least 3 characters.";
-                }
-
-                if (preg_match_all('/[<>!_]/', $username, $result)) {
-                    return "Username contains invalid characters.";
-                }
-                
-                if($dbConnection->checkUserCredentials("username", $username)) {
-                    return "User exists, pick another username.";
-                } 
-                // Check password------------------------------------------
-                if(!$passwrd) {
-                    return "Password has too few characters, at least 6 characters.";
-                }
-
-                if(strlen($passwrd) < 6){
-                    return "Password has too few characters, at least 6 characters.";
-                }
-                
-
-                if($passwrd != $repeatedPasswrd) {
-                    return "Passwords do not match.";
-                }
-
-                $dbConnection->createUsernameAndPassword($username, $passwrd);
-                header("Refresh:0; url=index.php");
-                return "User registered!";
-                // unset($_SESSION[""]);
-                // exit;
+                return $dbConnection->checkUserOnRegistration($username, $passwrd, $repeatedPasswrd);
 
 			} catch (\Exception $e) {
                 echo $e;
