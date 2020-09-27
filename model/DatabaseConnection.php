@@ -1,5 +1,6 @@
 <?php
 
+use function PHPSTORM_META\type;
 
 class DatabaseConnection {
 
@@ -14,6 +15,7 @@ class DatabaseConnection {
     private $tableName;
     private $dbColumnOneName = "username";
     private $dbColumnTwoName = "passwrd";
+    private $hashCost = ["cost" => 8];
     
     public function __construct(){   
 
@@ -56,7 +58,9 @@ class DatabaseConnection {
 
     public function createUsernameAndPassword($username, $password) {
         try {
-            $sql = "INSERT INTO $this->tableName (username, passwrd) VALUES ('$username', '$password')";
+            $hashedPassword = $this->passwordHash($password);
+            print_r($hashedPassword);
+            $sql = "INSERT INTO $this->tableName (username, passwrd) VALUES ('$username', '$hashedPassword')";
             $this->dbConnection->query($sql);
 
         }catch(\Exception $error) {
@@ -64,9 +68,22 @@ class DatabaseConnection {
         }
     }
 
-    public function checkUserCredentials($columnName, $enteredString) {
+    public function checkUserCredentials($username, $passwrd) {
+        echo "checkUserCredentials<br>";
+        echo $username . "<br>";
+        echo $passwrd . "<br>";
+        echo "checkUserCredentials<br>";
+
+        echo "getpasswrd 1 ";
         try {
-            $sql = "SELECT * FROM $this->tableName WHERE $columnName = '$enteredString'";
+            $sqlpasswrd = $this->dbConnection->query("SELECT * FROM $this->tableName WHERE username = 'hej'");
+            echo "<br>-------sqlpass-------<br>";
+            var_dump($sqlpasswrd);
+            echo "<br>-------sqlpass-------<br>";
+            $hashedPassword = $this->readHashedPassword($passwrd, $sqlpasswrd);
+            echo "getpasswrd 2 ";
+            var_dump($hashedPassword);
+            $sql = "SELECT * FROM $this->tableName WHERE $this->dbColumnOneName = '$username' and $this->dbColumnTwoName = '$hashedPassword'";
             $query = $this->dbConnection->query($sql);
             if (!$query)
             {
@@ -74,15 +91,41 @@ class DatabaseConnection {
             }
             if(mysqli_num_rows($query) > 0){ 
                 return true;
-            }else{
+            } else{
                 return false; 
-        }
-
+            }
         }catch(\Exception $error) {
-            echo " Fel användare eller lösen " . $error;
+            echo " Wrong username or password " . $error;
         }
     }
     
+    public function checkUsernameAndPasswordOnLogin($username, $passwrd) {
+        
+        if(!$username) {
+            return "Username is missing";
+        }
+        if(!$passwrd) {
+            return "Password is missing";
+        }
+        
+        try{
+            echo "  kolla cred 1  <br>";
+            $test = $this->checkUserCredentials($username, $passwrd);
+            echo "  kolla cred 2  <br>";
+            print_r($test);
+            if($test) {
+                echo "  kolla cred   ";
+                $_SESSION["username"] = $username;
+                return "Welcome";
+            } else {
+                return "Wrong name or password";
+            }
+            
+        }catch (Exception $e) {
+            echo "Error found " . $e->getMessage() . "\n";
+        }
+
+    }
 
     public function checkUserOnRegistration($username, $passwrd, $repeatedPasswrd){
         
@@ -123,8 +166,16 @@ class DatabaseConnection {
         $this->createUsernameAndPassword($username, $passwrd);
         header("Refresh:0; url=index.php");
         return "User registered!";
-        // unset($_SESSION[""]);
-        // exit;
+    }
+
+    private function readHashedPassword ($password, $dbPassword) {
+        echo " hashing ";
+        echo $password;
+        var_dump($dbPassword);
+        return password_verify($password, $dbPassword);
+    }
+    private function passwordHash ($password) {
+        return password_hash($password, PASSWORD_DEFAULT, $this->hashCost);
     }
 
 }

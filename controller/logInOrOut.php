@@ -17,36 +17,9 @@ class logInOrOut {
 
     public function logIn($dbConnection)  {
 		if ($this->view->userWantsToLogIn() and !isset($_SESSION["username"])) {
-            $message = "";
             try {
-                $username = $this->view->getUserName();
-                if(!$username) {
-                    return "Username is missing";
-                }
-                $passwrd = $this->view->getPassword();
+                return $dbConnection->checkUsernameAndPasswordOnLogin($this->view->getUserName(), $this->view->getPassword());
                 
-				if($dbConnection->checkUserCredentials("username", $username)) {
-                    $message = "";
-
-                    if($dbConnection->checkUserCredentials("passwrd", $passwrd)) {
-                        $_SESSION["username"] = $username;
-                        // $this->isLoggedIn = true;
-                        $message = "Welcome";
-                        return $message;
-                    } else {
-                        if(!$passwrd) {
-                            return "Password is missing";
-                        }
-                        $message = 'Wrong name or password';
-                        return $message;
-                    }
-                    $message = "Wrong name or password";
-                    return $message;
-                } else {
-                    $this->isLoggedIn = false;
-                    $message = "Wrong name or password";
-                    return $message;
-                }
 			} catch (\Exception $e) {
                 echo $e;
 			}
