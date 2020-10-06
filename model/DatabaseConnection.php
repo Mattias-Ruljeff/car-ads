@@ -1,7 +1,5 @@
 <?php
 
-use function PHPSTORM_META\type;
-
 class DatabaseConnection {
 
     //Database
@@ -25,7 +23,7 @@ class DatabaseConnection {
         $this->username = $_SERVER["SERVER_NAME"] == "localhost" ? "root" : $this->dbparts['user'];
         $this->password = $_SERVER["SERVER_NAME"] == "localhost" ? "root" : $this->dbparts['pass'];
         $this->database = $_SERVER["SERVER_NAME"] == "localhost" ? "users" : ltrim($this->dbparts['path'],'/');
-        $this->tableName = $_SERVER["SERVER_NAME"] == "localhost" ? "Test" : "test";
+        $this->tableName = $_SERVER["SERVER_NAME"] == "localhost" ? "test" : "test";
 
         // Create connection
         $this->dbConnection = new mysqli($this->hostname, $this->username, $this->password, $this->database);
@@ -54,53 +52,9 @@ class DatabaseConnection {
                 die("Connection failed: " . $this->dbConnection->connect_error);
             }
         }
-        
 
-    public function createUsernameAndPassword($username, $password) {
-        try {
-            $hashedPassword = $this->passwordHash($password);
-            print_r($hashedPassword);
-            $sql = "INSERT INTO $this->tableName (username, passwrd) VALUES ('$username', '$hashedPassword')";
-            $this->dbConnection->query($sql);
-
-        }catch(\Exception $error) {
-            echo "fel vid skapande av table data " . $error;
-        }
-    }
-
-    public function checkUserCredentials($username, $passwrd) {
-        echo "checkUserCredentials<br>";
-        echo $username . "<br>";
-        echo $passwrd . "<br>";
-        echo "checkUserCredentials<br>";
-
-        echo "getpasswrd 1 ";
-        try {
-            $sqlpasswrd = $this->dbConnection->query("SELECT * FROM $this->tableName WHERE username = 'hej'");
-            echo "<br>-------sqlpass-------<br>";
-            var_dump($sqlpasswrd);
-            echo "<br>-------sqlpass-------<br>";
-            $hashedPassword = $this->readHashedPassword($passwrd, $sqlpasswrd);
-            echo "getpasswrd 2 ";
-            var_dump($hashedPassword);
-            $sql = "SELECT * FROM $this->tableName WHERE $this->dbColumnOneName = '$username' and $this->dbColumnTwoName = '$hashedPassword'";
-            $query = $this->dbConnection->query($sql);
-            if (!$query)
-            {
-                die('Error: ' . mysqli_error($this->dbConnection));
-            }
-            if(mysqli_num_rows($query) > 0){ 
-                return true;
-            } else{
-                return false; 
-            }
-        }catch(\Exception $error) {
-            echo " Wrong username or password " . $error;
-        }
-    }
-    
     public function checkUsernameAndPasswordOnLogin($username, $passwrd) {
-        
+    
         if(!$username) {
             return "Username is missing";
         }
@@ -109,12 +63,8 @@ class DatabaseConnection {
         }
         
         try{
-            echo "  kolla cred 1  <br>";
             $test = $this->checkUserCredentials($username, $passwrd);
-            echo "  kolla cred 2  <br>";
-            print_r($test);
             if($test) {
-                echo "  kolla cred   ";
                 $_SESSION["username"] = $username;
                 return "Welcome";
             } else {
@@ -167,15 +117,53 @@ class DatabaseConnection {
         header("Refresh:0; url=index.php");
         return "User registered!";
     }
+        
 
-    private function readHashedPassword ($password, $dbPassword) {
-        echo " hashing ";
-        echo $password;
-        var_dump($dbPassword);
-        return password_verify($password, $dbPassword);
+    public function createUsernameAndPassword($username, $password) {
+        try {
+            $hashedPassword = $this->passwordHash($password);
+            $sql = "INSERT INTO $this->tableName (username, passwrd) VALUES ('$username', '$hashedPassword')";
+            $this->dbConnection->query($sql);
+
+        }catch(\Exception $error) {
+            echo "fel vid skapande av table data " . $error;
+        }
     }
     private function passwordHash ($password) {
         return password_hash($password, PASSWORD_DEFAULT, $this->hashCost);
+    }
+
+    public function checkUserCredentials($username, $passwrd) {
+
+        $dbPassword = "";
+        try {
+            $sql = "SELECT passwrd FROM $this->tableName WHERE username = 'hej'";
+
+            if ($result = $this->dbConnection->query($sql)) {
+
+                while ($row = $result->fetch_row()) {
+                    $dbPassword = strval($row[0]);
+                }
+                $result->close();
+            }
+            $hashedPassword = $this->readHashedPassword($passwrd, $dbPassword);
+            $sql2 = "SELECT * FROM $this->tableName WHERE $this->dbColumnOneName = '$username' and $this->dbColumnTwoName = '$hashedPassword'";
+            $query = $this->dbConnection->query($sql2);
+            if (!$query)
+            {
+                die('Error: ' . mysqli_error($this->dbConnection));
+            }
+            if(mysqli_num_rows($query) > 0){ 
+                return true;
+            } else{
+                return false; 
+            }
+        }catch(\Exception $error) {
+            echo " Wrong username or password " . $error;
+        }
+    }
+    private function readHashedPassword ($password, $dbPassword) {
+        return password_verify($password, $dbPassword);
     }
 
 }

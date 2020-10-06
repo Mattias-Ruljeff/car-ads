@@ -60,13 +60,6 @@ class Application {
 		} else {
 			$response = $this->controller->logIn($this->dbConnection);
 		}
-
-		// echo "<br> GET ";
-		// var_dump($_GET);
-		// echo "<br> POST ";
-		// var_dump($_POST);
-		// echo "<br> COOKIE ";
-		// var_dump($_COOKIE);
 		return $response;
 	}
 

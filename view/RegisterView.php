@@ -35,28 +35,11 @@ class RegisterView {
 	 */
 	public function response($message) {
 		if($_POST[self::$name]) {
-			// if (preg_match_all('/[<>!_]/', self::$name, $result)) {
-			// 	self::$savedName = strip_tags(trim($_POST[self::$name]));
-			// } else {
-			// }
+
 			self::$savedName = strip_tags(trim($_POST[self::$name]));
 		}
 		$response = $this->generateRegisterFormHTML($message);
-		
-		// if($_POST[self::$name] == "" and $_POST[self::$password] == "") {
-		// 	self::$savedName = $_POST[self::$name];
-		// 	$message = "Enter name and password";
-		// } else if($_POST[self::$name] == "") {
-		// 	$message = "Enter name";
-		// } else if($_POST[self::$password] == "") {
-		// 	self::$savedName = $_POST[self::$name];
-		// 	$message = "Enter password";
-		// } else {
-		// 	self::$savedName = $_POST[self::$name];
-		// 	$username = $_POST[self::$name];
-		// 	$password = $_POST[self::$password];
-		// 	$_SESSION["user"] = "Username: " . $username . " Password: " .  $password;		
-		// }
+
 		return $response;
 	}
 	
