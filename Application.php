@@ -2,6 +2,7 @@
  
 // INCLUDE THE FILES NEEDED...
 require_once('view/DateTimeView.php');
+require_once('view/AdsView.php');
 require_once('view/LoginView.php');
 require_once("view/LayoutView.php");
 require_once("view/RegisterView.php");
@@ -17,6 +18,7 @@ require_once("model/DatabaseConnection.php");
 
 class Application {
 	private $dateTimeView;
+	private $adsView;
 	private $layoutView;
 	private $registerView;
 	private $controller;
@@ -26,6 +28,7 @@ class Application {
 
 	public function __construct(){
 		$this->dateTimeView = new DateTimeView();
+		$this->adsView = new AdsView();
 		$this->registerView = new RegisterView();
 		$this->view = new LoginView();
 		$this->controller = new logInOrOut($this->view);
@@ -66,14 +69,14 @@ class Application {
 	private function generateOutput($message) {
 		$this->layoutView = new LayoutView();
 		if(isset($_GET["register"])){
-			$this->layoutView->render(false, $this->registerView, $this->dateTimeView, $message);
+			$this->layoutView->render(false, $this->registerView, $this->dateTimeView, $this->adsView, $message);
 		} else {
 
 			if ($this->view->userWantsToLogOut() or !$_SESSION["username"]) {
-				$this->layoutView->render(false, $this->view, $this->dateTimeView, $message);
+				$this->layoutView->render(false, $this->view, $this->dateTimeView, $this->adsView, $message);
 			} else {
 				session_regenerate_id();
-				$this->layoutView->render(true, $this->view, $this->dateTimeView, $message);
+				$this->layoutView->render(true, $this->view, $this->dateTimeView, $this->adsView, $message);
 			}
 		}
 	}

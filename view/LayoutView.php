@@ -2,7 +2,7 @@
 
 class LayoutView {
 
-  public function render($isLoggedIn, $v, DateTimeView $dtv, $message) {
+  public function render($isLoggedIn, $view, DateTimeView $dtv, AdsView $adsView, $message) {
       if(isset($_GET["register"])) {
         $textInATag = "Back to login";
         $href = "/";
@@ -21,9 +21,10 @@ class LayoutView {
             <a href="'. $href .'">'. $textInATag .'</a>
             ' . $this->renderIsLoggedIn($isLoggedIn) . '
             <div class="container">
-            ' . $v->response($message) . '
+            ' . $view->response($message) . '
                 
                 ' . $dtv->show() . '
+                ' . $adsView->show() . '
             </div>
            </body>
         </html>
