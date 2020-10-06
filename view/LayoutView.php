@@ -7,7 +7,7 @@ class LayoutView {
         $textInATag = "Back to login";
         $href = "/";
       } else {
-        $textInATag = "Register new user";
+        $textInATag = "Register a new user";
         $href = "?register";
       }
       echo '<!DOCTYPE html>
