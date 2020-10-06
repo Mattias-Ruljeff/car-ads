@@ -2,6 +2,10 @@
 
 class AdsModel {
 
+
+            // TODO, ändra allt för att anpassa för Ads.
+
+
     //Database
     private $dbConnection;
     private $url;
@@ -22,7 +26,7 @@ class AdsModel {
         $this->username = $_SERVER["SERVER_NAME"] == "localhost" ? "root" : $this->dbparts['user'];
         $this->password = $_SERVER["SERVER_NAME"] == "localhost" ? "root" : $this->dbparts['pass'];
         $this->database = $_SERVER["SERVER_NAME"] == "localhost" ? "cars" : ltrim($this->dbparts['path'],'/');
-        $this->tableName = $_SERVER["SERVER_NAME"] == "localhost" ? "list" : "test";
+        $this->tableName = $_SERVER["SERVER_NAME"] == "localhost" ? "cars" : "cars";
 
         // Create connection
         $this->dbConnection = new mysqli($this->hostname, $this->username, $this->password, $this->database);
@@ -51,30 +55,6 @@ class AdsModel {
                 die("Connection failed: " . $this->dbConnection->connect_error);
             }
         }
-
-    public function checkUsernameAndPasswordOnLogin($username, $passwrd) {
-    
-        if(!$username) {
-            return "Username is missing";
-        }
-        if(!$passwrd) {
-            return "Password is missing";
-        }
-        
-        try{
-            $test = $this->checkUserCredentials($username, $passwrd);
-            if($test) {
-                $_SESSION["username"] = $username;
-                return "Welcome";
-            } else {
-                return "Wrong name or password";
-            }
-            
-        }catch (Exception $e) {
-            echo "Error found " . $e->getMessage() . "\n";
-        }
-
-    }
 
     public function checkUserOnRegistration($username, $passwrd, $repeatedPasswrd){
         
