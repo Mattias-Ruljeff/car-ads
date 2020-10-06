@@ -120,7 +120,7 @@ class DatabaseConnection {
     public function CheckIfUserExists($username) {
         $sql = "SELECT username FROM $this->tableName WHERE username = '$username'";
 
-        if($this->dbConnection->query($sql) == $username) {
+        if($this->dbConnection->query($sql)) {
             return true;
         }else {
             return false;
