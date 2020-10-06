@@ -127,7 +127,6 @@ class DatabaseConnection {
             }
             $result->close();
         }
-        echo $existingUser;
         if($existingUser == $username) {
             return true;
         }else {
