@@ -96,7 +96,7 @@ class DatabaseConnection {
             return "Username contains invalid characters.";
         }
         
-        if($this->checkUserCredentials("username", $username)) {
+        if($this->CheckIfUserExists($username)) {
             return "User exists, pick another username.";
         } 
         // Check password------------------------------------------
@@ -115,6 +115,16 @@ class DatabaseConnection {
 
         $this->createUsernameAndPassword($username, $passwrd);
         return "User registered!";
+    }
+
+    public function CheckIfUserExists($username) {
+        $sql = "SELECT username FROM $this->tableName WHERE username = '$username'";
+
+        if($this->dbConnection->query($sql) == $username) {
+            return true;
+        }else {
+            return false;
+        }
     }
         
 
