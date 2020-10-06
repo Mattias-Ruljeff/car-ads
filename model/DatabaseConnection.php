@@ -119,8 +119,16 @@ class DatabaseConnection {
 
     public function CheckIfUserExists($username) {
         $sql = "SELECT username FROM $this->tableName WHERE username = '$username'";
+        $existingUser = "";
+        if ($result = $this->dbConnection->query($sql)) {
 
-        if($this->dbConnection->query($sql)) {
+            while ($row = $result->fetch_row()) {
+                $existingUser = strval($row[0]);
+            }
+            $result->close();
+        }
+        echo $existingUser;
+        if($existingUser == $username) {
             return true;
         }else {
             return false;
