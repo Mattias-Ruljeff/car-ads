@@ -114,7 +114,6 @@ class DatabaseConnection {
         }
 
         $this->createUsernameAndPassword($username, $passwrd);
-        // header("Refresh:0; url=index.php");
         return "User registered!";
     }
         
@@ -124,6 +123,7 @@ class DatabaseConnection {
             $hashedPassword = $this->passwordHash($password);
             $sql = "INSERT INTO $this->tableName (username, passwrd) VALUES ('$username', '$hashedPassword')";
             $this->dbConnection->query($sql);
+            header("Refresh:0; url=index.php");
 
         }catch(\Exception $error) {
             echo "fel vid skapande av table data " . $error;
@@ -152,20 +152,6 @@ class DatabaseConnection {
             } else {
                 return false;
             }
-
-            // echo "\nefter kontroll\n";
-            // echo $hashedPassword;
-            // $sql2 = "SELECT * FROM $this->tableName WHERE $this->dbColumnOneName = '$username' and $this->dbColumnTwoName = '$hashedPassword'";
-            // $query = $this->dbConnection->query($sql2);
-            // if (!$query)
-            // {
-            //     die('Error: ' . mysqli_error($this->dbConnection));
-            // }
-            // if(mysqli_num_rows($query) > 0){ 
-            //     return true;
-            // } else{
-            //     return false; 
-            // }
         }catch(\Exception $error) {
             echo " Wrong username or password " . $error;
         }
