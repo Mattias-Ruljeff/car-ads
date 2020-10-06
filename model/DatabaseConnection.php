@@ -114,7 +114,7 @@ class DatabaseConnection {
         }
 
         $this->createUsernameAndPassword($username, $passwrd);
-        header("Refresh:0; url=index.php");
+        // header("Refresh:0; url=index.php");
         return "User registered!";
     }
         
@@ -137,8 +137,8 @@ class DatabaseConnection {
 
         $dbPassword = "";
         try {
-            $sql = "SELECT passwrd FROM $this->tableName WHERE username = 'hej'";
-
+            $sql = "SELECT passwrd FROM $this->tableName WHERE username = '$username'";
+            
             if ($result = $this->dbConnection->query($sql)) {
 
                 while ($row = $result->fetch_row()) {
@@ -146,18 +146,26 @@ class DatabaseConnection {
                 }
                 $result->close();
             }
-            $hashedPassword = $this->readHashedPassword($passwrd, $dbPassword);
-            $sql2 = "SELECT * FROM $this->tableName WHERE $this->dbColumnOneName = '$username' and $this->dbColumnTwoName = '$hashedPassword'";
-            $query = $this->dbConnection->query($sql2);
-            if (!$query)
-            {
-                die('Error: ' . mysqli_error($this->dbConnection));
-            }
-            if(mysqli_num_rows($query) > 0){ 
+            if ($this->readHashedPassword($passwrd, $dbPassword)) {
                 return true;
-            } else{
-                return false; 
+
+            } else {
+                return false;
             }
+
+            // echo "\nefter kontroll\n";
+            // echo $hashedPassword;
+            // $sql2 = "SELECT * FROM $this->tableName WHERE $this->dbColumnOneName = '$username' and $this->dbColumnTwoName = '$hashedPassword'";
+            // $query = $this->dbConnection->query($sql2);
+            // if (!$query)
+            // {
+            //     die('Error: ' . mysqli_error($this->dbConnection));
+            // }
+            // if(mysqli_num_rows($query) > 0){ 
+            //     return true;
+            // } else{
+            //     return false; 
+            // }
         }catch(\Exception $error) {
             echo " Wrong username or password " . $error;
         }
