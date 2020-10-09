@@ -1,5 +1,7 @@
 <?php
 
+namespace Model;
+
 class DatabaseConnection {
 
     //Database
@@ -27,13 +29,6 @@ class DatabaseConnection {
 
         // Create connection
         $this->dbConnection = new mysqli($this->hostname, $this->username, $this->password, $this->database);
-    }
-
-    private function createDatabase () {
-        if($this->dbConnection->query("CREATE DATABASE $this->database") === TRUE){
-        } else {
-          echo "Error creating database: " . $this->dbConnection->error;
-        }
     }
 
     public function createTableInDataBase () {

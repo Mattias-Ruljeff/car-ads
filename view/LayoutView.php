@@ -1,5 +1,7 @@
 <?php
 
+namespace View;
+
 class LayoutView {
 
   public function render($isLoggedIn, $view, DateTimeView $dtv, AdsView $adsView, $message) {
@@ -24,7 +26,7 @@ class LayoutView {
             ' . $view->response($message) . '
                 
                 ' . $dtv->show() . '
-                ' . $adsView->show() . '
+                ' . $adsView->show($isLoggedIn) . '
             </div>
            </body>
         </html>

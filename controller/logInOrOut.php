@@ -5,14 +5,10 @@ use function PHPSTORM_META\type;
 class logInOrOut {
 
     private $view;
-    private $columnOneName = "Username";
-    private $columTwoName = "Passwrd";
-    // private $isLoggedIn;
 
     public function __construct(\LoginView $view) {
         $this->view = $view;
         $this->isLoggedIn = false;
-
     }
 
     public function logIn($dbConnection)  {
