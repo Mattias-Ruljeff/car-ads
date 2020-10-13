@@ -1,5 +1,6 @@
 <?php
 
+namespace Controller;
 
 class RegisterNewUser {
 
@@ -7,7 +8,7 @@ class RegisterNewUser {
     private $columnOneName = "Username";
     private $columTwoName = "Passwrd";
 
-    public function __construct(\RegisterView $view) {
+    public function __construct(\View\RegisterView $view) {
         $this->view = $view;
 
     }

@@ -1,12 +1,12 @@
 <?php
 
-use function PHPSTORM_META\type;
+namespace Controller;
 
-class logInOrOut {
+class LogInOrOut {
 
     private $view;
 
-    public function __construct(\LoginView $view) {
+    public function __construct(\View\LoginView $view) {
         $this->view = $view;
         $this->isLoggedIn = false;
     }

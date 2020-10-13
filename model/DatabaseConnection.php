@@ -1,6 +1,7 @@
 <?php
 
 namespace Model;
+use mysqli;
 
 class DatabaseConnection {
 
@@ -12,9 +13,12 @@ class DatabaseConnection {
     private $username;
     private $password;
     private $database;
-    private $tableName;
-    private $dbColumnOneName = "username";
-    private $dbColumnTwoName = "passwrd";
+    private static $tablenameForUsers = "test";
+    private static $tablenameForAds = "carAds";
+    private static $dbColumnOneNameForUsers = "username";
+    private static $dbColumnTwoNameForUsers = "passwrd";
+    private static $dbColumnOneNameForCarAds = "car";
+    private static $dbColumnTwoNameForCarAds = "mileage";
     private $hashCost = ["cost" => 8];
     
     public function __construct(){   
@@ -25,19 +29,18 @@ class DatabaseConnection {
         $this->username = $_SERVER["SERVER_NAME"] == "localhost" ? "root" : $this->dbparts['user'];
         $this->password = $_SERVER["SERVER_NAME"] == "localhost" ? "root" : $this->dbparts['pass'];
         $this->database = $_SERVER["SERVER_NAME"] == "localhost" ? "users" : ltrim($this->dbparts['path'],'/');
-        $this->tableName = $_SERVER["SERVER_NAME"] == "localhost" ? "test" : "test";
 
         // Create connection
         $this->dbConnection = new mysqli($this->hostname, $this->username, $this->password, $this->database);
     }
 
-    public function createTableInDataBase () {
-        $sql = "CREATE TABLE $this->tableName (
-            id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            $this->dbColumnOneName VARCHAR(30) NOT NULL,
-            $this->dbColumnTwoName VARCHAR(30) NOT NULL,s
-            reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-            )";
+    public function createTableInDataBase ($tableName ,$dbColumnOneName, $dbColumnTwoName) {
+            $sql = "CREATE TABLE $tableName (
+                    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                    $dbColumnOneName VARCHAR(30) NOT NULL,
+                    $dbColumnTwoName INT(10) NOT NULL,
+                    reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+                    )";
             
             if ($this->dbConnection->query($sql) === TRUE) {
             } else {
@@ -66,7 +69,7 @@ class DatabaseConnection {
                 return "Wrong name or password";
             }
             
-        }catch (Exception $e) {
+        }catch (\Exception $e) {
             echo "Error found " . $e->getMessage() . "\n";
         }
 
@@ -113,7 +116,7 @@ class DatabaseConnection {
     }
 
     public function CheckIfUserExists($username) {
-        $sql = "SELECT username FROM $this->tableName WHERE username = '$username'";
+        $sql = "SELECT username FROM test WHERE username = '$username'";
         $existingUser = "";
         if ($result = $this->dbConnection->query($sql)) {
 
@@ -133,7 +136,7 @@ class DatabaseConnection {
     public function createUsernameAndPassword($username, $password) {
         try {
             $hashedPassword = $this->passwordHash($password);
-            $sql = "INSERT INTO $this->tableName (username, passwrd) VALUES ('$username', '$hashedPassword')";
+            $sql = "INSERT INTO $this->tablenameForUsers (username, passwrd) VALUES ('$username', '$hashedPassword')";
             $this->dbConnection->query($sql);
             header("Refresh:0; url=index.php");
 
@@ -149,7 +152,7 @@ class DatabaseConnection {
 
         $dbPassword = "";
         try {
-            $sql = "SELECT passwrd FROM $this->tableName WHERE username = '$username'";
+            $sql = "SELECT passwrd FROM test WHERE username = '$username'";
             
             if ($result = $this->dbConnection->query($sql)) {
 
@@ -172,4 +175,35 @@ class DatabaseConnection {
         return password_verify($password, $dbPassword);
     }
 
+    public function createNewCarAd(string $carModel, int $mileage ) {
+        echo "createNewCarAd";
+        if(!$this->CheckIfCarAdExists($carModel)) {
+            try {
+                $sql = "INSERT INTO carads (model, mileage) VALUES ('$carModel', '$mileage')";
+                $this->dbConnection->query($sql);
+                // header("Refresh:0; url=index.php");
+    
+            }catch(\Exception $error) {
+                echo "Error creating ad" . $error;
+            } 
+        } else {
+            echo "Car ad already exist";
+        }
+    }
+    public function CheckIfCarAdExists($carAd) {
+        $sql = "SELECT model FROM carads WHERE model = '$carAd'";
+        $existingCarAd = "";
+        if ($result = $this->dbConnection->query($sql)) {
+
+            while ($row = $result->fetch_row()) {
+                $existingCarAd = strval($row[0]);
+            }
+            $result->close();
+        }
+        if($existingCarAd == $carAd) {
+            return true;
+        }else {
+            return false;
+        }
+    }
 }

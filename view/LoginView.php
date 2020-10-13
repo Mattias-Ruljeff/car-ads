@@ -44,7 +44,7 @@ class LoginView {
 		if($_POST[self::$logout]){
 			session_unset();
 		}
-		if(isset($_SESSION["username"])) {
+		if($_SESSION["username"]) {
 			$response = $this->generateLogoutButtonHTML($message);
 		} else {
 			$response = $this->generateLoginFormHTML($message);
@@ -94,11 +94,4 @@ class LoginView {
 			</form>
 		';
 	}
-	
-	//CREATE GET-FUNCTIONS TO FETCH REQUEST VARIABLES
-	// private function getRequestUserName() {
-	// 	//RETURN REQUEST VARIABLE: USERNAME
-	// 	return "username";
-	// }
-	
 }

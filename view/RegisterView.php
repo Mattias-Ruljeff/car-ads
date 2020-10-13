@@ -28,6 +28,9 @@ class RegisterView {
 	public function getRepeatedPassword() {
 		return $_POST[self::$passwordRepeat];
 	}
+	public function checkIfRegisterIsSet(){
+		return isset($_GET["register"]);
+	}
 	/**
 	 * Create HTTP response
 	 *

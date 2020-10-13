@@ -4,7 +4,7 @@ namespace View;
 
 class LayoutView {
 
-  public function render($isLoggedIn, $view, DateTimeView $dtv, AdsView $adsView, $message) {
+  public function render($isLoggedIn, $view, DateTimeView $dtv, $adsView, $message) {
       if(isset($_GET["register"])) {
         $textInATag = "Back to login";
         $href = "/";
@@ -26,7 +26,7 @@ class LayoutView {
             ' . $view->response($message) . '
                 
                 ' . $dtv->show() . '
-                ' . $adsView->show($isLoggedIn) . '
+                ' . $adsView . '
             </div>
            </body>
         </html>
