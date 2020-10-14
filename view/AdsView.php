@@ -61,8 +61,7 @@ class AdsView {
 
 	public function showOnlyAds($listOfAds) {
 
-		$returnString = '<a href="?addCar">Add new car</a>';
-		$returnString .= '<br>';
+		$returnString = '<br>';
 		if($listOfAds){
 			$returnString .= "<ul>";
 			while ($row = $listOfAds->fetch_row()) {
@@ -73,16 +72,7 @@ class AdsView {
 			$listOfAds->close();
 			$returnString .= "</ul>";
 		}
-
-		if($this->addNewCar()) {
-			return '<h2>My cars</h2>
-					'. $this->generateNewCarForm() .'
-					<p>' . $returnString . '</p>';
-		} else {
-			return '<h2>My cars</h2>
-					<p>' . $returnString . '</p>';
-			
-		}
+		return '<h2>My cars</h2>' . $returnString;
 	}
 
 

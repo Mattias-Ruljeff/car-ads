@@ -12,6 +12,10 @@ body{
     background: #479F6D;
 
 }
+h2 {
+    border: 10px solid none;
+    border-bottom: 7px solid grey;
+}
 
 .container {
     display: flex;
