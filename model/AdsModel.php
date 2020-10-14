@@ -45,7 +45,7 @@ class AdsModel {
         echo "addCar";
         try {
             echo "addCar1";
-            $sql = "INSERT INTO Carads ($this->dbColumnOneName, $this->dbColumnTwoName) VALUES ('$carModel', '$mileage')";
+            $sql = "INSERT INTO carads ($this->dbColumnOneName, $this->dbColumnTwoName) VALUES ('$carModel', '$mileage')";
             $test = $this->dbConnection->query($sql);
             // header("Refresh:0; url=index.php");
             var_dump($test);
