@@ -28,10 +28,10 @@ class LayoutView {
                     ' . $view->response($message) . '
                     ' . $dtv->show() . '
                 </div>
+            </div>
                 <div id="adsBox">
                     ' . $adsView . '
                 </div>
-            </div>
            </body>
         </html>
       ';
