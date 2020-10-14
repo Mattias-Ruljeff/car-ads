@@ -49,12 +49,9 @@ class AdsView {
 		}
 
 		if($this->addNewCar()) {
-			return '<h2>My cars</h2>
-					'. $this->generateNewCarForm() .'
-					<p>' . $returnString . '</p>';
+			return '<h2>My cars</h2>'. $this->generateNewCarForm() .$returnString;
 		} else {
-			return '<h2>My cars</h2>
-					<p>' . $returnString . '</p>';
+			return '<h2>My cars</h2>' . $returnString;
 			
 		}
 	}
