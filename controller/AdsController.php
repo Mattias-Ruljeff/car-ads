@@ -5,19 +5,23 @@ namespace Controller;
 class AdsController {
 
     private $view;
+    private $model;
 
-    public function __construct(\View\AdsView $view) {
+    public function __construct(\View\AdsView $view, \Model\AdsModel $model) {
         $this->view = $view;
-
+        $this->model = $model;
     }
-
-    public function addNewCar($dbConnection)  {
-		if ($this->view->saveCar()) {
+    
+    public function getAllAds () {
+        $this->model->getAllAds();
+    }
+    public function addNewCar()  {
+		if ($this->view->editCar()) {
             echo "newCar-----------------------";
             try {
                 $carModel = $this->view->getCarModelName();
                 $mileage = (int)$this->view->getCarMileage();
-                $dbConnection->createNewCarAd($carModel, $mileage);
+                $this->model->createNewCarAd($carModel, $mileage);
 
                 return true;
 
@@ -25,5 +29,19 @@ class AdsController {
                 echo $e;
 			}
 		}
-	}
+    }
+    public function editCar()  {
+        if ($this->view->editCar()) {
+            echo "newCar-----------------------";
+            try {
+                
+
+                return true;
+
+            } catch (\Exception $e) {
+                echo $e;
+            }
+        }
+    }
+
 }

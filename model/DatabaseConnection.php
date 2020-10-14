@@ -34,6 +34,10 @@ class DatabaseConnection {
         $this->dbConnection = new mysqli($this->hostname, $this->username, $this->password, $this->database);
     }
 
+    public function connect() {
+        return new mysqli($this->hostname, $this->username, $this->password, $this->database);
+    }
+
     public function createTableInDataBase ($tableName ,$dbColumnOneName, $dbColumnTwoName) {
             $sql = "CREATE TABLE $tableName (
                     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -181,7 +185,7 @@ class DatabaseConnection {
             try {
                 $sql = "INSERT INTO carads (model, mileage) VALUES ('$carModel', '$mileage')";
                 $this->dbConnection->query($sql);
-                // header("Refresh:0; url=index.php");
+                header("Refresh:0; url=index.php");
     
             }catch(\Exception $error) {
                 echo "Error creating ad" . $error;
@@ -190,6 +194,7 @@ class DatabaseConnection {
             echo "Car ad already exist";
         }
     }
+    
     public function CheckIfCarAdExists($carAd) {
         $sql = "SELECT model FROM carads WHERE model = '$carAd'";
         $existingCarAd = "";

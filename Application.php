@@ -12,7 +12,8 @@ require_once("view/RegisterView.php");
 require_once("model/UserStorage.php");
 require_once("model/UserName.php");
 require_once("model/DatabaseConnection.php");
-require_once("model/SessionModel.php");
+require_once("model/SessionModel.php"); 
+require_once("model/AdsModel.php"); 
 
 //MAKE SURE ERRORS ARE SHOWN... MIGHT WANT TO TURN THIS OFF ON A PUBLIC SERVER
 // error_reporting(E_ALL);
@@ -25,20 +26,23 @@ class Application {
 	private $registerView;
 	private $controller;
 	private $registerController;
+	private $adsModel;
+	private $adsController;
 	private $sessionModel;
 	private $view;
 	private $dbConnection;
 
 	public function __construct(){
+		$this->dbConnection = new \Model\DatabaseConnection();
 		$this->dateTimeView = new \View\DateTimeView();
 		$this->adsView = new \View\AdsView();
 		$this->registerView = new \View\RegisterView();
 		$this->view = new \View\LoginView();
 		$this->layoutView = new \View\LayoutView();
+		$this->adsModel = new \Model\AdsModel($this->dbConnection);
 		$this->controller = new \Controller\logInOrOut($this->view);
 		$this->registerController = new \Controller\RegisterNewUser($this->registerView);
-		$this->adsController = new \Controller\AdsController($this->adsView);
-		$this->dbConnection = new \Model\DatabaseConnection();
+		$this->adsController = new \Controller\AdsController($this->adsView, $this->adsModel);
 		$this->sessionModel = new \Model\SessionModel();
 	}
 
@@ -55,7 +59,8 @@ class Application {
 
 		$this->adsView->addNewCar();
 		$this->adsView->saveCar();
-		$this->adsController->addNewCar($this->dbConnection);;
+		$this->adsController->addNewCar();
+		$this->adsController->editCar();
 
 		if($this->registerView->checkIfRegisterIsSet()){
 			$response = $this->registerController->registerNewUser($this->dbConnection);
@@ -73,8 +78,8 @@ class Application {
 			if ($this->view->userWantsToLogOut() or $this->sessionModel->checkIfNoSession()) {
 				$this->layoutView->render(false, $this->view, $this->dateTimeView, null, $message);
 			} else {
-				// session_regenerate_id();
-				$this->layoutView->render(true, $this->view, $this->dateTimeView, $this->adsView->show(), $message);
+				session_regenerate_id();
+				$this->layoutView->render(true, $this->view, $this->dateTimeView, $this->adsView->show($this->adsModel->getAllAds()), $message);
 			}
 		}
 	}

@@ -4,9 +4,15 @@ namespace Model;
 
 class AdsModel {
 
-    private $tableName = "cars";
+    private $tableName = "carads";
     private $dbColumnOneName = "model";
     private $dbColumnTwoName = "mileage";
+    private $dbConnection;
+
+    public function __construct(\Model\DatabaseConnection $dbConnection)
+    {
+        $this->dbConnection = $dbConnection->connect();
+    }
 
     public function checkInputWhenCreatingAd($model, $mileage){
         
@@ -31,19 +37,25 @@ class AdsModel {
             return "Mileage has too few characters, at least 6 characters.";
         }
 
-        $this->createNewAd($model, $mileage);
+        $this->createNewCarAd($model, $mileage);
         return "Ad created!";
     }
         
-    public function createNewAd(string $carModel, string $mileage ) {
+    public function createNewCarAd(string $carModel, string $mileage ) {
         try {
             $sql = "INSERT INTO $this->tableName ($this->dbColumnOneName, $this->dbColumnTwoName) VALUES ('$carModel', '$mileage')";
             $this->dbConnection->query($sql);
-            // header("Refresh:0; url=index.php");
+            header("Refresh:0; url=index.php");
 
         }catch(\Exception $error) {
             echo "Error creating ad" . $error;
         }
     }
+
+    public function getAllAds() {
+        $sql = "SELECT * FROM carads";
+        return $this->dbConnection->query($sql);
+    }
+
 
 }

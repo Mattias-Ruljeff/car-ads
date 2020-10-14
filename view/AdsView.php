@@ -7,10 +7,17 @@ class AdsView {
 	private static $carModel = "AdsView::CarModel";
 	private static $carMileage = "AdsView::CarMileage";
 	private static $saveCar = "AdsView::SaveCar";
+	private static $editCar = "AdsView::EditCar";
+
+	private static $addCarString = "addCar";
+	private static $editCarString = "editCar";
 
 
 	public function addNewCar() {
-		return isset($_GET["addCar"]);
+		return isset($_GET[self::$addCarString]);
+	}
+	public function editCar() {
+		return isset($_GET[self::$editCarString]);
 	}
 	public function saveCar() {
 		return isset($_POST[self::$saveCar]);
@@ -23,13 +30,20 @@ class AdsView {
 	}
 
 
-	public function show() {
+	public function show($listOfAds) {
 
 		$returnString = '<a href="?addCar">Add new car</a>';
-		$returnString .= "Car 1: Nissan";
-		$returnString .= "<br>";
-		$returnString .= "Car 2: Toyota ";
-		$returnString .= "<br>";
+		$returnString .= '<br>';
+		if($listOfAds){
+			$returnString .= "<ul>";
+			while ($row = $listOfAds->fetch_row()) {
+				$returnString .= "<li>" . strval($row[0]) . " ". strval($row[1]) . "</li>";
+				$returnString .= '<a href="' . self::$editCar . '">Edit car</a>';
+			}
+			$listOfAds->close();
+			$returnString .= "</ul>";
+		}
+
 		if($this->addNewCar()) {
 			return '<h2>My cars</h2>
 					'. $this->generateNewCarForm() .'
