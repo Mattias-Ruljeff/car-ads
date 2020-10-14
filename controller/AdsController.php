@@ -19,10 +19,12 @@ class AdsController {
         $this->model->getAllAds();
     }
     public function addNewCar()  {
-		if ($this->view->editCar()) {
+		if ($this->view->saveCar()) {
             try {
                 $carModel = $this->view->getCarModelName();
                 $mileage = (int)$this->view->getCarMileage();
+                var_dump($carModel);
+                var_dump($mileage);
                 $this->model->createNewCarAd($carModel, $mileage);
 
                 return true;

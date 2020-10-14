@@ -20,18 +20,18 @@ class LayoutView {
             <link rel="stylesheet" href="./style.css">
             </head>
             <body>
-            <div class="container">
-                <div id="loginBox">
-                    <h1>Assignment 2</h1>
-                    <a href="'. $href .'">'. $textInATag .'</a>
-                    ' . $this->renderIsLoggedIn($isLoggedIn) . '
-                    ' . $view->response($message) . '
+            <div id="loginBox">
+                <h1>Assignment 2</h1>
+                <a href="'. $href .'">'. $textInATag .'</a>
+                ' . $this->renderIsLoggedIn($isLoggedIn) . '
+                ' . $view->response($message) . '
+                <div class="container">
                     ' . $dtv->show() . '
                 </div>
             </div>
-                <div id="adsBox">
-                    ' . $adsView . '
-                </div>
+            <div id="adsBox">
+                ' . $adsView . '
+            </div>
            </body>
         </html>
       ';

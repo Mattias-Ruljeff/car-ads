@@ -5,6 +5,9 @@ html, body {
 
 }
 body{
+    display: flex;
+    flex-direction: column;
+    /* flex-flow: row; */
     border-right: 10px solid grey;
     border-left: 10px solid grey;
     margin-right: 10%; 
@@ -15,26 +18,27 @@ body{
 h2 {
     border: 10px solid none;
     border-bottom: 7px solid grey;
+    width: max-content;
 }
 
-.container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: fit-content;
+.container{
+    display: inline;
+    text-align: center;
 }
 
 #loginBox {
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex-grow: 1;
-    height: 100%;
+    flex-grow: 3;
+    width: 300px;
+    height: max-content;
 
     border: 2px solid grey;
     border-radius: 10px;
     margin-left: 15px;
     margin-right: 15px;
+    margin-bottom: 15px;
     background: #699E78;
 }
 
@@ -43,10 +47,12 @@ h2 {
     flex-direction: column;
     align-items: center;
     flex-grow: 2;
+    height: max-content;
     
     border: 2px solid grey;
     border-radius: 10px;
     margin-right: 15px;
+    margin-left: 15px;
     background: #8B9D83;
     
 }
@@ -57,7 +63,6 @@ h2 {
     align-items: center;
     height: min-content;
     flex-grow: 2;
-    background: ;
 }
 
 a {
@@ -85,6 +90,8 @@ a:active {
 
 li {
     list-style-type: none;
+    height: 60px;
+    width: 150px;
 }
 
 ul {
@@ -92,7 +99,7 @@ ul {
     flex-wrap: wrap;
     flex-direction: row;
     align-items: center;
-    padding: 0;
+    padding: 10px;
 }
 
 .ad {
@@ -101,8 +108,8 @@ ul {
     align-items: center;
     border: 1px solid black;
     border-radius: 3px;
-    width: max-content;
     margin-right: 5px;
     margin-left: 5px;
+    margin-bottom: 10px;
     padding: 10px;
 }
