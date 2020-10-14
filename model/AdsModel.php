@@ -43,7 +43,7 @@ class AdsModel {
         
     public function createNewCarAd(string $carModel, string $mileage ) {
         try {
-            $sql = "INSERT INTO carads ($this->dbColumnOneName, $this->dbColumnTwoName) VALUES ('$carModel', '$mileage')";
+            $sql = "INSERT INTO Carads ($this->dbColumnOneName, $this->dbColumnTwoName) VALUES ('$carModel', '$mileage')";
             $this->dbConnection->query($sql);
             header("Refresh:0; url=index.php");
 

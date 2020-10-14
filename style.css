@@ -6,8 +6,8 @@ html, body {
 }
 body{
     display: flex;
-    flex-direction: column;
-    /* flex-flow: row; */
+    flex-direction: row;
+    flex-flow: row;
     border-right: 10px solid grey;
     border-left: 10px solid grey;
     margin-right: 10%; 
