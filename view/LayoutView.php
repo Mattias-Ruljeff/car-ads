@@ -20,6 +20,7 @@ class LayoutView {
             <link rel="stylesheet" href="./style.css">
             </head>
             <body>
+            <div id="loginBox">
                 <h1>Assignment 2</h1>
                 <a href="'. $href .'">'. $textInATag .'</a>
                 ' . $this->renderIsLoggedIn($isLoggedIn) . '
@@ -27,7 +28,11 @@ class LayoutView {
                 <div class="container">
                     ' . $dtv->show() . '
                 </div>
-           </body>
+            </div>
+            </body>
+            <div id="adsBox">
+                ' . $adsView . '
+            </div>
         </html>
       ';
   }
@@ -44,25 +49,20 @@ class LayoutView {
 }
 
 // '<!DOCTYPE html>
-// <html>
-//     <head>
-//     <meta charset="utf-8">
-//     <title>Login Example</title>
-//     <link rel="stylesheet" href="./style.css">
-//     </head>
-//     <body>
-//     <div id="loginBox">
-//         <h1>Assignment 2</h1>
-//         <a href="'. $href .'">'. $textInATag .'</a>
-//         ' . $this->renderIsLoggedIn($isLoggedIn) . '
-//         ' . $view->response($message) . '
-//         <div class="container">
-//             ' . $dtv->show() . '
-//         </div>
-//     </div>
-//     <div id="adsBox">
-//         ' . $adsView . '
-//     </div>
-//    </body>
-// </html>
-// '
+//         <html>
+//             <head>
+//             <meta charset="utf-8">
+//             <title>Login Example</title>
+//             <link rel="stylesheet" href="./style.css">
+//             </head>
+//             <body>
+//                 <h1>Assignment 2</h1>
+//                 <a href="'. $href .'">'. $textInATag .'</a>
+//                 ' . $this->renderIsLoggedIn($isLoggedIn) . '
+//                 ' . $view->response($message) . '
+//                 <div class="container">
+//                     ' . $dtv->show() . '
+//                 </div>
+//            </body>
+//         </html>
+//       '
