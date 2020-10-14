@@ -1,7 +1,7 @@
 <?php
  
 // INCLUDE THE FILES NEEDED...
-require_once("controller/LogInOrOut.php");
+require_once("controller/LogInOrOutController.php");
 require_once("controller/RegisterNewUser.php");
 require_once("controller/AdsController.php");
 require_once('view/DateTimeView.php');
