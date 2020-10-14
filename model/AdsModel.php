@@ -42,13 +42,10 @@ class AdsModel {
     }
         
     public function createNewCarAd(string $carModel, string $mileage ) {
-        echo "addCar";
         try {
-            echo "addCar1";
             $sql = "INSERT INTO carads ($this->dbColumnOneName, $this->dbColumnTwoName) VALUES ('$carModel', '$mileage')";
             $test = $this->dbConnection->query($sql);
-            // header("Refresh:0; url=index.php");
-            var_dump($test);
+            header("Refresh:0; url=index.php");
 
         }catch(\Exception $error) {
             echo "Error creating ad" . $error;
