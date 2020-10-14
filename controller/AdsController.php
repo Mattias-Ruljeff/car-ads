@@ -2,10 +2,13 @@
 
 namespace Controller;
 
+use Model\SessionModel;
+
 class AdsController {
 
     private $view;
     private $model;
+    private $sessionModel;
 
     public function __construct(\View\AdsView $view, \Model\AdsModel $model) {
         $this->view = $view;
@@ -17,7 +20,6 @@ class AdsController {
     }
     public function addNewCar()  {
 		if ($this->view->editCar()) {
-            echo "newCar-----------------------";
             try {
                 $carModel = $this->view->getCarModelName();
                 $mileage = (int)$this->view->getCarMileage();
@@ -32,7 +34,6 @@ class AdsController {
     }
     public function editCar()  {
         if ($this->view->editCar()) {
-            echo "newCar-----------------------";
             try {
                 
 

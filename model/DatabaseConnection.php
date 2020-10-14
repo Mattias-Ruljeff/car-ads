@@ -13,7 +13,7 @@ class DatabaseConnection {
     private $username;
     private $password;
     private $database;
-    private static $tablenameForUsers = "test";
+    private $tablenameForUsers = "test";
     private static $tablenameForAds = "carAds";
     private static $dbColumnOneNameForUsers = "username";
     private static $dbColumnTwoNameForUsers = "passwrd";
@@ -120,7 +120,7 @@ class DatabaseConnection {
     }
 
     public function CheckIfUserExists($username) {
-        $sql = "SELECT username FROM test WHERE username = '$username'";
+        $sql = "SELECT $this->dbColumnOneNameForUsers FROM test WHERE username = '$username'";
         $existingUser = "";
         if ($result = $this->dbConnection->query($sql)) {
 

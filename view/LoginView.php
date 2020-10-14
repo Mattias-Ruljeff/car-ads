@@ -74,21 +74,26 @@ class LoginView {
 	public function generateLoginFormHTML($message) {
 
 		return '
-			<form method="post" > 
+		<form method="post" > 
 				<fieldset>
 					<legend>Login - enter Username and password</legend>
+					<div id="login">
 					<p id="' . self::$messageId . '">' . $message . '</p>
 					
 					<label for="' . self::$name . '">Username :</label>
 					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="' . self::$savedName .'" />
-
-					<label for="' . self::$password . '">Password :</label>
+					<br>
+					
+					<label for="'  . self::$password . '">Password :</label>
 					<input type="password" id="' . self::$password . '" name="' . self::$password . '" />
-
+					<br>
+					
 					<label for="' . self::$keep . '">Keep me logged in  :</label>
 					<input type="checkbox" id="' . self::$keep . '" name="' . self::$keep . '" />
+					<br>
 					
 					<input type="submit" name="' . self::$login . '" value="login" />
+					</div>
 				</fieldset>
 				
 			</form>

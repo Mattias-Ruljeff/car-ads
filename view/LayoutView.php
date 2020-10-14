@@ -14,19 +14,23 @@ class LayoutView {
       }
       echo '<!DOCTYPE html>
         <html>
-          <head>
+            <head>
             <meta charset="utf-8">
             <title>Login Example</title>
-          </head>
-          <body>
-            <h1>Assignment 2</h1>
-            <a href="'. $href .'">'. $textInATag .'</a>
-            ' . $this->renderIsLoggedIn($isLoggedIn) . '
+            <link rel="stylesheet" href="./style.css">
+            </head>
+            <body>
             <div class="container">
-            ' . $view->response($message) . '
-                
-                ' . $dtv->show() . '
-                ' . $adsView . '
+                <div id="loginBox">
+                    <h1>Assignment 2</h1>
+                    <a href="'. $href .'">'. $textInATag .'</a>
+                    ' . $this->renderIsLoggedIn($isLoggedIn) . '
+                    ' . $view->response($message) . '
+                    ' . $dtv->show() . '
+                </div>
+                <div id="adsBox">
+                    ' . $adsView . '
+                </div>
             </div>
            </body>
         </html>

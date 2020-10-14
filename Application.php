@@ -56,7 +56,6 @@ class Application {
 	}
 
 	private function changeState() {
-
 		$this->adsView->addNewCar();
 		$this->adsView->saveCar();
 		$this->adsController->addNewCar();
@@ -76,10 +75,10 @@ class Application {
 			$this->layoutView->render(false, $this->registerView, $this->dateTimeView, null, $message);
 		} else {
 			if ($this->view->userWantsToLogOut() or $this->sessionModel->checkIfNoSession()) {
-				$this->layoutView->render(false, $this->view, $this->dateTimeView, null, $message);
+				$this->layoutView->render(false, $this->view, $this->dateTimeView,  $this->adsView->showOnlyAds($this->adsModel->getAllAds()), $message);
 			} else {
 				session_regenerate_id();
-				$this->layoutView->render(true, $this->view, $this->dateTimeView, $this->adsView->show($this->adsModel->getAllAds()), $message);
+				$this->layoutView->render(true, $this->view, $this->dateTimeView, $this->adsView->showAdsWithButtons($this->adsModel->getAllAds()), $message);
 			}
 		}
 	}

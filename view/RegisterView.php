@@ -59,6 +59,7 @@ class RegisterView {
 			<form method="post" > 
 				<fieldset>
 					<legend>Register a new user - Write username and password</legend>
+					<div id="login">
 					<p id="' . self::$messageId . '">' . $message . '</p>
 					
 					<label for="' . self::$name . '">Username :</label>
@@ -74,6 +75,7 @@ class RegisterView {
 					<br>
 					
 					<input type="submit" name="' . self::$register . '" value="Register" />
+					</div>
 				</fieldset>
 			</form>
 		';

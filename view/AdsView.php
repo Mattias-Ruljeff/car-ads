@@ -8,6 +8,7 @@ class AdsView {
 	private static $carMileage = "AdsView::CarMileage";
 	private static $saveCar = "AdsView::SaveCar";
 	private static $editCar = "AdsView::EditCar";
+	private static $deleteCar = "AdsView::DeleteCar";
 
 	private static $addCarString = "addCar";
 	private static $editCarString = "editCar";
@@ -30,15 +31,18 @@ class AdsView {
 	}
 
 
-	public function show($listOfAds) {
+	public function showAdsWithButtons($listOfAds) {
 
 		$returnString = '<a href="?addCar">Add new car</a>';
 		$returnString .= '<br>';
 		if($listOfAds){
 			$returnString .= "<ul>";
 			while ($row = $listOfAds->fetch_row()) {
-				$returnString .= "<li>" . strval($row[0]) . " ". strval($row[1]) . "</li>";
-				$returnString .= '<a href="' . self::$editCar . '">Edit car</a>';
+				$returnString .= "<div class='ad'>";
+				$returnString .= "<li>Brand: " . strval($row[0]) . "<br>" .  "Mileage: " . strval($row[1]) . "</li>";
+				$returnString .= '<a href="' . self::$editCar . '">Edit</a>';
+				$returnString .= '<a href="' . self::$deleteCar . '">Delete</a>';
+				$returnString .= "</div>";
 			}
 			$listOfAds->close();
 			$returnString .= "</ul>";
@@ -54,6 +58,34 @@ class AdsView {
 			
 		}
 	}
+
+	public function showOnlyAds($listOfAds) {
+
+		$returnString = '<a href="?addCar">Add new car</a>';
+		$returnString .= '<br>';
+		if($listOfAds){
+			$returnString .= "<ul>";
+			while ($row = $listOfAds->fetch_row()) {
+				$returnString .= "<div class='ad'>";
+				$returnString .= "<li>Brand: " . strval($row[0]) . "<br>" .  "Mileage: " . strval($row[1]) . "</li>";
+				$returnString .= "</div>";
+			}
+			$listOfAds->close();
+			$returnString .= "</ul>";
+		}
+
+		if($this->addNewCar()) {
+			return '<h2>My cars</h2>
+					'. $this->generateNewCarForm() .'
+					<p>' . $returnString . '</p>';
+		} else {
+			return '<h2>My cars</h2>
+					<p>' . $returnString . '</p>';
+			
+		}
+	}
+
+
 
 	private function generateNewCarForm() {
 		return 
