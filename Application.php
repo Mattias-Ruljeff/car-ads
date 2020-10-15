@@ -74,7 +74,7 @@ class Application {
 	private function generateOutput($message) {
 
 		if($this->registerView->checkIfRegisterIsSet()){
-			$this->layoutView->render(false, $this->registerView, $this->dateTimeView, null, $message);
+			$this->layoutView->render(false, $this->registerView, $this->dateTimeView, $this->adsView->showOnlyAds($this->adsModel->getAllAds()), $message);
 		} else {
 			if ($this->view->userWantsToLogOut() or $this->sessionModel->checkIfNoSession()) {
 				$this->layoutView->render(false, $this->view, $this->dateTimeView,  $this->adsView->showOnlyAds($this->adsModel->getAllAds()), $message);

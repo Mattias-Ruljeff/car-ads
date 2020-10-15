@@ -135,7 +135,6 @@ class DatabaseConnection {
             return false;
         }
     }
-        
 
     public function createUsernameAndPassword($username, $password) {
         try {
@@ -148,12 +147,12 @@ class DatabaseConnection {
             echo "fel vid skapande av table data " . $error;
         }
     }
+
     private function passwordHash ($password) {
         return password_hash($password, PASSWORD_DEFAULT, $this->hashCost);
     }
 
     public function checkUserCredentials($username, $passwrd) {
-
         $dbPassword = "";
         try {
             $sql = "SELECT passwrd FROM test WHERE username = '$username'";

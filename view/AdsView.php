@@ -18,7 +18,7 @@ class AdsView {
 		return isset($_GET[self::$addCarString]);
 	}
 	public function editCar() {
-		return isset($_GET[self::$editCarString]);
+		return isset($_POST[self::$editCarString]);
 	}
 	public function deleteCar() {
 		return isset($_GET[self::$deleteCar]);
@@ -41,13 +41,17 @@ class AdsView {
 		if($listOfAds){
 			$returnString .= "<ul>";
 			while ($row = $listOfAds->fetch_row()) {
-				$returnString .= "<div class='ad'>";
-				$returnString .= "<li>";
-				$returnString .= "<div id= ". strval($row[0]) ." >Brand: " . strval($row[0]) . "<br>" .  "Mileage: " . strval($row[1]) . "</div>";
-				$returnString .= "</li>";
-				$returnString .= '<a href="' . self::$editCar . '">Edit</a>';
-				$returnString .= '<a href="' . self::$deleteCar . '">Delete</a>';
-				$returnString .= "</div>";
+				$returnString .= '<div class="ad">
+									<li>
+									<div id= ". strval($row[0]) ." >
+										Brand: ' . strval($row[0]) . '
+										<br>
+										Mileage: '. strval($row[1]). '
+									</div>
+									</li>
+									<a href="' . self::$editCar . '">Edit</a>
+									<a href="' . self::$deleteCar . '">Delete</a>
+									</div>';
 			}
 			$listOfAds->close();
 			$returnString .= "</ul>";
