@@ -36,6 +36,17 @@ class AdsController {
     }
     public function editCar()  {
         if ($this->view->editCar()) {
+            echo "editcar";
+            try {
+                return true;
+
+            } catch (\Exception $e) {
+                echo $e;
+            }
+        }
+    }
+    public function deleteCar()  {
+        if ($this->view->editCar()) {
             try {
                 
 

@@ -57,8 +57,11 @@ class Application {
 	private function changeState() {
 		$this->adsView->addNewCar();
 		$this->adsView->saveCar();
+		$this->adsView->editCar();
+		$this->adsView->deleteCar();
 		$this->adsController->addNewCar();
 		$this->adsController->editCar();
+		$this->adsController->deleteCar();
 
 		if($this->registerView->checkIfRegisterIsSet()){
 			$response = $this->registerController->registerNewUser($this->dbConnection);
