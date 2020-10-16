@@ -4,10 +4,10 @@ namespace Model;
 
 class Car {
     
-    private $id;
-    private $model = "";
-    private $mileage = "";
-    private $owner = "";
+    protected $id;
+    protected $model = "";
+    protected $mileage = "";
+    protected $owner = "";
 
     public function __construct($id, $owner, $model , $mileage )
     {

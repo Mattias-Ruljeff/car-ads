@@ -20,7 +20,7 @@ class AdsController {
         $this->model->getAllAds();
     }
     public function addNewCar()  {
-		if ($this->view->saveCar()) {
+		if ($this->view->saveNewCar()) {
             try {
                 $carModel = $this->view->getCarModelName();
                 $mileage = (int)$this->view->getCarMileage();
@@ -50,11 +50,13 @@ class AdsController {
         }
     }
     public function deleteCar()  {
-        if ($this->view->deleteCar()) {
+        if ($this->view->deleteCarAction()) {
             try {
-                $id = $this->view->getCarAdIdWhileDeleting();
+                if($this->view->deleteCar()){
+                    $id = $this->view->getCarAdIdWhileDeleting();
+                    $this->model->deleteOneCarAd($id);
 
-                $this->model->deleteOneCarAd($id);
+                }
                 return true;
 
             } catch (\Exception $e) {

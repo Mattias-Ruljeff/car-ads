@@ -28,9 +28,6 @@ class Application {
 	private $view;
 	private $dbConnection;
 
-	private static $isLoggedin = true;
-	private static $isNotLoggedin = false;
-
 	public function __construct(){
 		$this->dbConnection = new \Model\DatabaseConnection();
 		$this->dateTimeView = new \View\DateTimeView();
@@ -56,7 +53,7 @@ class Application {
 
 	private function changeState() {
 		$this->adsView->addNewCar();
-		$this->adsView->saveCar();
+		$this->adsView->saveNewCar();
 		$this->adsView->editCar();
 		$this->adsView->deleteCar();
 		$this->adsController->addNewCar();
@@ -77,18 +74,21 @@ class Application {
 		if($this->registerView->checkIfRegisterIsSet())
 		{
 			$activeView = $this->adsView->showOnlyAds($this->adsModel->getAllAds());
+			$isLoggedin = false;
 
 		} else if ($this->view->userWantsToLogOut() or $this->sessionModel->checkIfNoSession())
 		{
 			$activeView = $this->adsView->showOnlyAds($this->adsModel->getAllAds());
+			$isLoggedin = false;
 
 		} else 
 		{
 			session_regenerate_id();
 			$activeView = $this->adsView->showAdsWithButtons($this->adsModel->getAllAds());
+			$isLoggedin = true;
 		}
 		
-		$this->layoutView->render(self::$isLoggedin, $this->view, $this->dateTimeView, $activeView, $message);
+		$this->layoutView->render($isLoggedin, $this->view, $this->dateTimeView, $activeView, $message);
 
 	}
 

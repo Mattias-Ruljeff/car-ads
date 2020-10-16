@@ -22,7 +22,7 @@ class LayoutView {
             <body>
             <div id="loginBox">
                 <h1>Assignment 2</h1>
-                <a href="'. $href .'">'. $textInATag .'</a>
+                ' . $this->renderRegisterUserButton($isLoggedIn) . '
                 ' . $this->renderIsLoggedIn($isLoggedIn) . '
                 ' . $view->response($message) . '
                 <div class="container">
@@ -45,5 +45,19 @@ class LayoutView {
     else {
       return '<h2>Not logged in</h2>';
     }
+  }
+
+  private function renderRegisterUserButton($isLoggedIn) {
+    if($isLoggedIn) {
+      return "";
+    }
+    if(isset($_GET["register"])) {
+      $textInATag = "Back to login";
+      $href = "/";
+    } else {
+      $textInATag = "Register a new user";
+      $href = "?register";
+    }
+    return '<a href="'. $href .'">'. $textInATag .'</a>';
   }
 }
