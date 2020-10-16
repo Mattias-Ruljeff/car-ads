@@ -118,7 +118,7 @@ class AdsView {
 					$returnString .= "<div id=". strval($row[0]) .">";
 					$returnString .= "Brand: ". strval($row[1]);
 					$returnString .= "<br>";
-					$returnString .= "<nobr>Mileage: ". strval($row[2]) ."</nobr></div>";
+					$returnString .= "Mileage: ". strval($row[2]) ."</div>";
 					$returnString .= "</div>";
 					$returnString .= "</li>";
 				}
