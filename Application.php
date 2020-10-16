@@ -27,6 +27,8 @@ class Application {
 	private $sessionModel;
 	private $view;
 	private $dbConnection;
+	private static $isLoggedIn = true;
+	private static $isNotLoggedIn = false;
 
 	public function __construct(){
 		$this->dbConnection = new \Model\DatabaseConnection();
@@ -70,27 +72,17 @@ class Application {
 
 	private function generateOutput($message) {
 
-		$activeView = "";
-		if($this->registerView->checkIfRegisterIsSet())
-		{
-			$activeView = $this->adsView->showOnlyAds($this->adsModel->getAllAds());
-			$isLoggedin = false;
 
-		} else if ($this->view->userWantsToLogOut() or $this->sessionModel->checkIfNoSession())
-		{
-			$activeView = $this->adsView->showOnlyAds($this->adsModel->getAllAds());
-			$isLoggedin = false;
-
-		} else 
-		{
-			session_regenerate_id();
-			$activeView = $this->adsView->showAdsWithButtons($this->adsModel->getAllAds());
-			$isLoggedin = true;
+		if($this->registerView->checkIfRegisterIsSet()){
+			$this->layoutView->render(self::$isNotLoggedIn, $this->registerView, $this->dateTimeView, $this->adsView->showOnlyAds($this->adsModel->getAllAds()), $message);
+		} else {
+			if ($this->view->userWantsToLogOut() or $this->sessionModel->checkIfNoSession()) {
+				$this->layoutView->render(self::$isNotLoggedIn, $this->view, $this->dateTimeView,  $this->adsView->showOnlyAds($this->adsModel->getAllAds()), $message);
+			} else {
+				session_regenerate_id();
+				$this->layoutView->render(self::$isLoggedIn,$this->view, $this->dateTimeView, $this->adsView->showAdsWithButtons($this->adsModel->getAllAds()), $message);
+			}
 		}
-		
-		$this->layoutView->render($isLoggedin, $this->view, $this->dateTimeView, $activeView, $message);
-
 	}
-
 }
 

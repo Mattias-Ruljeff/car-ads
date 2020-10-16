@@ -22,7 +22,7 @@ class LayoutView {
             <body>
             <div id="loginBox">
                 <h1>Assignment 2</h1>
-                ' . $this->renderRegisterUserButton($isLoggedIn) . '
+                <a href="'. $href .'">'. $textInATag .'</a>
                 ' . $this->renderIsLoggedIn($isLoggedIn) . '
                 ' . $view->response($message) . '
                 <div class="container">
@@ -58,6 +58,6 @@ class LayoutView {
       $textInATag = "Register a new user";
       $href = "?register";
     }
-    return '<a href="'. $href .'">'. $textInATag .'</a>';
+    return '';
   }
 }
