@@ -48,9 +48,6 @@ class Application {
 		$this->sessionModel->setSession();
 		$response = $this->changeState();
 		$this->generateOutput($response);
-
-		// var_dump($_COOKIE);
-		// print_r(session_get_cookie_params());
 	}
 
 	private function changeState() {

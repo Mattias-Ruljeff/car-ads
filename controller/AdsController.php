@@ -25,8 +25,8 @@ class AdsController {
                 $carModel = $this->view->getCarModelName();
                 $mileage = (int)$this->view->getCarMileage();
                 $id = $this->model->getUniqueId();
-                $newCar = new Car($id, "kalle", $carModel, $mileage);
-                $this->model->createNewCarAd($newCar);
+                
+                $this->model->createNewCarAd($id, $carModel, $mileage);
 
                 return true;
 

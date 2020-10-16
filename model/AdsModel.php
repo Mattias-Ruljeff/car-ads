@@ -4,7 +4,6 @@ namespace Model;
 
 class AdsModel {
 
-    // Not set to static, problems with sql-string.
     private static $tableCarAds = "carads";
     private static $dbColumnModel = "model";
     private static $dbColumnMileage = "mileage";
@@ -43,19 +42,19 @@ class AdsModel {
         return "Ad created!";
     }
         
-    public function createNewCarAd(\Model\Car $newCar) {
+    public function createNewCarAd($id,$carModel, $mileage) {
         try {
             
-            $sql = "INSERT INTO carads 
+            $sql = "INSERT INTO ".self::$tableCarAds." 
                 (
                 ".self::$dbColumnId.", 
                 ".self::$dbColumnModel.",
                 ".self::$dbColumnMileage."
                 ) 
                 VALUES (
-                    '".$newCar->getId()."',
-                    '".$newCar->getModel()."',
-                    '".$newCar->getMileage()."')";
+                    '$id',
+                    '$carModel',
+                    '$mileage')";
             
             $this->dbConnection->query($sql);
 
@@ -66,7 +65,7 @@ class AdsModel {
     }
     public function editOneCarAd(int $id, $model, $mileage) {
         try {
-            $sql = "UPDATE carads SET
+            $sql = "UPDATE ".self::$tableCarAds." SET
                     ".self::$dbColumnId." = '$id', 
                     ".self::$dbColumnModel." = '$model',
                     ".self::$dbColumnMileage." = '$mileage'
@@ -85,7 +84,7 @@ class AdsModel {
     }
     public function deleteOneCarAd(int $id) {
         try {
-            $sql = "DELETE FROM carads WHERE id= $id";
+            $sql = "DELETE FROM ".self::$tableCarAds." WHERE id= $id";
             if($this->dbConnection->query($sql)){
             } else {
                 throw new \Exception("Error editing car ad");

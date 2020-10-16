@@ -3,9 +3,12 @@
 namespace View;
 
 class LayoutView {
-
+  //aasd a
+  //asd a 
+  
   public function render($isLoggedIn, $view, DateTimeView $dtv, $adsView, $message) {
-      if(isset($_GET["register"])) {
+    $hej =  " ";
+    if(isset($_GET["register"])) {
         $textInATag = "Back to login";
         $href = "/";
       } else {
