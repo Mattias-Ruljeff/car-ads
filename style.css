@@ -13,8 +13,7 @@ body{
     margin-right: 10%; 
     margin-left: 10%; 
     background: rgb(255,255,255);
-    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(118,118,245,0.7259278711484594) 10%, rgba(32,164,36,0.8883928571428571) 50%, rgba(118,118,245,0.7511379551820728) 90%, rgba(255,255,255,1) 100%);
-
+    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(30,157,33,1) 8%, rgba(28,119,31,1) 50%, rgba(30,157,33,1) 92%, rgba(255,255,255,1) 100%);
 }
 h2 {
     border: 10px solid none;
