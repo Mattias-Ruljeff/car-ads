@@ -14,10 +14,8 @@ class DatabaseConnection {
     private $password;
     private $database;
     private $tablenameForUsers = "users";
-    private  $dbColumnOneNameForUsers = "username";
-    private  $dbColumnTwoNameForUsers = "passwrd";
-    private  $dbColumnOneNameForCarAds = "car";
-    private  $dbColumnTwoNameForCarAds = "mileage";
+    private $dbColumnUsername = "username";
+    private $dbColumnPassword = "passwrd";
     private $hashCost = ["cost" => 8];
     
     public function __construct(){   
@@ -38,11 +36,11 @@ class DatabaseConnection {
     }
 
     // For later implementation, if database-table does not exist.
-    public function createTableInDataBase ($tableName ,$dbColumnOneName, $dbColumnTwoName) {
+    public function createTableInDataBase ($tableName ,$dbColumnUsername, $dbColumnPassword) {
             $sql = "CREATE TABLE $tableName (
                     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                    $dbColumnOneName VARCHAR(30) NOT NULL,
-                    $dbColumnTwoName INT(10) NOT NULL,
+                    $dbColumnUsername VARCHAR(30) NOT NULL,
+                    $dbColumnPassword INT(10) NOT NULL,
                     reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
                     )";
             
@@ -120,7 +118,7 @@ class DatabaseConnection {
     }
 
     public function CheckIfUserExists($username) {
-        $sql = "SELECT $this->dbColumnOneNameForUsers FROM $this->tablenameForUsers WHERE username = '$username'";
+        $sql = "SELECT $this->dbColumnUsername FROM $this->tablenameForUsers WHERE $this->dbColumnUsername = '$username'";
         $existingUser = "";
         if ($result = $this->dbConnection->query($sql)) {
 
@@ -139,7 +137,7 @@ class DatabaseConnection {
     public function createUsernameAndPassword($username, $password) {
         try {
             $hashedPassword = $this->passwordHash($password);
-            $sql = "INSERT INTO $this->tablenameForUsers (username, passwrd) VALUES ('$username', '$hashedPassword')";
+            $sql = "INSERT INTO $this->tablenameForUsers ($this->dbColumnUsername, $this->dbColumnPassword) VALUES ('$username', '$hashedPassword')";
             $this->dbConnection->query($sql);
             header("Refresh:0; url=index.php");
 
@@ -155,7 +153,7 @@ class DatabaseConnection {
     public function checkUserCredentials($username, $passwrd) {
         $dbPassword = "";
         try {
-            $sql = "SELECT passwrd FROM $this->tablenameForUsers WHERE username = '$username'";
+            $sql = "SELECT $this->dbColumnPassword FROM $this->tablenameForUsers WHERE $this->dbColumnUsername = '$username'";
             
             if ($result = $this->dbConnection->query($sql)) {
 

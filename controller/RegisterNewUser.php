@@ -5,8 +5,6 @@ namespace Controller;
 class RegisterNewUser {
 
     private $view;
-    private $columnOneName = "Username";
-    private $columTwoName = "Passwrd";
 
     public function __construct(\View\RegisterView $view) {
         $this->view = $view;

@@ -14,33 +14,6 @@ class AdsModel {
     {
         $this->dbConnection = $dbConnection->connect();
     }
-
-    public function checkInputWhenCreatingAd($model, $mileage){
-        
-        if(!$model and !$mileage){
-            return "Model has too few characters, at least 3 characters.<br>Mileage has too few characters, at least 6 characters.";
-        }
-
-        // Check username-----------------------------------------
-        if(!$model) {
-            return "Model has too few characters, at least 3 characters.";
-        }
-
-        if (strlen($model) < 3) {
-            return "Model has too few characters, at least 3 characters.";
-        }
-
-        if (preg_match_all('/[<>!_]/', $model, $result)) {
-            return "Ad contains invalid characters.";
-        }
- 
-        if(!$mileage) {
-            return "Mileage has too few characters, at least 6 characters.";
-        }
-
-        // $this->createNewCarAd($model, $mileage);
-        return "Ad created!";
-    }
         
     public function createNewCarAd($id,$carModel, $mileage) {
         try {

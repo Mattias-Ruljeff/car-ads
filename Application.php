@@ -31,6 +31,7 @@ class Application {
 	private static $isNotLoggedIn = false;
 
 	public function __construct(){
+		$this->sessionModel = new \Model\SessionModel();
 		$this->dbConnection = new \Model\DatabaseConnection();
 		$this->dateTimeView = new \View\DateTimeView();
 		$this->adsView = new \View\AdsView();
@@ -41,7 +42,6 @@ class Application {
 		$this->controller = new \Controller\logInOrOut($this->view);
 		$this->registerController = new \Controller\RegisterNewUser($this->registerView);
 		$this->adsController = new \Controller\AdsController($this->adsView, $this->adsModel);
-		$this->sessionModel = new \Model\SessionModel();
 	}
 
 	public function run() {
@@ -51,10 +51,6 @@ class Application {
 	}
 
 	private function changeState() {
-		$this->adsView->addNewCar();
-		$this->adsView->saveNewCar();
-		$this->adsView->editCar();
-		$this->adsView->deleteCar();
 		$this->adsController->addNewCar();
 		$this->adsController->editCar();
 		$this->adsController->deleteCar();
@@ -69,12 +65,11 @@ class Application {
 
 	private function generateOutput($message) {
 
-
 		if($this->registerView->checkIfRegisterIsSet()){
 			$this->layoutView->render(self::$isNotLoggedIn, $this->registerView, $this->dateTimeView, $this->adsView->showOnlyAds($this->adsModel->getAllAds()), $message);
 		} else {
 			if ($this->view->userWantsToLogOut() or $this->sessionModel->checkIfNoSession()) {
-				$this->layoutView->render(self::$isNotLoggedIn, $this->view, $this->dateTimeView,  $this->adsView->showOnlyAds($this->adsModel->getAllAds()), $message);
+				$this->layoutView->render(self::$isNotLoggedIn, $this->view, $this->dateTimeView, $this->adsView->showOnlyAds($this->adsModel->getAllAds()), $message);
 			} else {
 				session_regenerate_id();
 				$this->layoutView->render(self::$isLoggedIn,$this->view, $this->dateTimeView, $this->adsView->showAdsWithButtons($this->adsModel->getAllAds()), $message);

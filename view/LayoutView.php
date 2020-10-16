@@ -3,11 +3,8 @@
 namespace View;
 
 class LayoutView {
-  //aasd a
-  //asd a 
   
   public function render($isLoggedIn, $view, DateTimeView $dtv, $adsView, $message) {
-    $hej =  " ";
     if(isset($_GET["register"])) {
         $textInATag = "Back to login";
         $href = "/";
@@ -15,6 +12,7 @@ class LayoutView {
         $textInATag = "Register a new user";
         $href = "?register";
       }
+
       echo '<!DOCTYPE html>
         <html>
             <head>
@@ -48,19 +46,5 @@ class LayoutView {
     else {
       return '<h2>Not logged in</h2>';
     }
-  }
-
-  private function renderRegisterUserButton($isLoggedIn) {
-    // if($isLoggedIn) {
-    //   return "";
-    // }
-    if(isset($_GET["register"])) {
-      $textInATag = "Back to login";
-      $href = "/";
-    } else {
-      $textInATag = "Register a new user";
-      $href = "?register";
-    }
-    return '';
   }
 }

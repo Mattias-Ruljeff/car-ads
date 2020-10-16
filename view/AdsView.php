@@ -3,14 +3,15 @@
 namespace View;
 
 class AdsView {
-	private static $addcar = "AdsView::AddCar";
 	private static $carModel = "AdsView::CarModel";
 	private static $carMileage = "AdsView::CarMileage";
-	private static $saveCar = "AdsView::SaveCar";
-	private static $saveEditedCar = "AdsView::SaveEditedCar";
+	private static $saveNewCar = "AdsView::SaveCar";
+
 	private static $editCar = "AdsView::EditCar";
 	private static $editCarModel = "AdsView::EditCarModel";
 	private static $editCarMileage = "AdsView::EditCarMileage";
+	private static $saveEditedCar = "AdsView::SaveEditedCar";
+
 	private static $deleteCar = "AdsView::DeleteCar";
 
 	private static $addCarString = "addCar";
@@ -23,7 +24,7 @@ class AdsView {
 		return isset($_GET[self::$addCarString]);
 	}
 	public function saveNewCar() {
-		return isset($_POST[self::$saveCar]);
+		return isset($_POST[self::$saveNewCar]);
 	}
 	public function getCarModelName() {
 		return $_POST[self::$carModel];
@@ -82,29 +83,15 @@ class AdsView {
 			$returnString .= "</ul>";
 		}
 		if($this->addNewCar()) {
-			return '<h2>Cars</h2>'. $this->generateNewCarForm() .$returnString;
+			return '<h2>Car ads</h2>'. $this->generateNewCarForm() .$returnString;
 		} else if ($this->editCar()) {
-			return '<h2>Cars</h2>'. $this->generateEditCarForm() .$returnString;
+			return '<h2>Car ads</h2>'. $this->generateEditCarForm() .$returnString;
 		} else if ($this->deleteCarAction()) {
-			return '<h2>Cars</h2>'. $this->generateDeleteCarForm() .$returnString;
+			return '<h2>Car ads</h2>'. $this->generateDeleteCarForm() .$returnString;
 		}else {
-			return '<h2>Cars</h2>' . $returnString;	
+			return '<h2>Car ads</h2>' . $returnString;	
 		}
 	}
-
-	// public function chooseForm($returnString) {
-		// var_dump($_POST);
-		// var_dump($_GET);
-		// if($this->addNewCar()) {
-		// 	return '<h2>Cars</h2>'. $this->generateNewCarForm() .$returnString;
-		// } else if ($this->editCar()) {
-		// 	return '<h2>Cars</h2>'. $this->generateEditCarForm() .$returnString;
-		// } else if ($this->deleteCarAction()) {
-		// 	return '<h2>Cars</h2>'. $this->generateDeleteCarForm() .$returnString;
-		// }
-		// return '<h2>Cars</h2>' . $returnString;	
-		
-	// }
 
 	public function showOnlyAds($listOfAds) {
 
@@ -124,11 +111,9 @@ class AdsView {
 				}
 				$returnString .= "</ul>";
 			}
-			return '<h2>Cars</h2>' . $returnString;
+			return '<h2>Car ads</h2>' . $returnString;
 		}
 	}
-
-
 
 	private function generateNewCarForm() {
 		return 
@@ -142,9 +127,9 @@ class AdsView {
 				<option value="Audi">Audi</option>
 			</select>
 			<label for="' . self::$carMileage . '">Mileage :</label>
-			<input type="text" id="' . self::$carMileage . '" name="' . self::$carMileage . '"maxlength="6"/>
+			<input type="text" id="' . self::$carMileage . '" name="' . self::$carMileage . '"maxlength="6" required/>
 			
-			<input type="submit" name="' . self::$saveCar . '" value="Save car" />
+			<input type="submit" name="' . self::$saveNewCar . '" value="Save car" />
 		</form>';
 	}
 
@@ -160,7 +145,7 @@ class AdsView {
 				<option value="Audi">Audi</option>
 			</select>
 			<label for="' . self::$editCarMileage . '">Mileage :</label>
-			<input type="text" id="' . self::$editCarMileage . '" name="' . self::$editCarMileage . '" />
+			<input type="text" id="' . self::$editCarMileage . '" name="' . self::$editCarMileage . '" required/>
 			
 			<input type="submit" name="' . self::$saveEditedCar . '" value="Save car" />
 		</form>';

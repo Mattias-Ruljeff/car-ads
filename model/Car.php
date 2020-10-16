@@ -1,5 +1,6 @@
 <?php
 
+// Did not have time to implement Car class in other modules....
 namespace Model;
 
 class Car {
