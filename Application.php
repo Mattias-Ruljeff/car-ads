@@ -1,22 +1,19 @@
 <?php
- 
-// INCLUDE THE FILES NEEDED...
+
 require_once("controller/LogInOrOutController.php");
 require_once("controller/RegisterNewUser.php");
 require_once("controller/AdsController.php");
+
 require_once('view/DateTimeView.php');
 require_once('view/AdsView.php');
 require_once('view/LoginView.php');
 require_once("view/LayoutView.php");
 require_once("view/RegisterView.php");
-require_once("model/UserStorage.php");
-require_once("model/UserName.php");
+
 require_once("model/DatabaseConnection.php");
 require_once("model/SessionModel.php"); 
 require_once("model/AdsModel.php"); 
-
-// error_reporting(E_ALL);
-// ini_set('display_errors', 'On');
+require_once("model/Car.php"); 
 
 class Application {
 	private $dateTimeView;
@@ -30,6 +27,9 @@ class Application {
 	private $sessionModel;
 	private $view;
 	private $dbConnection;
+
+	private static $isLoggedin = true;
+	private static $isNotLoggedin = false;
 
 	public function __construct(){
 		$this->dbConnection = new \Model\DatabaseConnection();
@@ -73,16 +73,23 @@ class Application {
 
 	private function generateOutput($message) {
 
-		if($this->registerView->checkIfRegisterIsSet()){
-			$this->layoutView->render(false, $this->registerView, $this->dateTimeView, $this->adsView->showOnlyAds($this->adsModel->getAllAds()), $message);
-		} else {
-			if ($this->view->userWantsToLogOut() or $this->sessionModel->checkIfNoSession()) {
-				$this->layoutView->render(false, $this->view, $this->dateTimeView,  $this->adsView->showOnlyAds($this->adsModel->getAllAds()), $message);
-			} else {
-				session_regenerate_id();
-				$this->layoutView->render(true, $this->view, $this->dateTimeView, $this->adsView->showAdsWithButtons($this->adsModel->getAllAds()), $message);
-			}
+		$activeView = "";
+		if($this->registerView->checkIfRegisterIsSet())
+		{
+			$activeView = $this->adsView->showOnlyAds($this->adsModel->getAllAds());
+
+		} else if ($this->view->userWantsToLogOut() or $this->sessionModel->checkIfNoSession())
+		{
+			$activeView = $this->adsView->showOnlyAds($this->adsModel->getAllAds());
+
+		} else 
+		{
+			session_regenerate_id();
+			$activeView = $this->adsView->showAdsWithButtons($this->adsModel->getAllAds());
 		}
+		
+		$this->layoutView->render(self::$isLoggedin, $this->view, $this->dateTimeView, $activeView, $message);
+
 	}
 
 }

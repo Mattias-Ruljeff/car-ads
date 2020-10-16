@@ -37,7 +37,7 @@ h2 {
     border: 2px solid grey;
     border-radius: 10px;
     margin-left: 15px;
-    margin-right: 15px;
+    margin-right: 7px;
     margin-bottom: 15px;
     background: #699E78;
 }
@@ -48,11 +48,12 @@ h2 {
     align-items: center;
     flex-grow: 2;
     height: max-content;
+    width: 60%;
     
     border: 2px solid grey;
     border-radius: 10px;
     margin-right: 15px;
-    margin-left: 15px;
+    margin-left: 7px;
     background: #8B9D83;
     
 }
@@ -98,8 +99,9 @@ ul {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    align-items: center;
-    padding: 10px;
+    justify-content: center;
+    padding: 0px;
+    margin: 0; 
 }
 
 .ad {

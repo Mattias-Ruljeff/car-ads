@@ -178,36 +178,36 @@ class DatabaseConnection {
         return password_verify($password, $dbPassword);
     }
 
-    public function createNewCarAd(string $carModel, int $mileage ) {
-        echo "createNewCarAd";
-        if(!$this->CheckIfCarAdExists($carModel)) {
-            try {
-                $sql = "INSERT INTO carads (model, mileage) VALUES ('$carModel', '$mileage')";
-                $this->dbConnection->query($sql);
-                header("Refresh:0; url=index.php");
+    // public function createNewCarAd(string $carModel, int $mileage ) {
+    //     echo "createNewCarAd";
+    //     if(!$this->CheckIfCarAdExists($carModel)) {
+    //         try {
+    //             $sql = "INSERT INTO carads (model, mileage) VALUES ('$carModel', '$mileage')";
+    //             $this->dbConnection->query($sql);
+    //             header("Refresh:0; url=index.php");
     
-            }catch(\Exception $error) {
-                echo "Error creating ad" . $error;
-            } 
-        } else {
-            echo "Car ad already exist";
-        }
-    }
+    //         }catch(\Exception $error) {
+    //             echo "Error creating ad" . $error;
+    //         } 
+    //     } else {
+    //         echo "Car ad already exist";
+    //     }
+    // }
     
-    public function CheckIfCarAdExists($carAd) {
-        $sql = "SELECT model FROM carads WHERE model = '$carAd'";
-        $existingCarAd = "";
-        if ($result = $this->dbConnection->query($sql)) {
+    // public function CheckIfCarAdExists($carAd) {
+    //     $sql = "SELECT model FROM carads WHERE model = '$carAd'";
+    //     $existingCarAd = "";
+    //     if ($result = $this->dbConnection->query($sql)) {
 
-            while ($row = $result->fetch_row()) {
-                $existingCarAd = strval($row[0]);
-            }
-            $result->close();
-        }
-        if($existingCarAd == $carAd) {
-            return true;
-        }else {
-            return false;
-        }
-    }
+    //         while ($row = $result->fetch_row()) {
+    //             $existingCarAd = strval($row[0]);
+    //         }
+    //         $result->close();
+    //     }
+    //     if($existingCarAd == $carAd) {
+    //         return true;
+    //     }else {
+    //         return false;
+    //     }
+    // }
 }
