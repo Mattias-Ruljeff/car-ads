@@ -48,9 +48,9 @@ class LayoutView {
   }
 
   private function renderRegisterUserButton($isLoggedIn) {
-    if($isLoggedIn) {
-      return "";
-    }
+    // if($isLoggedIn) {
+    //   return "";
+    // }
     if(isset($_GET["register"])) {
       $textInATag = "Back to login";
       $href = "/";
