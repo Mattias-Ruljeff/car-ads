@@ -151,11 +151,12 @@ class AdsView {
 		</form>';
 	}
 	private function generateDeleteCarForm() {
+		var_dump($_POST);
 		return 
 		'<h3>Delete car ad?</h3>
 		<form method="post">
-			<input type="submit" name="' . self::$deleteCar . '" value="Yes" />
-			<input type="submit" name="' . self::$editCarString . '" value="No, edit car" />
-		</form>';
+		<input type="submit" name="' . self::$deleteCar . '" value="Yes" />
+		</form>
+		';
 	}
 }
