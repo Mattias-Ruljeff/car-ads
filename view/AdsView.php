@@ -5,8 +5,6 @@ namespace View;
 class AdsView {
 	private static $carModel = "AdsView::CarModel";
 	private static $carMileage = "AdsView::CarMileage";
-	private static $carOwner = "AdsView::CarOwner";
-	private static $carOwnerPhoneNumber = "AdsView::CarPhoneNumber";
 	private static $saveNewCar = "AdsView::SaveCar";
 
 	private static $editCar = "AdsView::EditCar";
@@ -33,12 +31,6 @@ class AdsView {
 	}
 	public function getCarMileage() {
 		return $_POST[self::$carMileage];
-	}
-	public function getCarOwner() {
-		return $_POST[self::$carOwner];
-	}
-	public function getCarOwnerPhoneNumber() {
-		return $_POST[self::$carOwnerPhoneNumber];
 	}
 
 	// Edit car ad.
@@ -114,10 +106,6 @@ class AdsView {
 					$returnString .= "Brand: ". strval($row[1]);
 					$returnString .= "<br>";
 					$returnString .= "Mileage: ". strval($row[2]) ."</div>";
-					$returnString .= "<br>";
-					$returnString .= "Owner: ". strval($row[3]) ."</div>";
-					$returnString .= "<br>";
-					$returnString .= "Phone number: ". strval($row[4]) ."</div>";
 					$returnString .= "</div>";
 					$returnString .= "</li>";
 				}
@@ -130,53 +118,37 @@ class AdsView {
 	private function generateNewCarForm() {
 		return 
 		'<h3>Create new car ad</h3>
-		<div class="formContainer">
-			<form method="post">
-				<label for="' . self::$carModel . '">Car model :</label>
-				<select id="' . self::$carModel . '" name="' . self::$carModel . '">
-					<option value="Volvo">Volvo</option>
-					<option value="Saab">Saab</option>
-					<option value="Fiat">Fiat</option>
-					<option value="Audi">Audi</option>
-				</select>
-				<label for="' . self::$carMileage . '">Mileage :</label>
-				<input type="text" id="' . self::$carMileage . '" name="' . self::$carMileage . '"maxlength="6" required/>
-
-				<label for="' . self::$carOwner. '">Owner :</label>
-				<input type="text" id="' . self::$carOwner . '" name="' . self::$carOwner . ' required/>
-
-				<label for="' . self::$carOwnerPhoneNumber . '">Phone number :</label>
-				<input type="text" id="' . self::$carOwnerPhoneNumber . '" name="' . self::$carOwnerPhoneNumber . '"maxlength="10" required/>
-				
-				<input type="submit" name="' . self::$saveNewCar . '" value="Save car" />
-			</form>
-		</div>';
+		<form method="post">
+			<label for="' . self::$carModel . '">Car model :</label>
+			<select id="' . self::$carModel . '" name="' . self::$carModel . '">
+				<option value="Volvo">Volvo</option>
+				<option value="Saab">Saab</option>
+				<option value="Fiat">Fiat</option>
+				<option value="Audi">Audi</option>
+			</select>
+			<label for="' . self::$carMileage . '">Mileage :</label>
+			<input type="text" id="' . self::$carMileage . '" name="' . self::$carMileage . '"maxlength="6" required/>
+			
+			<input type="submit" name="' . self::$saveNewCar . '" value="Save car" />
+		</form>';
 	}
 
 	private function generateEditCarForm() {
 		return 
 		'<h3>Edit car ad</h3>
-		<div class="formContainer">
-			<form method="post">
-				<label for="' . self::$editCar . '">Car model :</label>
-				<select id="' . self::$editCarModel . '" name="' . self::$editCarModel . '">
-					<option value="Volvo">Volvo</option>
-					<option value="Saab">Saab</option>
-					<option value="Fiat">Fiat</option>
-					<option value="Audi">Audi</option>
-				</select>
-				<label for="' . self::$editCarMileage . '">Mileage :</label>
-				<input type="number" id="' . self::$editCarMileage . '" name="' . self::$editCarMileage . '" required/>
-				
-				<label for="' . self::$carOwner. '">Owner :</label>
-				<input type="text" id="' . self::$carOwner . '" name="' . self::$carOwner . ' required/>
-				
-				<label for="' . self::$carOwnerPhoneNumber . '">Phone Number :</label>
-				<input type="number" id="' . self::$carOwnerPhoneNumber . '" name="' . self::$carOwnerPhoneNumber . '"maxlength="10" required/>
-				
-				<input type="submit" name="' . self::$saveEditedCar . '" value="Save car" />
-			</form>
-		</div>';
+		<form method="post">
+			<label for="' . self::$editCar . '">Car model :</label>
+			<select id="' . self::$editCarModel . '" name="' . self::$editCarModel . '">
+				<option value="Volvo">Volvo</option>
+				<option value="Saab">Saab</option>
+				<option value="Fiat">Fiat</option>
+				<option value="Audi">Audi</option>
+			</select>
+			<label for="' . self::$editCarMileage . '">Mileage :</label>
+			<input type="text" id="' . self::$editCarMileage . '" name="' . self::$editCarMileage . '" required/>
+			
+			<input type="submit" name="' . self::$saveEditedCar . '" value="Save car" />
+		</form>';
 	}
 	private function generateDeleteCarForm() {
 		return 

@@ -7,8 +7,6 @@ class AdsModel {
     private static $tableCarAds = "carads";
     private static $dbColumnModel = "model";
     private static $dbColumnMileage = "mileage";
-    private static $dbColumnOwner = "owner";
-    private static $dbColumnPhoneNumber = "phonenumber";
     private static $dbColumnId = "id";
     private $dbConnection;
 
@@ -17,39 +15,33 @@ class AdsModel {
         $this->dbConnection = $dbConnection->connect();
     }
         
-    public function createNewCarAd($id, $carModel, $mileage, $owner, $phoneNumber) {
+    public function createNewCarAd($id,$carModel, $mileage) {
         try {
             
             $sql = "INSERT INTO ".self::$tableCarAds." 
                 (
                 ".self::$dbColumnId.", 
                 ".self::$dbColumnModel.",
-                ".self::$dbColumnMileage.",
-                ".self::$dbColumnOwner.",
-                ".self::$dbColumnPhoneNumber."
+                ".self::$dbColumnMileage."
                 ) 
                 VALUES (
                     '$id',
                     '$carModel',
-                    '$mileage',
-                    '$owner',
-                    '$phoneNumber',
-                    )";
+                    '$mileage')";
             
             $this->dbConnection->query($sql);
 
-            // header("Refresh:0; url=index.php");
+            header("Refresh:0; url=index.php");
         }catch(\Exception $error) {
             echo "Error creating ad" . $error;
         }
     }
-    public function editOneCarAd(int $id, $model, $mileage, $owner, $phoneNumber) {
+    public function editOneCarAd(int $id, $model, $mileage) {
         try {
             $sql = "UPDATE ".self::$tableCarAds." SET
                     ".self::$dbColumnId." = '$id', 
                     ".self::$dbColumnModel." = '$model',
-                    ".self::$dbColumnOwner." = '$owner'
-                    ".self::$dbColumnPhoneNumber." = '$phoneNumber'
+                    ".self::$dbColumnMileage." = '$mileage'
                     WHERE 
                     id= $id";
                     
@@ -93,7 +85,7 @@ class AdsModel {
         }
         return $listOfAds;
     }
-
+    
     public function getUniqueId() {
         try {
             $fromDb = $this->getAllAds();
