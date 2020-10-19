@@ -5,6 +5,8 @@ namespace View;
 class AdsView {
 	private static $carModel = "AdsView::CarModel";
 	private static $carMileage = "AdsView::CarMileage";
+	private static $carOwner = "AdsView::CarOwner";
+	private static $carPhonenumber = "AdsView::CarPhoneNumber";
 	private static $saveNewCar = "AdsView::SaveCar";
 
 	private static $editCar = "AdsView::EditCar";
@@ -106,6 +108,10 @@ class AdsView {
 					$returnString .= "Brand: ". strval($row[1]);
 					$returnString .= "<br>";
 					$returnString .= "Mileage: ". strval($row[2]) ."</div>";
+					$returnString .= "<br>";
+					$returnString .= "Owner: ". strval($row[3]) ."</div>";
+					$returnString .= "<br>";
+					$returnString .= "Phone number: ". strval($row[4]) ."</div>";
 					$returnString .= "</div>";
 					$returnString .= "</li>";
 				}
@@ -128,6 +134,12 @@ class AdsView {
 			</select>
 			<label for="' . self::$carMileage . '">Mileage :</label>
 			<input type="text" id="' . self::$carMileage . '" name="' . self::$carMileage . '"maxlength="6" required/>
+
+			<label for="' . self::$carOwner. '">Mileage :</label>
+			<input type="text" id="' . self::$carOwner . '" name="' . self::$carOwner . '"maxlength="6" required/>
+
+			<label for="' . self::$carPhonenumber . '">Mileage :</label>
+			<input type="text" id="' . self::$carPhonenumber . '" name="' . self::$carPhonenumber . '"maxlength="6" required/>
 			
 			<input type="submit" name="' . self::$saveNewCar . '" value="Save car" />
 		</form>';
@@ -146,6 +158,12 @@ class AdsView {
 			</select>
 			<label for="' . self::$editCarMileage . '">Mileage :</label>
 			<input type="text" id="' . self::$editCarMileage . '" name="' . self::$editCarMileage . '" required/>
+			
+			<label for="' . self::$carOwner. '">Mileage :</label>
+			<input type="text" id="' . self::$carOwner . '" name="' . self::$carOwner . '"maxlength="6" required/>
+			
+			<label for="' . self::$carPhonenumber . '">Mileage :</label>
+			<input type="text" id="' . self::$carPhonenumber . '" name="' . self::$carPhonenumber . '"maxlength="6" required/>
 			
 			<input type="submit" name="' . self::$saveEditedCar . '" value="Save car" />
 		</form>';

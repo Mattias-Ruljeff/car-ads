@@ -8,7 +8,6 @@ class RegisterNewUser {
 
     public function __construct(\View\RegisterView $view) {
         $this->view = $view;
-
     }
 
     public function registerNewUser($dbConnection)  {
@@ -18,7 +17,7 @@ class RegisterNewUser {
                 $passwrd = $this->view->getPassword();
                 $repeatedPasswrd = $this->view->getRepeatedPassword();
 
-                return $dbConnection->checkUserOnRegistration($username, $passwrd, $repeatedPasswrd);
+                return $dbConnection->checkUseInputOnRegistration($username, $passwrd, $repeatedPasswrd);
 
 			} catch (\Exception $e) {
                 echo $e;

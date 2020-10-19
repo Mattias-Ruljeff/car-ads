@@ -31,6 +31,9 @@ class DatabaseConnection {
         $this->dbConnection = new mysqli($this->hostname, $this->username, $this->password, $this->database);
     }
 
+    /**
+     * Connection method, for other modules to be able to connect to the database.
+     */
     public function connect() {
         return new mysqli($this->hostname, $this->username, $this->password, $this->database);
     }
@@ -74,10 +77,32 @@ class DatabaseConnection {
         }catch (\Exception $e) {
             echo "Error found " . $e->getMessage() . "\n";
         }
-
     }
 
-    public function checkUserOnRegistration($username, $passwrd, $repeatedPasswrd){
+    public function checkUserCredentials($username, $passwrd) {
+        $dbPassword = "";
+        try {
+            $sql = "SELECT $this->dbColumnPassword FROM $this->tablenameForUsers WHERE $this->dbColumnUsername = '$username'";
+            
+            if ($result = $this->dbConnection->query($sql)) {
+
+                while ($row = $result->fetch_row()) {
+                    $dbPassword = strval($row[0]);
+                }
+                $result->close();
+            }
+            if ($this->readHashedPassword($passwrd, $dbPassword)) {
+                return true;
+
+            } else {
+                return false;
+            }
+        }catch(\Exception $error) {
+            echo " Wrong username or password " . $error;
+        }
+    }
+
+    public function checkUseInputOnRegistration($username, $passwrd, $repeatedPasswrd){
         
         if(!$username and !$passwrd){
             return "Username has too few characters, at least 3 characters.<br>Password has too few characters, at least 6 characters.";
@@ -150,28 +175,8 @@ class DatabaseConnection {
         return password_hash($password, PASSWORD_DEFAULT, $this->hashCost);
     }
 
-    public function checkUserCredentials($username, $passwrd) {
-        $dbPassword = "";
-        try {
-            $sql = "SELECT $this->dbColumnPassword FROM $this->tablenameForUsers WHERE $this->dbColumnUsername = '$username'";
-            
-            if ($result = $this->dbConnection->query($sql)) {
 
-                while ($row = $result->fetch_row()) {
-                    $dbPassword = strval($row[0]);
-                }
-                $result->close();
-            }
-            if ($this->readHashedPassword($passwrd, $dbPassword)) {
-                return true;
 
-            } else {
-                return false;
-            }
-        }catch(\Exception $error) {
-            echo " Wrong username or password " . $error;
-        }
-    }
     private function readHashedPassword ($password, $dbPassword) {
         return password_verify($password, $dbPassword);
     }

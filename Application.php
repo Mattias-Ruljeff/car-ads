@@ -20,26 +20,30 @@ class Application {
 	private $adsView;
 	private $layoutView;
 	private $registerView;
+	private $loginView;
+
 	private $controller;
 	private $registerController;
-	private $adsModel;
 	private $adsController;
+
+	private $adsModel;
 	private $sessionModel;
-	private $view;
 	private $dbConnection;
+
 	private static $isLoggedIn = true;
 	private static $isNotLoggedIn = false;
 
 	public function __construct(){
-		$this->sessionModel = new \Model\SessionModel();
-		$this->dbConnection = new \Model\DatabaseConnection();
 		$this->dateTimeView = new \View\DateTimeView();
 		$this->adsView = new \View\AdsView();
 		$this->registerView = new \View\RegisterView();
-		$this->view = new \View\LoginView();
+		$this->loginView = new \View\LoginView();
 		$this->layoutView = new \View\LayoutView();
+		
+		$this->sessionModel = new \Model\SessionModel();
+		$this->dbConnection = new \Model\DatabaseConnection();
 		$this->adsModel = new \Model\AdsModel($this->dbConnection);
-		$this->controller = new \Controller\logInOrOut($this->view);
+		$this->controller = new \Controller\logInOrOut($this->loginView);
 		$this->registerController = new \Controller\RegisterNewUser($this->registerView);
 		$this->adsController = new \Controller\AdsController($this->adsView, $this->adsModel);
 	}
@@ -68,11 +72,11 @@ class Application {
 		if($this->registerView->checkIfRegisterIsSet()){
 			$this->layoutView->render(self::$isNotLoggedIn, $this->registerView, $this->dateTimeView, $this->adsView->showOnlyAds($this->adsModel->getAllAds()), $message);
 		} else {
-			if ($this->view->userWantsToLogOut() or $this->sessionModel->checkIfNoSession()) {
-				$this->layoutView->render(self::$isNotLoggedIn, $this->view, $this->dateTimeView, $this->adsView->showOnlyAds($this->adsModel->getAllAds()), $message);
+			if ($this->loginView->userWantsToLogOut() or $this->sessionModel->checkIfNoSession()) {
+				$this->layoutView->render(self::$isNotLoggedIn, $this->loginView, $this->dateTimeView, $this->adsView->showOnlyAds($this->adsModel->getAllAds()), $message);
 			} else {
 				session_regenerate_id();
-				$this->layoutView->render(self::$isLoggedIn,$this->view, $this->dateTimeView, $this->adsView->showAdsWithButtons($this->adsModel->getAllAds()), $message);
+				$this->layoutView->render(self::$isLoggedIn,$this->loginView, $this->dateTimeView, $this->adsView->showAdsWithButtons($this->adsModel->getAllAds()), $message);
 			}
 		}
 	}
