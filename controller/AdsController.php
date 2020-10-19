@@ -18,11 +18,15 @@ class AdsController {
     public function addNewCar()  {
 		if ($this->view->saveNewCar()) {
             try {
+                $id = $this->model->getUniqueId();
                 $carModel = $this->view->getCarModelName();
                 $mileage = (int)$this->view->getCarMileage();
-                $id = $this->model->getUniqueId();
+                $owner = $this->view->getCarOwner();
+                $phoneNumber = $this->view->getCarOwnerPhoneNumber();
+                echo $owner;
+                echo $phoneNumber;
                 
-                $this->model->createNewCarAd($id, $carModel, $mileage);
+                $this->model->createNewCarAd($id, $carModel, $mileage, $owner, $phoneNumber);
 
                 return true;
 
@@ -34,11 +38,13 @@ class AdsController {
     public function editCar()  {
         if ($this->view->saveEditedCar()) {
             try {
+                $id = $this->view->getCarAdIdWhileEditing();
                 $model = $this->view->getCarModelNameWhileEditingCar();
                 $mileage = $this->view->getCarMileageWhileEditingCar();
-                $id = $this->view->getCarAdIdWhileEditing();
+                $owner = $this->view->getCarOwner();
+                $phoneNumber = $this->view->getCarOwnerPhoneNumber();
 
-                $this->model->editOneCarAd($id, $model, $mileage);
+                $this->model->editOneCarAd($id, $model, $mileage, $owner, $phoneNumber);
 
             } catch (\Exception $e) {
                 echo $e;

@@ -17,15 +17,15 @@ class AdsModel {
         $this->dbConnection = $dbConnection->connect();
     }
         
-    public function createNewCarAd($id,$carModel, $mileage, $owner, $phoneNumber) {
+    public function createNewCarAd($id, $carModel, $mileage, $owner, $phoneNumber) {
         try {
             
             $sql = "INSERT INTO ".self::$tableCarAds." 
                 (
                 ".self::$dbColumnId.", 
                 ".self::$dbColumnModel.",
-                ".self::$dbColumnMileage."
-                ".self::$dbColumnOwner."
+                ".self::$dbColumnMileage.",
+                ".self::$dbColumnOwner.",
                 ".self::$dbColumnPhoneNumber."
                 ) 
                 VALUES (
@@ -38,7 +38,7 @@ class AdsModel {
             
             $this->dbConnection->query($sql);
 
-            header("Refresh:0; url=index.php");
+            // header("Refresh:0; url=index.php");
         }catch(\Exception $error) {
             echo "Error creating ad" . $error;
         }

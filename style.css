@@ -104,6 +104,12 @@ ul {
     margin: 0; 
 }
 
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+}
+
 .ad {
     display: flex;
     flex-direction: column;
