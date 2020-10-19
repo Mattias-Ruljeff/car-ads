@@ -2,14 +2,10 @@
 
 namespace Controller;
 
-use Model\Car;
-use Model\SessionModel;
-
 class AdsController {
 
     private $view;
     private $model;
-    private $sessionModel;
 
     public function __construct(\View\AdsView $view, \Model\AdsModel $model) {
         $this->view = $view;

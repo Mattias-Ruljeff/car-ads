@@ -151,7 +151,6 @@ class AdsView {
 		</form>';
 	}
 	private function generateDeleteCarForm() {
-		var_dump($_POST);
 		return 
 		'<h3>Delete car ad?</h3>
 		<form method="post">

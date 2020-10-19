@@ -4,14 +4,11 @@ namespace View;
 
 class RegisterView {
 	private static $register = 'RegisterView::Register';
-	private static $logout = 'RegisterView::Logout';
 	private static $name = 'RegisterView::UserName';
 	private static $password = 'RegisterView::Password';
 	private static $passwordRepeat = 'RegisterView::PasswordRepeat';
-	private static $cookieName = 'RegisterView::CookieName';
-	private static $cookiePassword = 'RegisterView::CookiePassword';
-	private static $keep = 'RegisterView::KeepMeLoggedIn';
 	private static $messageId = 'RegisterView::Message';
+	private static $getRegister = "register";
 	private static $savedName;
 
 	public function userWantsToRegisterUser() : bool {
@@ -29,7 +26,7 @@ class RegisterView {
 		return $_POST[self::$passwordRepeat];
 	}
 	public function checkIfRegisterIsSet(){
-		return isset($_GET["register"]);
+		return isset($_GET[self::$getRegister]);
 	}
 	/**
 	 * Create HTTP response

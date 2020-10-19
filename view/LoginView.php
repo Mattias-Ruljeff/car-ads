@@ -7,11 +7,11 @@ class LoginView {
 	private static $logout = 'LoginView::Logout';
 	private static $name = 'LoginView::UserName';
 	private static $password = 'LoginView::Password';
-	private static $cookieName = 'LoginView::CookieName';
-	private static $cookiePassword = 'LoginView::CookiePassword';
 	private static $keep = 'LoginView::KeepMeLoggedIn';
 	private static $messageId = 'LoginView::Message';
 	private static $savedName = "";
+	private static $sessionUsername = "username";
+
 
 
 	public function userWantsToLogIn() : bool {
@@ -44,7 +44,7 @@ class LoginView {
 		if($_POST[self::$logout]){
 			session_unset();
 		}
-		if($_SESSION["username"]) {
+		if($_SESSION[self::$sessionUsername]) {
 			$response = $this->generateLogoutButtonHTML($message);
 		} else {
 			$response = $this->generateLoginFormHTML($message);

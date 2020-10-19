@@ -3,9 +3,11 @@
 namespace View;
 
 class LayoutView {
+
+  private static $getRegister = "register";
   
   public function render($isLoggedIn, $view, DateTimeView $dtv, $adsView, $message) {
-    if(isset($_GET["register"])) {
+    if(isset($_GET[self::$getRegister])) {
         $textInATag = "Back to login";
         $href = "/";
       } else {
