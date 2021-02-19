@@ -28,7 +28,11 @@ class DatabaseConnection {
         $this->database = $_SERVER["SERVER_NAME"] == "localhost" ? "users" : ltrim($this->dbparts['path'],'/');
 
         // Create connection
-        $this->dbConnection = new mysqli($this->hostname, $this->username, $this->password, $this->database);
+        try {
+            $this->dbConnection = new mysqli($this->hostname, $this->username, $this->password, $this->database);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
